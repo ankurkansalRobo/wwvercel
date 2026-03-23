@@ -1,0 +1,1089 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>WealthWise — Goal Intelligence OS</title>
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,200;0,9..144,300;0,9..144,400;1,9..144,200;1,9..144,300;1,9..144,400&family=Instrument+Sans:wght@400;500;600&display=swap" rel="stylesheet">
+<style>
+*{box-sizing:border-box;margin:0;padding:0}
+:root{
+  --acc:#1B3A6B;--acc-l:#6B9FD4;--acc-ll:#A8C8E8;--acc-bg:rgba(27,58,107,.08);
+  --warm-page:#F8F6F1;--warm-panel:#FDFCF9;
+  --bl:rgba(0,0,0,.08);--bl2:rgba(0,0,0,.05);
+  --tx1:#1A1A18;--tx2:#6B6860;--tx3:#A09D96;
+  --crit-fill:#541508;--crit-fill-d:#7A2010;
+  --warn-fill:#543C08;--warn-fill-d:#7A6010;
+  --good-fill:#08363E;--good-fill-d:#0A3840;
+  --crit-d:#FCA58A;--warn-d:#FCD080;--good-d:#67E8F9;
+  --crit-bg:rgba(140,40,20,.1);--warn-bg:rgba(160,120,20,.1);--good-bg:rgba(20,100,110,.1);
+  --crit-t:#8C2814;--warn-t:#8C6614;--good-t:#146068;
+  --serif:'Fraunces',serif;--sans:'Instrument Sans',sans-serif;
+}
+html{scroll-behavior:smooth}
+body{font-family:var(--sans);background:#080E1C;color:#F0EDE8;overflow-x:hidden}
+
+/* ── NAV ─────────────────────────────────── */
+nav{position:fixed;top:0;left:0;right:0;z-index:999;height:58px;display:flex;align-items:center;padding:0 48px;justify-content:space-between;background:rgba(8,14,28,.88);backdrop-filter:blur(18px);border-bottom:1px solid rgba(255,255,255,.06);transition:all .3s}
+.nav-logo{display:flex;align-items:center;gap:9px;text-decoration:none}
+.nav-ic{width:28px;height:28px;border-radius:6px;background:var(--acc);display:flex;align-items:center;justify-content:center}
+.nav-ic span{font-family:var(--serif);font-style:italic;color:#FFF;font-size:13px;font-weight:300}
+.nav-wm{font-family:var(--sans);font-size:15px;font-weight:600;color:#FFF;letter-spacing:-.01em}
+.nav-links{display:flex;align-items:center;gap:4px}
+.nav-link{font-size:13px;color:rgba(255,255,255,.5);text-decoration:none;padding:6px 13px;border-radius:6px;transition:all .15s}
+.nav-link:hover{color:#FFF;background:rgba(255,255,255,.07)}
+.nav-cta{font-size:13px;font-weight:600;padding:8px 20px;border-radius:6px;background:var(--acc);color:#FFF;border:none;cursor:pointer;font-family:var(--sans);text-decoration:none;transition:all .15s;letter-spacing:-.01em;display:inline-block}
+.nav-cta:hover{background:#243F72;transform:translateY(-1px)}
+
+/* ── HERO ─────────────────────────────────── */
+.hero{min-height:100vh;background:#080E1C;position:relative;overflow:hidden;display:flex;flex-direction:column;align-items:center;justify-content:center;text-align:center;padding:110px 40px 80px}
+.hero-bg{position:absolute;inset:0;pointer-events:none;background:radial-gradient(ellipse 70% 55% at 50% 30%,rgba(27,58,107,.3) 0%,transparent 70%),radial-gradient(ellipse 35% 25% at 20% 80%,rgba(84,21,8,.15) 0%,transparent 60%),radial-gradient(ellipse 35% 25% at 80% 70%,rgba(10,56,64,.12) 0%,transparent 60%)}
+.hero-grid{position:absolute;inset:0;pointer-events:none;background-image:linear-gradient(rgba(27,58,107,.12) 1px,transparent 1px),linear-gradient(90deg,rgba(27,58,107,.12) 1px,transparent 1px);background-size:52px 52px;mask-image:radial-gradient(ellipse 80% 70% at 50% 40%,#000 20%,transparent 100%)}
+.hero-tag{display:inline-flex;align-items:center;gap:8px;font-size:10px;font-weight:600;letter-spacing:.12em;text-transform:uppercase;color:var(--acc-l);border:1px solid rgba(107,159,212,.22);border-radius:100px;padding:5px 16px;margin-bottom:28px;font-family:var(--sans);position:relative;z-index:1}
+.htd{width:5px;height:5px;border-radius:50%;background:var(--acc-l)}
+.hero-h1{font-family:var(--serif);font-weight:200;font-size:clamp(52px,7.5vw,92px);line-height:1.0;letter-spacing:-.035em;color:#FFF;margin-bottom:10px;position:relative;z-index:1;max-width:840px}
+.hero-h1-os{font-style:italic;color:var(--acc-l);display:block}
+.hero-sub{font-size:clamp(14px,1.4vw,17px);line-height:1.75;color:rgba(255,255,255,.48);max-width:540px;font-family:var(--sans);margin-bottom:40px;position:relative;z-index:1}
+.hero-sub strong{color:rgba(255,255,255,.82);font-weight:500}
+.hero-btns{display:flex;align-items:center;gap:12px;justify-content:center;position:relative;z-index:1;margin-bottom:72px;flex-wrap:wrap}
+.btn-p{font-size:14px;font-weight:600;padding:13px 28px;border-radius:7px;background:var(--acc);color:#FFF;border:none;cursor:pointer;font-family:var(--sans);text-decoration:none;transition:all .18s;letter-spacing:-.01em;display:inline-block}
+.btn-p:hover{background:#243F72;transform:translateY(-1px)}
+.btn-o{font-size:14px;font-weight:500;padding:12px 24px;border-radius:7px;background:transparent;color:rgba(255,255,255,.65);border:1px solid rgba(255,255,255,.16);cursor:pointer;font-family:var(--sans);text-decoration:none;transition:all .18s;display:inline-block}
+.btn-o:hover{border-color:rgba(255,255,255,.35);color:#FFF}
+
+/* hero platform preview */
+.hero-preview{position:relative;z-index:1;width:100%;max-width:980px;margin:0 auto;border-radius:12px;overflow:hidden;border:1px solid rgba(255,255,255,.1);box-shadow:0 40px 100px rgba(0,0,0,.6),0 0 0 1px rgba(255,255,255,.04)}
+.hp-bar{height:38px;background:#0F1729;border-bottom:1px solid rgba(255,255,255,.08);display:flex;align-items:center;padding:0 14px;gap:7px}
+.hpd{width:10px;height:10px;border-radius:50%}
+.hp-ttl{font-size:11px;color:rgba(255,255,255,.28);font-family:var(--sans);margin-left:6px}
+.hp-body{background:#0C1220;display:flex;height:330px}
+.hp-sb{width:44px;background:#0F1729;border-right:1px solid rgba(255,255,255,.07);padding:10px 0;display:flex;flex-direction:column;align-items:center;gap:4px}
+.hp-si{width:32px;height:32px;border-radius:7px;display:flex;align-items:center;justify-content:center;font-size:14px}
+.hp-si.a{background:rgba(107,159,212,.13);color:var(--acc-l)}
+.hp-si.o{color:rgba(255,255,255,.2)}
+.hp-m{flex:1;display:flex;flex-direction:column;overflow:hidden}
+.hp-gh{padding:13px 16px 10px;border-bottom:1px solid rgba(255,255,255,.07)}
+.hp-gdate{font-size:8px;font-weight:600;letter-spacing:.1em;text-transform:uppercase;color:rgba(255,255,255,.25);font-family:var(--sans);margin-bottom:3px}
+.hp-ggreet{font-family:var(--serif);font-size:19px;font-weight:200;color:#F0EDE8;line-height:1.1}
+.hp-gattn{font-family:var(--serif);font-size:19px;font-weight:200;color:var(--crit-d);line-height:1.1}
+.hp-ks{display:flex;border-bottom:1px solid rgba(255,255,255,.07);background:#141E30}
+.hp-k{flex:1;padding:8px 11px;border-right:1px solid rgba(255,255,255,.07)}
+.hp-k:last-child{border-right:none}
+.hp-kv{font-family:var(--serif);font-size:17px;font-weight:300;line-height:1;letter-spacing:-.02em}
+.hp-kl{font-size:8px;font-weight:600;letter-spacing:.07em;text-transform:uppercase;color:rgba(255,255,255,.28);font-family:var(--sans);margin-top:2px}
+.hp-zones{display:flex;flex:1;overflow:hidden}
+.hp-z1{width:185px;border-right:1px solid rgba(255,255,255,.07);padding:10px;background:#0F1729;overflow:hidden}
+.hp-zh{font-size:8px;font-weight:600;letter-spacing:.08em;text-transform:uppercase;color:rgba(255,255,255,.25);font-family:var(--sans);margin-bottom:8px;display:flex;align-items:center;gap:5px}
+.hp-zdash{width:10px;height:2px;background:var(--acc-l);border-radius:1px;flex-shrink:0}
+.hp-nba{border-radius:5px;padding:7px 9px;margin-bottom:5px;border:1px solid rgba(255,255,255,.07)}
+.hp-nb{font-size:8px;font-weight:600;border-radius:2px;padding:1px 5px;font-family:var(--sans);display:inline-block;margin-bottom:3px}
+.hp-nt{font-size:9px;font-weight:500;color:#F0EDE8;font-family:var(--sans);line-height:1.3;margin-bottom:2px}
+.hp-ns{font-size:8px;color:rgba(255,255,255,.35);font-family:var(--sans)}
+.hp-z2{flex:1;padding:10px;position:relative;overflow:hidden}
+.hp-dotbg{position:absolute;inset:0;background-image:radial-gradient(circle,rgba(255,255,255,.18) 1px,transparent 1px);background-size:18px 18px;opacity:.1;pointer-events:none}
+.hp-z2i{position:relative;z-index:1}
+.hp-mt{font-family:var(--serif);font-size:13px;font-weight:300;color:#F0EDE8;margin-bottom:7px}
+.hp-tm{display:flex;flex-direction:column;gap:2px}
+.hp-tr{display:flex;gap:2px}
+.hp-tc{border-radius:4px;padding:6px 8px;display:flex;flex-direction:column;position:relative;overflow:hidden}
+.hp-tsh{position:absolute;top:0;left:0;right:0;height:45%;background:rgba(255,255,255,.04)}
+.hp-tn{font-size:8px;font-weight:500;color:rgba(255,255,255,.62);font-family:var(--sans)}
+.hp-tv{font-family:var(--serif);font-size:11px;font-weight:300;color:#FFF;margin-top:auto}
+.hp-z3{width:175px;border-left:1px solid rgba(255,255,255,.07);padding:10px;background:#0F1729;overflow:hidden}
+.hp-fi{padding:5px 0;border-bottom:1px solid rgba(255,255,255,.07)}
+.hp-fi:last-child{border-bottom:none}
+.hp-ftop{display:flex;align-items:flex-start;gap:5px}
+.hp-fdot{width:5px;height:5px;border-radius:50%;flex-shrink:0;margin-top:2px}
+.hp-ftit{font-size:9px;font-weight:500;color:#F0EDE8;font-family:var(--sans);line-height:1.3;flex:1}
+.hp-fsub{font-size:8px;color:rgba(255,255,255,.3);font-family:var(--sans);margin-top:1px;padding-left:10px}
+
+/* ── LIGHT SECTIONS SHARED ─────────────── */
+.ls{background:var(--warm-page);color:var(--tx1)}
+.stag{font-size:10px;font-weight:600;letter-spacing:.12em;text-transform:uppercase;color:var(--acc);font-family:var(--sans);margin-bottom:14px;display:block}
+.sh2{font-family:var(--serif);font-size:clamp(30px,4vw,50px);font-weight:300;letter-spacing:-.025em;line-height:1.08;color:var(--tx1);margin-bottom:16px}
+.sh2 em{font-style:italic;color:var(--acc)}
+.ssub{font-size:16px;line-height:1.75;color:var(--tx2);max-width:520px;font-family:var(--sans)}
+.si{max-width:1100px;margin:0 auto}
+
+/* ── PROBLEM (dark) ─────────────────────── */
+.problem{background:#0C1220;padding:96px 48px;border-top:1px solid rgba(255,255,255,.06)}
+.problem .stag{color:var(--acc-l)}
+.problem .sh2{color:#F0EDE8}
+.problem .sh2 em{color:var(--crit-d);font-style:italic}
+.problem .ssub{color:rgba(255,255,255,.4)}
+.p-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:18px;margin-top:52px}
+.persona{border-radius:10px;padding:28px 24px;background:#0F1729;border:1px solid rgba(255,255,255,.08);position:relative;overflow:hidden}
+.persona::before{content:'';position:absolute;top:0;left:0;right:0;height:2px}
+.p1::before{background:linear-gradient(90deg,var(--crit-fill-d),var(--crit-d))}
+.p2::before{background:linear-gradient(90deg,var(--warn-fill-d),var(--warn-d))}
+.p3::before{background:linear-gradient(90deg,var(--acc),var(--acc-l))}
+.p-flag{font-size:22px;margin-bottom:12px}
+.p-name{font-family:var(--serif);font-size:19px;font-weight:300;color:#F0EDE8;margin-bottom:3px}
+.p-det{font-size:11px;color:rgba(255,255,255,.3);font-family:var(--sans);margin-bottom:20px}
+.p-clbl{font-size:9px;font-weight:600;letter-spacing:.1em;text-transform:uppercase;color:rgba(255,255,255,.3);font-family:var(--sans);margin-bottom:3px}
+.p-cost{font-family:var(--serif);font-size:38px;font-weight:200;color:var(--crit-d);letter-spacing:-.02em;line-height:1;margin-bottom:3px}
+.p-csub{font-size:11px;color:rgba(255,255,255,.28);font-family:var(--sans);margin-bottom:18px}
+.p-issues{display:flex;flex-direction:column;gap:7px}
+.p-issue{display:flex;align-items:flex-start;gap:7px;font-size:11px;color:rgba(255,255,255,.5);font-family:var(--sans);line-height:1.45}
+.pid{width:5px;height:5px;border-radius:50%;flex-shrink:0;margin-top:4px}
+.p-total{margin-top:36px;padding:28px 32px;background:#141E30;border:1px solid rgba(255,255,255,.08);border-radius:10px;display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:20px}
+.pt-lbl{font-size:11px;font-weight:600;letter-spacing:.08em;text-transform:uppercase;color:rgba(255,255,255,.3);font-family:var(--sans);margin-bottom:6px}
+.pt-n{font-family:var(--serif);font-size:52px;font-weight:200;color:var(--crit-d);letter-spacing:-.03em;line-height:1}
+.pt-s{font-size:13px;color:rgba(255,255,255,.38);font-family:var(--sans);max-width:360px;line-height:1.65}
+
+/* ── PLATFORM (light) ───────────────────── */
+.platform{background:var(--warm-page);padding:96px 48px}
+.rungs{display:grid;grid-template-columns:repeat(4,1fr);gap:0;margin-top:52px;border-radius:10px;overflow:hidden;border:1px solid var(--bl)}
+.rung{padding:26px 22px;background:#FFF;border-right:1px solid var(--bl)}
+.rung:last-child{border-right:none}
+.rung.active{background:var(--acc);color:#FFF}
+.r-n{font-family:var(--serif);font-style:italic;font-size:11px;color:var(--tx3);margin-bottom:8px}
+.rung.active .r-n{color:rgba(255,255,255,.5)}
+.r-lbl{font-family:var(--serif);font-size:17px;font-weight:300;color:var(--tx1);margin-bottom:8px;line-height:1.25}
+.rung.active .r-lbl{color:#FFF;font-weight:400}
+.r-desc{font-size:11px;color:var(--tx3);font-family:var(--sans);line-height:1.55}
+.rung.active .r-desc{color:rgba(255,255,255,.65)}
+.r-badge{display:inline-block;font-size:9px;font-weight:600;padding:2px 8px;border-radius:3px;font-family:var(--sans);letter-spacing:.04em;margin-top:14px;background:rgba(255,255,255,.15);color:#FFF}
+.r-tag{position:absolute;top:14px;right:14px;font-size:9px;font-weight:600;padding:2px 7px;border-radius:3px;font-family:var(--sans);background:rgba(255,255,255,.2);color:#FFF;letter-spacing:.03em}
+.rung.active{position:relative}
+.feats{display:grid;grid-template-columns:1fr 1fr;gap:16px;margin-top:20px}
+.feat{display:flex;gap:16px;padding:22px;border-radius:9px;border:1px solid var(--bl);background:#FFF;transition:border-color .2s,box-shadow .2s}
+.feat:hover{border-color:rgba(27,58,107,.2);box-shadow:0 4px 16px rgba(27,58,107,.06)}
+.feat-ic{width:40px;height:40px;border-radius:8px;flex-shrink:0;display:flex;align-items:center;justify-content:center;font-size:17px;background:var(--acc-bg)}
+.feat-t{font-family:var(--serif);font-size:16px;font-weight:300;color:var(--tx1);margin-bottom:5px}
+.feat-d{font-size:12px;color:var(--tx3);font-family:var(--sans);line-height:1.6}
+
+/* ── PE SECTION (light) ──────────────────── */
+.pe-section{background:var(--warm-panel);padding:96px 48px;border-top:1px solid var(--bl)}
+.pe-layout{display:grid;grid-template-columns:1fr 1.2fr;gap:64px;align-items:center;margin-top:56px}
+.pe-text{}
+.pe-text .ssub{margin-bottom:32px}
+.pe-bullets{display:flex;flex-direction:column;gap:10px}
+.pe-bullet{display:flex;align-items:flex-start;gap:10px;font-size:13px;color:var(--tx2);font-family:var(--sans);line-height:1.5}
+.pe-bullet-dot{width:6px;height:6px;border-radius:50%;flex-shrink:0;margin-top:5px;background:var(--acc)}
+
+/* PE Platform Mockup */
+.pe-mock{border-radius:10px;overflow:hidden;border:1px solid var(--bl);box-shadow:0 16px 48px rgba(0,0,0,.1)}
+.pm-head{background:var(--warm-panel);border-bottom:1px solid var(--bl);padding:10px 14px;display:flex;align-items:center;gap:8px}
+.pm-title{font-size:11px;font-weight:600;letter-spacing:.07em;text-transform:uppercase;color:var(--tx3);font-family:var(--sans)}
+.pm-badge{font-size:9px;font-weight:600;padding:2px 7px;border-radius:3px;font-family:var(--sans);margin-left:auto}
+.pm-body{background:#FFF;padding:0}
+/* Fund table */
+.pm-tbl{width:100%}
+.pm-th{background:var(--warm-panel);padding:7px 12px;font-size:8px;font-weight:600;letter-spacing:.08em;text-transform:uppercase;color:var(--tx3);font-family:var(--sans);border-bottom:1px solid var(--bl);text-align:left}
+.pm-th:not(:first-child){text-align:right}
+.pm-tr{border-bottom:1px solid var(--bl2)}
+.pm-tr:last-child{border-bottom:none}
+.pm-td{padding:10px 12px;font-size:11px;color:var(--tx1);font-family:var(--sans);vertical-align:middle}
+.pm-td:not(:first-child){text-align:right}
+.pm-fn{font-weight:500;font-family:var(--sans)}
+.pm-fv{font-family:var(--serif);font-size:13px;font-weight:300}
+.pm-status{font-size:8px;font-weight:600;padding:2px 6px;border-radius:2px;font-family:var(--sans)}
+/* Capital call bar */
+.pm-call-bar{background:var(--warm-panel);border-top:1px solid var(--bl);padding:12px 14px;display:flex;align-items:center;gap:12px}
+.pm-call-label{font-size:9px;font-weight:600;letter-spacing:.07em;text-transform:uppercase;color:var(--tx3);font-family:var(--sans);min-width:90px}
+.pm-call-item{flex:1;background:#FFF;border:1px solid var(--bl);border-radius:6px;padding:8px 11px;border-left:3px solid var(--crit-fill)}
+.pm-call-name{font-size:10px;font-weight:500;color:var(--tx1);font-family:var(--sans);margin-bottom:2px}
+.pm-call-amt{font-family:var(--serif);font-size:14px;font-weight:300;color:var(--crit-t)}
+.pm-call-date{font-size:9px;color:var(--tx3);font-family:var(--sans)}
+
+/* ── CREDIT SECTION (dark) ───────────────── */
+.credit-section{background:#080E1C;padding:96px 48px;border-top:1px solid rgba(255,255,255,.06)}
+.credit-section .stag{color:var(--acc-l)}
+.credit-section .sh2{color:#F0EDE8}
+.credit-section .sh2 em{color:var(--acc-l);font-style:italic}
+.credit-section .ssub{color:rgba(255,255,255,.42)}
+.credit-layout{display:grid;grid-template-columns:1.2fr 1fr;gap:64px;align-items:center;margin-top:56px}
+/* Credit mockup */
+.cr-mock{border-radius:10px;overflow:hidden;border:1px solid rgba(255,255,255,.09);box-shadow:0 20px 60px rgba(0,0,0,.4)}
+.cr-head{background:#0F1729;border-bottom:1px solid rgba(255,255,255,.08);padding:10px 14px;display:flex;align-items:center;gap:8px}
+.cr-title{font-size:11px;font-weight:600;letter-spacing:.07em;text-transform:uppercase;color:rgba(255,255,255,.35);font-family:var(--sans)}
+.cr-body{background:#0C1220}
+.cr-tr{border-bottom:1px solid rgba(255,255,255,.06);display:grid;grid-template-columns:2fr 1fr 1fr 1fr 1fr}
+.cr-tr:last-child{border-bottom:none}
+.cr-th{padding:7px 10px;font-size:8px;font-weight:600;letter-spacing:.08em;text-transform:uppercase;color:rgba(255,255,255,.25);font-family:var(--sans);background:#141E30}
+.cr-td{padding:10px 10px;font-size:11px;color:#F0EDE8;font-family:var(--sans);display:flex;align-items:center}
+.cr-td.num{font-family:var(--serif);font-size:13px;font-weight:300;justify-content:flex-end}
+.cr-issuer{font-weight:500;color:#F0EDE8}
+.cr-type{font-size:9px;color:rgba(255,255,255,.35);margin-top:1px}
+.cr-rate{font-family:var(--serif);font-size:14px;font-weight:300;justify-content:flex-end}
+.cr-badge{font-size:8px;font-weight:600;padding:2px 5px;border-radius:2px;font-family:var(--sans)}
+/* WGP impact panel */
+.cr-impact{background:#141E30;border-top:1px solid rgba(255,255,255,.08);padding:12px 14px;display:flex;gap:12px;align-items:center}
+.cr-imp-label{font-size:9px;font-weight:600;letter-spacing:.07em;text-transform:uppercase;color:rgba(255,255,255,.28);font-family:var(--sans);min-width:80px}
+.cr-imp-bar{flex:1;height:6px;background:rgba(255,255,255,.08);border-radius:3px;overflow:hidden}
+.cr-imp-fill{height:100%;border-radius:3px;background:linear-gradient(90deg,var(--acc),var(--acc-l))}
+.cr-imp-val{font-family:var(--serif);font-size:15px;font-weight:300;color:var(--acc-l)}
+/* credit bullets */
+.credit-bullets{display:flex;flex-direction:column;gap:10px}
+.credit-bullet{display:flex;align-items:flex-start;gap:10px;font-size:13px;color:rgba(255,255,255,.5);font-family:var(--sans);line-height:1.5}
+.cb-dot{width:6px;height:6px;border-radius:50%;flex-shrink:0;margin-top:5px;background:var(--acc-l)}
+
+/* ── REAL ESTATE SECTION (light) ────────── */
+.re-section{background:var(--warm-page);padding:96px 48px;border-top:1px solid var(--bl)}
+.re-layout{display:grid;grid-template-columns:1fr 1.3fr;gap:64px;align-items:start;margin-top:56px}
+.re-mock{border-radius:10px;overflow:hidden;border:1px solid var(--bl);box-shadow:0 16px 48px rgba(0,0,0,.09)}
+.re-head{background:var(--warm-panel);border-bottom:1px solid var(--bl);padding:10px 14px;display:flex;align-items:center;gap:8px}
+.re-title{font-size:11px;font-weight:600;letter-spacing:.07em;text-transform:uppercase;color:var(--tx3);font-family:var(--sans)}
+.re-body{background:#FFF;padding:14px}
+/* Property cards */
+.re-cards{display:flex;flex-direction:column;gap:10px;margin-bottom:12px}
+.re-card{border-radius:7px;border:1px solid var(--bl);overflow:hidden;display:flex;height:80px}
+.re-card-color{width:8px;flex-shrink:0}
+.re-card-body{flex:1;padding:10px 12px;display:flex;flex-direction:column;justify-content:space-between}
+.re-card-top{display:flex;align-items:baseline;justify-content:space-between}
+.re-card-name{font-size:12px;font-weight:500;color:var(--tx1);font-family:var(--sans)}
+.re-card-val{font-family:var(--serif);font-size:16px;font-weight:300;color:var(--tx1)}
+.re-card-row{display:flex;align-items:center;gap:8px}
+.re-card-type{font-size:9px;font-weight:600;padding:1px 6px;border-radius:2px;font-family:var(--sans)}
+.re-card-sub{font-size:10px;color:var(--tx3);font-family:var(--sans)}
+.re-card-right{padding:10px;display:flex;flex-direction:column;align-items:flex-end;justify-content:space-between}
+.re-card-wgp{font-family:var(--serif);font-size:18px;font-weight:300}
+.re-card-wgp-l{font-size:8px;font-weight:600;letter-spacing:.06em;text-transform:uppercase;color:var(--tx3);font-family:var(--sans)}
+/* AVM panel */
+.re-avm{background:var(--warm-panel);border-radius:7px;padding:12px 14px;border:1px solid var(--bl)}
+.re-avm-title{font-size:9px;font-weight:600;letter-spacing:.08em;text-transform:uppercase;color:var(--tx3);font-family:var(--sans);margin-bottom:8px}
+.re-avm-row{display:flex;align-items:center;gap:10px;margin-bottom:5px}
+.re-avm-label{font-size:11px;color:var(--tx2);font-family:var(--sans);flex:1}
+.re-avm-bar-track{flex:2;height:5px;background:var(--bl);border-radius:3px;overflow:hidden}
+.re-avm-bar-fill{height:100%;border-radius:3px}
+.re-avm-val{font-family:var(--serif);font-size:13px;font-weight:300;color:var(--tx1);min-width:60px;text-align:right}
+.re-bullets{display:flex;flex-direction:column;gap:10px;margin-top:8px}
+.re-bullet{display:flex;align-items:flex-start;gap:10px;font-size:13px;color:var(--tx2);font-family:var(--sans);line-height:1.5}
+.rb-dot{width:6px;height:6px;border-radius:50%;flex-shrink:0;margin-top:5px;background:var(--acc)}
+
+/* ── UAE (light) ─────────────────────────── */
+.uae{background:var(--warm-panel);padding:96px 48px;border-top:1px solid var(--bl)}
+.uae-g{display:grid;grid-template-columns:repeat(3,1fr);gap:16px;margin-top:52px}
+.uae-t{border-radius:10px;padding:26px 22px;border:1px solid var(--bl);background:#FFF;transition:all .2s}
+.uae-t:hover{border-color:rgba(27,58,107,.2);box-shadow:0 4px 20px rgba(27,58,107,.07)}
+.uae-ic{width:38px;height:38px;border-radius:7px;background:var(--acc-bg);display:flex;align-items:center;justify-content:center;font-size:17px;margin-bottom:14px}
+.uae-tt{font-family:var(--serif);font-size:17px;font-weight:300;color:var(--tx1);margin-bottom:7px;line-height:1.25}
+.uae-td{font-size:12px;color:var(--tx3);font-family:var(--sans);line-height:1.6}
+.uae-tag{display:inline-block;margin-top:12px;font-size:9px;font-weight:600;padding:2px 8px;border-radius:3px;font-family:var(--sans);letter-spacing:.04em;background:var(--good-bg);color:var(--good-t)}
+
+/* ── BUILT FOR (light) ───────────────────── */
+.bf{background:var(--warm-page);padding:96px 48px;border-top:1px solid var(--bl)}
+.bf-g{display:grid;grid-template-columns:repeat(3,1fr);gap:18px;margin-top:52px}
+.bf-c{border-radius:12px;padding:30px 26px;border:1px solid var(--bl);background:#FFF;display:flex;flex-direction:column;transition:border-color .2s,box-shadow .2s}
+.bf-c:hover{border-color:rgba(27,58,107,.2);box-shadow:0 4px 24px rgba(27,58,107,.07)}
+.bf-ic{font-size:26px;margin-bottom:18px}
+.bf-who{font-size:10px;font-weight:600;letter-spacing:.1em;text-transform:uppercase;color:var(--acc);font-family:var(--sans);margin-bottom:7px}
+.bf-tit{font-family:var(--serif);font-size:21px;font-weight:300;color:var(--tx1);margin-bottom:12px;line-height:1.2}
+.bf-desc{font-size:13px;color:var(--tx2);font-family:var(--sans);line-height:1.7;margin-bottom:20px;flex:1}
+.bf-feats{display:flex;flex-direction:column;gap:6px;margin-bottom:22px}
+.bf-feat{display:flex;align-items:flex-start;gap:7px;font-size:12px;color:var(--tx2);font-family:var(--sans);line-height:1.4}
+.bf-ck{color:var(--good-t);font-size:11px;flex-shrink:0;margin-top:1px}
+.bf-cta{display:block;text-align:center;padding:11px;border-radius:7px;font-size:13px;font-weight:600;font-family:var(--sans);background:var(--acc-bg);color:var(--acc);text-decoration:none;transition:all .18s;border:1px solid rgba(27,58,107,.12)}
+.bf-cta:hover{background:var(--acc);color:#FFF}
+
+/* ── METHODOLOGY (dark) ──────────────────── */
+.methodology{background:#080E1C;padding:96px 48px;border-top:1px solid rgba(255,255,255,.06)}
+.methodology .stag{color:var(--acc-l)}
+.meth-inner{max-width:1100px;margin:0 auto;display:grid;grid-template-columns:1fr 1fr;gap:64px;align-items:start}
+.meth-pull{font-family:var(--serif);font-size:clamp(20px,2.2vw,28px);font-weight:200;font-style:italic;line-height:1.5;color:#F0EDE8;margin-bottom:26px;border-left:2px solid var(--acc);padding-left:22px}
+.meth-pull span{color:var(--acc-l)}
+.meth-attr{font-size:13px;color:rgba(255,255,255,.4);font-family:var(--sans);margin-bottom:28px;line-height:1.6}
+.meth-attr strong{color:#F0EDE8;font-weight:500}
+.meth-pills{display:flex;flex-wrap:wrap;gap:7px}
+.meth-pill{font-size:11px;font-weight:500;padding:5px 12px;border-radius:100px;font-family:var(--sans);background:rgba(107,159,212,.1);color:var(--acc-l);border:1px solid rgba(107,159,212,.15)}
+.meth-right-title{font-size:10px;font-weight:600;letter-spacing:.1em;text-transform:uppercase;color:rgba(255,255,255,.3);font-family:var(--sans);margin-bottom:18px}
+.meth-items{display:flex;flex-direction:column;gap:12px}
+.meth-item{display:flex;gap:14px;padding:16px;border-radius:8px;background:#0F1729;border:1px solid rgba(255,255,255,.07);align-items:flex-start;transition:border-color .2s}
+.meth-item:hover{border-color:rgba(107,159,212,.2)}
+.meth-item-ic{width:36px;height:36px;border-radius:7px;flex-shrink:0;background:rgba(107,159,212,.1);display:flex;align-items:center;justify-content:center;font-size:16px}
+.meth-item-t{font-size:13px;font-weight:500;color:#F0EDE8;font-family:var(--sans);margin-bottom:3px}
+.meth-item-s{font-size:12px;color:rgba(255,255,255,.35);font-family:var(--sans);line-height:1.5}
+
+/* ── CTA ─────────────────────────────────── */
+.cta-sec{background:#080E1C;padding:100px 48px;text-align:center;border-top:1px solid rgba(255,255,255,.06);position:relative;overflow:hidden}
+.cta-glow{position:absolute;top:50%;left:50%;transform:translate(-50%,-50%);width:600px;height:300px;background:radial-gradient(ellipse,rgba(27,58,107,.35) 0%,transparent 70%);pointer-events:none}
+.cta-tg{font-size:10px;font-weight:600;letter-spacing:.12em;text-transform:uppercase;color:var(--acc-l);font-family:var(--sans);margin-bottom:18px;position:relative;z-index:1;display:block}
+.cta-h2{font-family:var(--serif);font-size:clamp(30px,5vw,58px);font-weight:200;font-style:italic;letter-spacing:-.025em;color:#FFF;margin-bottom:18px;position:relative;z-index:1;line-height:1.08}
+.cta-sub{font-size:16px;color:rgba(255,255,255,.42);font-family:var(--sans);max-width:460px;margin:0 auto 40px;line-height:1.65;position:relative;z-index:1}
+.cta-btns{display:flex;gap:12px;justify-content:center;flex-wrap:wrap;position:relative;z-index:1}
+.cta-note{font-size:11px;color:rgba(255,255,255,.22);font-family:var(--sans);margin-top:16px;position:relative;z-index:1}
+
+/* ── FOOTER ──────────────────────────────── */
+footer{background:#060B18;border-top:1px solid rgba(255,255,255,.06);padding:48px 48px 32px}
+.ft-inner{max-width:1100px;margin:0 auto}
+.ft-top{display:flex;align-items:flex-start;justify-content:space-between;margin-bottom:40px;flex-wrap:wrap;gap:32px}
+.ft-logo{display:flex;align-items:center;gap:9px;margin-bottom:10px}
+.ft-lic{width:27px;height:27px;border-radius:5px;background:var(--acc);display:flex;align-items:center;justify-content:center}
+.ft-lic span{font-family:var(--serif);font-style:italic;color:#FFF;font-size:13px;font-weight:300}
+.ft-wm{font-family:var(--sans);font-size:14px;font-weight:600;color:#FFF}
+.ft-tl{font-size:12px;color:rgba(255,255,255,.28);font-family:var(--sans);line-height:1.55;max-width:210px}
+.ft-links{display:flex;gap:48px;flex-wrap:wrap}
+.ft-lg{display:flex;flex-direction:column;gap:8px}
+.ft-lt{font-size:10px;font-weight:600;letter-spacing:.1em;text-transform:uppercase;color:rgba(255,255,255,.25);font-family:var(--sans);margin-bottom:4px}
+.ft-lnk{font-size:13px;color:rgba(255,255,255,.35);text-decoration:none;font-family:var(--sans);transition:color .15s}
+.ft-lnk:hover{color:rgba(255,255,255,.7)}
+.ft-bot{display:flex;align-items:center;justify-content:space-between;border-top:1px solid rgba(255,255,255,.06);padding-top:24px;flex-wrap:wrap;gap:12px}
+.ft-copy{font-size:11px;color:rgba(255,255,255,.2);font-family:var(--sans)}
+.ft-badge{font-size:10px;font-weight:600;letter-spacing:.08em;text-transform:uppercase;color:rgba(107,159,212,.55);font-family:var(--sans);border:1px solid rgba(107,159,212,.18);border-radius:4px;padding:3px 8px}
+
+/* ── REVEAL ──────────────────────────────── */
+.reveal{opacity:0;transform:translateY(22px);transition:opacity .65s cubic-bezier(.4,0,.2,1),transform .65s cubic-bezier(.4,0,.2,1)}
+.reveal.vis{opacity:1;transform:none}
+
+/* ── RESPONSIVE ──────────────────────────── */
+@media(max-width:960px){
+  nav{padding:0 20px}
+  .nav-links{display:none}
+  .hero,.problem,.platform,.pe-section,.credit-section,.re-section,.uae,.bf,.methodology,.cta-sec{padding:68px 22px}
+  .p-grid,.uae-g,.bf-g,.feats{grid-template-columns:1fr}
+  .rungs{grid-template-columns:1fr 1fr}
+  .pe-layout,.credit-layout,.re-layout,.meth-inner{grid-template-columns:1fr;gap:40px}
+  footer{padding:40px 22px 24px}
+  .ft-top{flex-direction:column}
+  .hp-z1,.hp-z3{display:none}
+  .hero{padding:110px 22px 64px}
+  .hero-preview{border-radius:8px}
+}
+</style>
+</head>
+<body>
+
+<!-- NAV -->
+<nav id="nav">
+  <a href="#" class="nav-logo">
+    <div class="nav-ic"><span>W</span></div>
+    <span class="nav-wm">WealthWise</span>
+  </a>
+  <div class="nav-links">
+    <a href="#platform" class="nav-link">Platform</a>
+    <a href="#alternatives" class="nav-link">Alternatives</a>
+    <a href="#uae" class="nav-link">UAE-Native</a>
+    <a href="#builtfor" class="nav-link">Who It's For</a>
+  </div>
+  <button class="nav-cta" onclick="openDemo()">Request a Demo</button>
+</nav>
+
+<!-- HERO -->
+<section class="hero" id="home">
+  <div class="hero-bg"></div>
+  <div class="hero-grid"></div>
+  <div class="hero-tag reveal"><span class="htd"></span>DIFC-Focused · DFSA-Ready · AI-Powered</div>
+  <h1 class="hero-h1 reveal">Goal Intelligence<span class="hero-h1-os">OS</span></h1>
+  <p class="hero-sub reveal">The only platform that understands <strong>Golden Visa constraints</strong>, <strong>Zakat obligations</strong>, <strong>EOSB accruals</strong>, and <strong>multi-currency goal risk</strong> — built for how UAE wealth actually works.</p>
+  <div class="hero-btns reveal">
+    <button class="btn-p" onclick="openDemo()">Request a Demo</button>
+    <a href="#platform" class="btn-o">See the Platform →</a>
+  </div>
+  <div class="hero-preview reveal">
+    <div class="hp-bar">
+      <div class="hpd" style="background:#FF5F57"></div><div class="hpd" style="background:#FFBD2E"></div><div class="hpd" style="background:#28CA41"></div>
+      <span class="hp-ttl" id="hp-ttl">WealthWise — Goal Intelligence OS · Dubai 10:14 AM</span>
+    </div>
+    <div class="hp-body">
+      <div class="hp-sb">
+        <div class="hp-si a">⊞</div><div class="hp-si o">◻</div><div class="hp-si o">◎</div><div class="hp-si o">△</div><div class="hp-si o">⚡</div><div class="hp-si o">☽</div>
+      </div>
+      <div class="hp-m">
+        <div class="hp-gh">
+          <div class="hp-gdate">Monday, 23 March 2026</div>
+          <div class="hp-ggreet">Good morning, Advisor.</div>
+          <div class="hp-gattn">7 clients need your attention.</div>
+        </div>
+        <div class="hp-ks">
+          <div class="hp-k"><div class="hp-kv" style="color:var(--warn-d)">38%</div><div class="hp-kl">Avg WGP</div></div>
+          <div class="hp-k"><div class="hp-kv" style="color:var(--crit-d)">7</div><div class="hp-kl">Critical</div></div>
+          <div class="hp-k"><div class="hp-kv" style="color:var(--crit-d)">$85K</div><div class="hp-kl">Due Today</div></div>
+          <div class="hp-k"><div class="hp-kv" style="color:var(--acc-l)">AED 8.9M</div><div class="hp-kl">AUM</div></div>
+        </div>
+        <div class="hp-zones">
+          <div class="hp-z1">
+            <div class="hp-zh"><span class="hp-zdash"></span>TODAY · ACTIONS</div>
+            <div class="hp-nba" style="background:#141E30;border-left:2px solid var(--crit-fill-d)"><div class="hp-nb" style="background:var(--crit-bg);color:var(--crit-d)">Protect</div><div class="hp-nt">Capital call DUE — Vista IX $85K</div><div class="hp-ns">Al-Mansoori · Liquidity needed</div></div>
+            <div class="hp-nba" style="background:#141E30;border-left:2px solid var(--warn-fill-d)"><div class="hp-nb" style="background:var(--warn-bg);color:var(--warn-d)">Recover</div><div class="hp-nt">Retirement at 25% — plan needed</div><div class="hp-ns">+15pp with intervention</div></div>
+            <div class="hp-nba" style="background:#141E30;border-left:2px solid var(--acc-l)"><div class="hp-nb" style="background:rgba(107,159,212,.15);color:var(--acc-l)">Comply</div><div class="hp-nt">UAE TRC required — India DTAA</div><div class="hp-ns">$5,000+ annual benefit</div></div>
+          </div>
+          <div class="hp-z2">
+            <div class="hp-dotbg"></div>
+            <div class="hp-z2i">
+              <div class="hp-mt">Client Portfolio Map</div>
+              <div class="hp-tm">
+                <div class="hp-tr">
+                  <div class="hp-tc" style="background:var(--crit-fill-d);flex:3;height:66px"><div class="hp-tsh"></div><div class="hp-tn">Al-Mansoori</div><div style="flex:1"></div><div class="hp-tv">AED 32M</div></div>
+                  <div class="hp-tc" style="background:var(--crit-fill-d);flex:2;height:66px"><div class="hp-tsh"></div><div class="hp-tn">Richardson</div><div style="flex:1"></div><div class="hp-tv">$4.2M</div></div>
+                </div>
+                <div class="hp-tr">
+                  <div class="hp-tc" style="background:var(--warn-fill-d);flex:2;height:42px"><div class="hp-tsh"></div><div class="hp-tn">Torres</div><div style="flex:1"></div><div class="hp-tv">$3.1M</div></div>
+                  <div class="hp-tc" style="background:var(--warn-fill-d);flex:2;height:42px"><div class="hp-tsh"></div><div class="hp-tn">Kapoor</div><div style="flex:1"></div><div class="hp-tv">$2.8M</div></div>
+                  <div class="hp-tc" style="background:var(--good-fill-d);flex:1;height:42px"><div class="hp-tsh"></div><div class="hp-tn">Al-Ahmad</div><div style="flex:1"></div><div class="hp-tv">AED 3M</div></div>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="hp-z3">
+            <div class="hp-zh"><span class="hp-zdash"></span>UPCOMING · 30 DAYS</div>
+            <div class="hp-fi"><div class="hp-ftop"><span class="hp-fdot" style="background:var(--crit-d)"></span><span class="hp-ftit">Vista IX $85K — Due Today</span></div><div class="hp-fsub">Al-Mansoori · PENDING</div></div>
+            <div class="hp-fi"><div class="hp-ftop"><span class="hp-fdot" style="background:var(--crit-d)"></span><span class="hp-ftit">DIFC Will missing — AED 19.4M</span></div><div class="hp-fsub">Al-Mansoori · EST-001</div></div>
+            <div class="hp-fi"><div class="hp-ftop"><span class="hp-fdot" style="background:var(--warn-d)"></span><span class="hp-ftit">Zakat overdue — $7,543 1447H</span></div><div class="hp-fsub">Al-Mansoori · OVERDUE</div></div>
+            <div class="hp-fi"><div class="hp-ftop"><span class="hp-fdot" style="background:var(--warn-d)"></span><span class="hp-ftit">LRS 72% — $180K of $250K</span></div><div class="hp-fsub">Rashid · UAE-001</div></div>
+            <div class="hp-fi"><div class="hp-ftop"><span class="hp-fdot" style="background:var(--good-d)"></span><span class="hp-ftit">Emirates NBD FAIL · ISL-001</span></div><div class="hp-fsub">Alternatives: DIB, ADIB</div></div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- PROBLEM -->
+<section class="problem" id="problem">
+  <div class="si">
+    <div class="reveal">
+      <span class="stag">The cost of inaction</span>
+      <h2 class="sh2">Your clients are losing <em>$930,000</em><br>you haven't quantified yet</h2>
+      <p class="ssub">Three real advisor archetypes. Three real gaps. Most platforms cannot even see the problem.</p>
+    </div>
+    <div class="p-grid reveal">
+      <div class="persona p1">
+        <div class="p-flag">🇬🇧</div>
+        <div class="p-name">James & Sarah Richardson</div>
+        <div class="p-det">British expat · Dubai 8yr · $4.2M · 9 goals</div>
+        <div class="p-clbl">Cost of inaction</div>
+        <div class="p-cost">$280K</div>
+        <div class="p-csub">Cumulative wealth erosion identified</div>
+        <div class="p-issues">
+          <div class="p-issue"><span class="pid" style="background:var(--crit-d)"></span>Retirement at 28% probability — 3 years of drift undetected</div>
+          <div class="p-issue"><span class="pid" style="background:var(--crit-d)"></span>DIFC Will missing — £4.2M exposed to intestacy</div>
+          <div class="p-issue"><span class="pid" style="background:var(--warn-d)"></span>PE capital call $85K — no liquidity alert in previous tool</div>
+          <div class="p-issue"><span class="pid" style="background:var(--warn-d)"></span>UK IHT nil-rate band unplanned — £325K threshold</div>
+        </div>
+      </div>
+      <div class="persona p2">
+        <div class="p-flag">🇺🇸</div>
+        <div class="p-name">Michael & Jennifer Torres</div>
+        <div class="p-det">American expat · Dubai 3yr · $3.1M · 5 goals</div>
+        <div class="p-clbl">Cost of inaction</div>
+        <div class="p-cost">$310K</div>
+        <div class="p-csub">Cumulative wealth erosion identified</div>
+        <div class="p-issues">
+          <div class="p-issue"><span class="pid" style="background:var(--crit-d)"></span>FBAR non-compliance — $10K+ annual penalty exposure</div>
+          <div class="p-issue"><span class="pid" style="background:var(--crit-d)"></span>NRA estate threshold breached — US assets with no Will</div>
+          <div class="p-issue"><span class="pid" style="background:var(--warn-d)"></span>401(k) stranded — $12K/year in fees avoidable</div>
+          <div class="p-issue"><span class="pid" style="background:var(--warn-d)"></span>LRS utilisation 72% — India repatriation at risk</div>
+        </div>
+      </div>
+      <div class="persona p3">
+        <div class="p-flag">🇦🇪</div>
+        <div class="p-name">Khalid & Fatima Al-Mansouri</div>
+        <div class="p-det">UAE National · Dubai · $8.7M · 9 goals</div>
+        <div class="p-clbl">Cost of inaction</div>
+        <div class="p-cost">$340K</div>
+        <div class="p-csub">Cumulative wealth erosion identified</div>
+        <div class="p-issues">
+          <div class="p-issue"><span class="pid" style="background:var(--crit-d)"></span>Zakat $7,543 overdue — no tracking, no audit trail</div>
+          <div class="p-issue"><span class="pid" style="background:var(--crit-d)"></span>Estate score 3/100 — Faraid on AED 19.4M without DIFC Will</div>
+          <div class="p-issue"><span class="pid" style="background:var(--warn-d)"></span>Emirates NBD Sharia non-compliance — undisclosed 2 years</div>
+          <div class="p-issue"><span class="pid" style="background:var(--warn-d)"></span>EOSB nomination not filed — AED 202,500 at risk</div>
+        </div>
+      </div>
+    </div>
+    <div class="p-total reveal">
+      <div><div class="pt-lbl">Combined cost of inaction</div><div class="pt-n">$930,000</div></div>
+      <div class="pt-s">Every number above comes from a single agent run against live data. This is the gap between what disconnected tools see — and what WealthWise surfaces on day one.</div>
+      <a href="#demo" class="btn-p" style="white-space:nowrap;flex-shrink:0" onclick="event.preventDefault();openDemo()">See it in a demo →</a>
+    </div>
+  </div>
+</section>
+
+<!-- PLATFORM -->
+<section class="platform ls" id="platform">
+  <div class="si">
+    <div class="reveal">
+      <span class="stag">The platform</span>
+      <h2 class="sh2">Most platforms stop at <em>Rung 3</em></h2>
+      <p class="ssub">Scenario comparison is the ceiling for every major incumbent. WealthWise operates at probability optimisation — built from first principles for the UAE HNW advisor.</p>
+    </div>
+    <div class="rungs reveal">
+      <div class="rung"><div class="r-n">Rung 1</div><div class="r-lbl">Data aggregation</div><div class="r-desc">Consolidate accounts across custodians. Show a net worth number. Most tools do this.</div></div>
+      <div class="rung"><div class="r-n">Rung 2</div><div class="r-lbl">Portfolio reporting</div><div class="r-desc">Performance attribution, benchmark comparison, allocation charts. Standard industry capability.</div></div>
+      <div class="rung"><div class="r-n">Rung 3</div><div class="r-lbl">Scenario comparison</div><div class="r-desc">Model "what if" scenarios. Basic Monte Carlo. Addepar, eMoney, MoneyGuidePro operate here.</div></div>
+      <div class="rung active"><div class="r-tag">WealthWise</div><div class="r-n">Rung 4</div><div class="r-lbl">Probability optimisation</div><div class="r-desc">Simultaneously maximise weighted goal probability across all goals. 7 constraints. 10,000 Monte Carlo paths. Goal-level attribution.</div><div class="r-badge">Goal Intelligence OS</div></div>
+    </div>
+    <div class="feats reveal">
+      <div class="feat"><div class="feat-ic">◎</div><div><div class="feat-t">Goal Probability Delta</div><div class="feat-d">How much did portfolio performance move each goal's probability? Computed on every agent run. Connects performance reporting to goal planning.</div></div></div>
+      <div class="feat"><div class="feat-ic">△</div><div><div class="feat-t">Goal-Level Attribution</div><div class="feat-d">Brinson-Fachler decomposition at goal level. Which holdings helped the retirement goal? Which hurt the education goal?</div></div></div>
+      <div class="feat"><div class="feat-ic">⊞</div><div><div class="feat-t">Goal Availability Score</div><div class="feat-d">Which liquid assets are available to fund each goal on time? Accounts for PE lock-ups, Golden Visa illiquidity, and capital call schedules.</div></div></div>
+      <div class="feat"><div class="feat-ic">∿</div><div><div class="feat-t">Goal Risk Sensitivity</div><div class="feat-d">How does each goal respond to UAE stress scenarios? Retirement under oil shock loses 18pp. The client cares about their retirement, not their Sharpe ratio.</div></div></div>
+    </div>
+  </div>
+</section>
+
+<!-- PE SECTION -->
+<section class="pe-section" id="alternatives">
+  <div class="si">
+    <div class="pe-layout reveal">
+      <div class="pe-text">
+        <span class="stag">Private Equity</span>
+        <h2 class="sh2">Capital calls tracked.<br><em>Liquidity protected.</em></h2>
+        <p class="ssub" style="margin-bottom:28px">40–60% of UAE HNW portfolios are in PE, private credit, and real estate. WealthWise treats this as core — not an edge case requiring workarounds.</p>
+        <div class="pe-bullets">
+          <div class="pe-bullet"><span class="pe-bullet-dot"></span>Capital call forecasting with ±30–50% confidence bands by horizon. LIQUIDITY_SHORTFALL alert if calls exceed 20% of liquid assets.</div>
+          <div class="pe-bullet"><span class="pe-bullet-dot"></span>Document Intelligence V3 — upload an LP Agreement or Capital Call Notice, GPT-4o extracts structured data, one-click applies to the live database.</div>
+          <div class="pe-bullet"><span class="pe-bullet-dot"></span>IRR, MOIC, TVPI, DPI, RVPI tracked per fund. Calculated IRR from actual cash flows shown alongside GP-reported — both visible, both labelled.</div>
+          <div class="pe-bullet"><span class="pe-bullet-dot"></span>PE concentration alert fires when private equity exceeds IPS target allocation. Goal Optimizer locks illiquid assets — only liquid sleeve is rebalanced.</div>
+        </div>
+      </div>
+      <div class="pe-mock">
+        <div class="pm-head">
+          <span class="pm-title">PE Fund Dashboard · Al-Mansoori</span>
+          <span class="pm-badge" style="background:var(--acc-bg);color:var(--acc)">4 funds</span>
+        </div>
+        <table class="pm-tbl">
+          <thead><tr>
+            <th class="pm-th">Fund</th><th class="pm-th">Commitment</th><th class="pm-th">Called</th><th class="pm-th">NAV</th><th class="pm-th">IRR</th><th class="pm-th">Status</th>
+          </tr></thead>
+          <tbody>
+            <tr class="pm-tr"><td class="pm-td"><div class="pm-fn">Vista Equity IX</div><div style="font-size:9px;color:var(--tx3)">Vintage 2022 · BUYOUT</div></td><td class="pm-td pm-fv">$500K</td><td class="pm-td pm-fv">$170K</td><td class="pm-td pm-fv">$190K</td><td class="pm-td" style="font-family:var(--serif);font-size:13px;font-weight:300;color:var(--good-t);text-align:right">18.2%</td><td class="pm-td" style="text-align:right"><span class="pm-status" style="background:rgba(20,100,110,.1);color:var(--good-t)">ACTIVE</span></td></tr>
+            <tr class="pm-tr"><td class="pm-td"><div class="pm-fn">Sequoia Global IV</div><div style="font-size:9px;color:var(--tx3)">Vintage 2021 · GROWTH</div></td><td class="pm-td pm-fv">$300K</td><td class="pm-td pm-fv">$240K</td><td class="pm-td pm-fv">$312K</td><td class="pm-td" style="font-family:var(--serif);font-size:13px;font-weight:300;color:var(--good-t);text-align:right">22.4%</td><td class="pm-td" style="text-align:right"><span class="pm-status" style="background:rgba(20,100,110,.1);color:var(--good-t)">ACTIVE</span></td></tr>
+            <tr class="pm-tr"><td class="pm-td"><div class="pm-fn">Thoma Bravo XV</div><div style="font-size:9px;color:var(--tx3)">Vintage 2023 · BUYOUT</div></td><td class="pm-td pm-fv">$200K</td><td class="pm-td pm-fv">$0</td><td class="pm-td pm-fv" style="color:var(--tx3)">—</td><td class="pm-td" style="font-family:var(--serif);font-size:13px;font-weight:300;color:var(--tx3);text-align:right">—</td><td class="pm-td" style="text-align:right"><span class="pm-status" style="background:var(--acc-bg);color:var(--acc)">ACTIVE</span></td></tr>
+            <tr class="pm-tr"><td class="pm-td"><div class="pm-fn">Gulf Capital Fund IV</div><div style="font-size:9px;color:var(--tx3)">Vintage 2019 · MENA</div></td><td class="pm-td pm-fv">$250K</td><td class="pm-td pm-fv">$250K</td><td class="pm-td pm-fv">$185K</td><td class="pm-td" style="font-family:var(--serif);font-size:13px;font-weight:300;color:var(--warn-t);text-align:right">14.1%</td><td class="pm-td" style="text-align:right"><span class="pm-status" style="background:var(--warn-bg);color:var(--warn-t)">HARVEST</span></td></tr>
+          </tbody>
+        </table>
+        <div class="pm-call-bar">
+          <div class="pm-call-label">CALLS DUE · 30 DAYS</div>
+          <div class="pm-call-item">
+            <div class="pm-call-name">Vista Equity Partners IX</div>
+            <div style="display:flex;align-items:baseline;gap:8px">
+              <div class="pm-call-amt">$85,000</div>
+              <div class="pm-call-date">Due 15 Mar · PENDING</div>
+            </div>
+          </div>
+          <div class="pm-call-item" style="border-left-color:var(--warn-fill)">
+            <div class="pm-call-name">Vista Equity Partners IX</div>
+            <div style="display:flex;align-items:baseline;gap:8px">
+              <div class="pm-call-amt" style="color:var(--warn-t)">$85,000</div>
+              <div class="pm-call-date">Due 14 Mar · OVERDUE</div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- PRIVATE CREDIT SECTION -->
+<section class="credit-section" id="credit">
+  <div class="si">
+    <div class="credit-layout reveal">
+      <div class="cr-mock">
+        <div class="cr-head">
+          <span class="cr-title">Private Credit · Al-Mansoori</span>
+          <span style="font-size:9px;font-weight:600;padding:2px 7px;border-radius:3px;font-family:var(--sans);background:rgba(107,159,212,.12);color:var(--acc-l);margin-left:auto">2 positions · $680K</span>
+        </div>
+        <div class="cr-body">
+          <div class="cr-tr">
+            <div class="cr-th">Issuer</div><div class="cr-th" style="text-align:right">Type</div><div class="cr-th" style="text-align:right">Amount</div><div class="cr-th" style="text-align:right">Rate</div><div class="cr-th" style="text-align:right">Maturity</div>
+          </div>
+          <div style="display:grid;grid-template-columns:2fr 1fr 1fr 1fr 1fr;border-bottom:1px solid rgba(255,255,255,.06)">
+            <div class="cr-td"><div><div class="cr-issuer">Gulf Infrastructure Holdings</div><div class="cr-type">Senior Secured</div></div></div>
+            <div class="cr-td num"><span class="cr-badge" style="background:rgba(20,100,110,.2);color:var(--good-d)">SENIOR</span></div>
+            <div class="cr-td num">$500K</div>
+            <div class="cr-rate cr-td num">8.75%</div>
+            <div class="cr-td num">Mar 2027</div>
+          </div>
+          <div style="display:grid;grid-template-columns:2fr 1fr 1fr 1fr 1fr">
+            <div class="cr-td"><div><div class="cr-issuer">Dubai Retail Partners LLC</div><div class="cr-type">Mezzanine</div></div></div>
+            <div class="cr-td num"><span class="cr-badge" style="background:rgba(160,120,20,.18);color:var(--warn-d)">MEZZ</span></div>
+            <div class="cr-td num">AED 300K</div>
+            <div class="cr-rate cr-td num">12.00%</div>
+            <div class="cr-td num">Sep 2026</div>
+          </div>
+          <div class="cr-impact">
+            <div class="cr-imp-label">GOAL CONTRIBUTION</div>
+            <div style="flex:1">
+              <div style="display:flex;align-items:center;gap:8px;margin-bottom:5px">
+                <div style="font-size:9px;color:rgba(255,255,255,.3);font-family:var(--sans);width:100px">Retirement · P1</div>
+                <div class="cr-imp-bar"><div class="cr-imp-fill" style="width:62%"></div></div>
+                <div class="cr-imp-val" style="font-size:12px">+3.2pp</div>
+              </div>
+              <div style="display:flex;align-items:center;gap:8px">
+                <div style="font-size:9px;color:rgba(255,255,255,.3);font-family:var(--sans);width:100px">Education · P3</div>
+                <div class="cr-imp-bar"><div class="cr-imp-fill" style="width:34%;background:linear-gradient(90deg,rgba(107,159,212,.6),var(--acc-l))"></div></div>
+                <div class="cr-imp-val" style="font-size:12px">+1.7pp</div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div>
+        <span class="stag">Private Credit</span>
+        <h2 class="sh2" style="color:#F0EDE8">Income that <em>feeds goals</em></h2>
+        <p class="ssub" style="color:rgba(255,255,255,.42);margin-bottom:28px">Private credit positions are modelled at goal level — not just as portfolio yield. The fixed-income contribution to retirement probability is calculated and attributed directly.</p>
+        <div class="credit-bullets">
+          <div class="credit-bullet"><span class="cb-dot"></span>Goal-level attribution shows which private credit positions are contributing to which goal probability. Not just yield — probability impact in basis points.</div>
+          <div class="credit-bullet"><span class="cb-dot"></span>Maturity matching against goal target dates. Dubai Retail Partners matures Sep 2026 — feeds into the capital availability calculation for shorter-horizon goals.</div>
+          <div class="credit-bullet"><span class="cb-dot"></span>Interest rate monitoring — when central bank rates shift, private credit floating-rate positions are flagged and their goal-level impact recalculated.</div>
+          <div class="credit-bullet"><span class="cb-dot"></span>Islamic finance screening applies to private credit — AAOIFI determines whether the instrument is Shariah-compliant before it is included in goal funding calculations for Sharia-compliant households.</div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- REAL ESTATE SECTION -->
+<section class="re-section ls" id="realestate">
+  <div class="si">
+    <div class="re-layout reveal">
+      <div>
+        <span class="stag">Real Estate & Alternatives</span>
+        <h2 class="sh2">Every asset class.<br><em>One probability.</em></h2>
+        <p class="ssub" style="margin-bottom:28px">UAE HNW clients hold yachts, art collections, DLD properties, and DIFC offices. WealthWise tracks all of them — and integrates them into the goal probability engine.</p>
+        <div class="re-bullets">
+          <div class="re-bullet"><span class="rb-dot"></span>Dubai DLD comparables pulled from Bayut via API — automated valuation model for residential and commercial properties shows fair value vs current book value.</div>
+          <div class="re-bullet"><span class="rb-dot"></span>Golden Visa qualifying asset monitored continuously. AED 2M threshold breach triggers immediate alert and Goal Optimizer constraint update.</div>
+          <div class="re-bullet"><span class="rb-dot"></span>Alt asset insurance expiries tracked via vw_expiry_alerts — 180-day lead time. Al-Mansoori's MENA Art Collection RSA policy: 103 days to renewal.</div>
+          <div class="re-bullet"><span class="rb-dot"></span>Document Intelligence V3 processes Appraisal Reports, Title Deeds, and Property Valuations — extracting structured data and updating asset values with one click.</div>
+        </div>
+      </div>
+      <div class="re-mock">
+        <div class="re-head">
+          <span class="re-title">Real Estate & Alternatives · Al-Mansoori</span>
+        </div>
+        <div class="re-body">
+          <div class="re-cards">
+            <div class="re-card">
+              <div class="re-card-color" style="background:var(--acc)"></div>
+              <div class="re-card-body">
+                <div class="re-card-top">
+                  <div class="re-card-name">Palm Jumeirah Villa</div>
+                  <div class="re-card-val">AED 3.85M</div>
+                </div>
+                <div class="re-card-row">
+                  <span class="re-card-type" style="background:var(--acc-bg);color:var(--acc)">RESIDENTIAL</span>
+                  <span class="re-card-sub">DLD · Mortgage AED 1.2M · Golden Visa ✓</span>
+                </div>
+              </div>
+              <div class="re-card-right">
+                <div class="re-card-wgp" style="color:var(--good-t)">Qualifies</div>
+                <div class="re-card-wgp-l">GV Status</div>
+              </div>
+            </div>
+            <div class="re-card">
+              <div class="re-card-color" style="background:var(--acc)"></div>
+              <div class="re-card-body">
+                <div class="re-card-top">
+                  <div class="re-card-name">DIFC Office Unit 14B</div>
+                  <div class="re-card-val">AED 2.1M</div>
+                </div>
+                <div class="re-card-row">
+                  <span class="re-card-type" style="background:var(--acc-bg);color:var(--acc)">COMMERCIAL</span>
+                  <span class="re-card-sub">No mortgage · 100% occupied</span>
+                </div>
+              </div>
+              <div class="re-card-right">
+                <div class="re-card-wgp" style="color:var(--good-t)">6.2%</div>
+                <div class="re-card-wgp-l">Yield</div>
+              </div>
+            </div>
+            <div class="re-card">
+              <div class="re-card-color" style="background:var(--warn-fill)"></div>
+              <div class="re-card-body">
+                <div class="re-card-top">
+                  <div class="re-card-name">Al Noor Yacht</div>
+                  <div class="re-card-val">AED 2.65M</div>
+                </div>
+                <div class="re-card-row">
+                  <span class="re-card-type" style="background:var(--warn-bg);color:var(--warn-t)">YACHT</span>
+                  <span class="re-card-sub">Insurance: 285 days · RSA 2026</span>
+                </div>
+              </div>
+              <div class="re-card-right">
+                <div class="re-card-wgp" style="color:var(--warn-t)">285d</div>
+                <div class="re-card-wgp-l">To renew</div>
+              </div>
+            </div>
+            <div class="re-card">
+              <div class="re-card-color" style="background:var(--crit-fill)"></div>
+              <div class="re-card-body">
+                <div class="re-card-top">
+                  <div class="re-card-name">MENA Art Collection</div>
+                  <div class="re-card-val">AED 1.85M</div>
+                </div>
+                <div class="re-card-row">
+                  <span class="re-card-type" style="background:var(--crit-bg);color:var(--crit-t)">ART</span>
+                  <span class="re-card-sub">Christie's appraisal 2024 · Expiring soon</span>
+                </div>
+              </div>
+              <div class="re-card-right">
+                <div class="re-card-wgp" style="color:var(--crit-t)">103d</div>
+                <div class="re-card-wgp-l">⚠ Urgent</div>
+              </div>
+            </div>
+          </div>
+          <div class="re-avm">
+            <div class="re-avm-title">DLD Comparable Valuations — Bayut API</div>
+            <div class="re-avm-row">
+              <div class="re-avm-label">Palm Jumeirah Villa</div>
+              <div class="re-avm-bar-track"><div class="re-avm-bar-fill" style="width:88%;background:var(--acc)"></div></div>
+              <div class="re-avm-val" style="color:var(--good-t)">AED 3.85M ↑</div>
+            </div>
+            <div class="re-avm-row">
+              <div class="re-avm-label">DIFC Office Unit 14B</div>
+              <div class="re-avm-bar-track"><div class="re-avm-bar-fill" style="width:56%;background:var(--acc)"></div></div>
+              <div class="re-avm-val">AED 2.1M →</div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- UAE NATIVE -->
+<section class="uae" id="uae">
+  <div class="si">
+    <div class="reveal">
+      <span class="stag">UAE-Native intelligence</span>
+      <h2 class="sh2">Not adapted for the UAE.<br><em>Built for it.</em></h2>
+      <p class="ssub">Every incumbent treats these as edge cases. For 35% of your client base, they are the entire engagement.</p>
+    </div>
+    <div class="uae-g reveal">
+      <div class="uae-t"><div class="uae-ic">🏛️</div><div class="uae-tt">EOSB Modelling</div><div class="uae-td">End of Service Benefit across all three contract types — UAE Labour Law, DIFC DEWS, ADGM. Nomination status tracked. AED 202,500 at risk without a filed nomination.</div><div class="uae-tag">UAE Labour Law · DEWS · ADGM</div></div>
+      <div class="uae-t"><div class="uae-ic">🔒</div><div class="uae-tt">Golden Visa Intelligence</div><div class="uae-td">AED 2M qualifying threshold monitored. Illiquidity constraint integrated into Goal Optimizer. Dependent visa cascade risk tracked for the whole family.</div><div class="uae-tag">DLD · Qualifying Asset · Renewal</div></div>
+      <div class="uae-t"><div class="uae-ic">☽</div><div class="uae-tt">Zakat as a Liability</div><div class="uae-td">Zakat per AAOIFI Standard 9. Purification (Tazkiyah) computed per holding. Hijri year tracking. A first-class balance sheet item, not an afterthought.</div><div class="uae-tag">AAOIFI Standard 9 · Tazkiyah</div></div>
+      <div class="uae-t"><div class="uae-ic">🌐</div><div class="uae-tt">LRS & India Repatriation</div><div class="uae-td">$250K annual LRS limit tracked per NRI person. Alerts at 70% and 85%. UAE-India DTAA analysis. Form 15CA reminders. 183-day residency day-count.</div><div class="uae-tag">FEMA · DTAA · Form 15CA</div></div>
+      <div class="uae-t"><div class="uae-ic">⚖️</div><div class="uae-tt">Faraid vs DIFC Will</div><div class="uae-td">Which assets fall under Faraid? Which does the DIFC Will cover? What does the intestacy freeze timeline look like for each jurisdiction?</div><div class="uae-tag">DIFC Courts · Faraid · Waqf</div></div>
+      <div class="uae-t"><div class="uae-ic">📊</div><div class="uae-tt">Multi-Currency Goal Risk</div><div class="uae-td">Goal probability measured in goal currency. UK property goal in GBP: standard 24%, FX-adjusted 19%. The 5pp gap is the currency risk your client is exposed to.</div><div class="uae-tag">AED · GBP · INR · USD</div></div>
+    </div>
+  </div>
+</section>
+
+<!-- BUILT FOR -->
+<section class="bf" id="builtfor">
+  <div class="si">
+    <div class="reveal">
+      <span class="stag">Who it's for</span>
+      <h2 class="sh2">Three buyer types. <em>One platform.</em></h2>
+      <p class="ssub">WealthWise serves distinct advisory profiles — each with different priorities, regulatory contexts, and definitions of world-class.</p>
+    </div>
+    <div class="bf-g reveal">
+      <div class="bf-c"><div class="bf-ic">🏢</div><div class="bf-who">DIFC-Licensed Firm</div><div class="bf-tit">Advisory practices and boutique RIAs</div><div class="bf-desc">Multi-client management with DFSA suitability compliance built in. The intelligence engine runs across your entire book simultaneously.</div><div class="bf-feats"><div class="bf-feat"><span class="bf-ck">✓</span>78-rule engine across all households simultaneously</div><div class="bf-feat"><span class="bf-ck">✓</span>DFSA audit trail — agent_decisions immutable log</div><div class="bf-feat"><span class="bf-ck">✓</span>Advisory Brief (SOA) with COBS Rule 3.4 disclosures</div><div class="bf-feat"><span class="bf-ck">✓</span>Client presentation mode for in-meeting demos</div></div><button class="bf-cta" onclick="openDemo()">Book a Demo →</button></div>
+      <div class="bf-c"><div class="bf-ic">📊</div><div class="bf-who">External Asset Manager</div><div class="bf-tit">EAMs and independent advisors</div><div class="bf-desc">Handle the complexity of HNW clients with 40–60% PE/RE/PC allocations. Capital call forecasting, multi-custodian import, and tax-lot aware rebalancing.</div><div class="bf-feats"><div class="bf-feat"><span class="bf-ck">✓</span>PE capital call forecasting with confidence bands</div><div class="bf-feat"><span class="bf-ck">✓</span>Document Intelligence — 13 AI extraction schemas</div><div class="bf-feat"><span class="bf-ck">✓</span>Multi-custodian CSV import with reusable field mapping</div><div class="bf-feat"><span class="bf-ck">✓</span>Goal-level Brinson-Fachler attribution</div></div><button class="bf-cta" onclick="openDemo()">Book a Demo →</button></div>
+      <div class="bf-c"><div class="bf-ic">🏰</div><div class="bf-who">Single Family Office</div><div class="bf-tit">Principals and family CFOs</div><div class="bf-desc">Consolidated view across all asset classes — liquid, illiquid, private credit, real estate, alternatives. Islamic finance and multi-jurisdiction estate in one system.</div><div class="bf-feats"><div class="bf-feat"><span class="bf-ck">✓</span>Consolidated estate health score and document vault</div><div class="bf-feat"><span class="bf-ck">✓</span>Sharia screening — AAOIFI, Zakat, Tazkiyah</div><div class="bf-feat"><span class="bf-ck">✓</span>Multi-jurisdiction succession (UAE + UK + US + India)</div><div class="bf-feat"><span class="bf-ck">✓</span>Yacht, art, private credit — all asset classes tracked</div></div><button class="bf-cta" onclick="openDemo()">Book a Demo →</button></div>
+    </div>
+  </div>
+</section>
+
+<!-- METHODOLOGY -->
+<section class="methodology" id="methodology">
+  <div class="meth-inner reveal">
+    <div>
+      <span class="stag">The methodology</span>
+      <div style="height:20px"></div>
+      <div class="meth-pull">"The only platform where every module — from <span>Zakat calculation</span> to <span>PE capital call forecasting</span> — ultimately answers one question: what is the probability of achieving each goal?"</div>
+      <div class="meth-attr"><strong>Ankur Kansal</strong> · CFA · FRM<br>Founder, WealthWise UAE<br>Consulting Partner, Tata Consultancy Services · 15+ years</div>
+      <div class="meth-pills">
+        <span class="meth-pill">Goal Intelligence Engine</span><span class="meth-pill">Document Intelligence V3</span><span class="meth-pill">Meeting Intelligence</span><span class="meth-pill">Capital Call Forecasting</span><span class="meth-pill">Islamic Finance Suite</span><span class="meth-pill">UAE Intelligence Hub</span><span class="meth-pill">Advisory Brief · SOA</span><span class="meth-pill">Rebalancing Engine</span><span class="meth-pill">Estate Health Score</span><span class="meth-pill">DFSA Audit Trail</span>
+      </div>
+    </div>
+    <div>
+      <div class="meth-right-title">Engagements & Foundations</div>
+      <div class="meth-items">
+        <div class="meth-item"><div class="meth-item-ic">🏛️</div><div><div class="meth-item-t">DIFC FinTech Hive</div><div class="meth-item-s">Engagement in progress with the UAE's leading financial technology accelerator. DIFC is the primary regulatory target market.</div></div></div>
+        <div class="meth-item"><div class="meth-item-ic">🌐</div><div><div class="meth-item-t">AI4 Conference 2026</div><div class="meth-item-s">Registered with startup pass for AI4 Abu Dhabi 2026 — the region's largest AI and technology conference.</div></div></div>
+        <div class="meth-item"><div class="meth-item-ic">📐</div><div><div class="meth-item-t">CFA Level III Framework</div><div class="meth-item-s">The Goal Intelligence Engine is built on CFA Level III Private Wealth and Private Markets pathway methodology — institutional-grade, not approximated.</div></div></div>
+        <div class="meth-item"><div class="meth-item-ic">🔒</div><div><div class="meth-item-t">Zero Hardcoding Principle</div><div class="meth-item-s">Every threshold, rate, rule, and assumption lives in a database table. Tax rates change. Regulations change. The platform adapts without code deployment.</div></div></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- CTA -->
+<section class="cta-sec" id="demo">
+  <div class="cta-glow"></div>
+  <span class="cta-tg">Request a demo</span>
+  <h2 class="cta-h2">See Goal Intelligence OS<br>working on your clients</h2>
+  <p class="cta-sub">30 minutes. We load your client archetype. You see the exact actions, the exact probabilities, the exact UAE intelligence — live.</p>
+  <div class="cta-btns">
+    <button class="btn-p" onclick="openDemo()" style="font-size:15px;padding:15px 32px">Request a Demo →</button>
+    <button class="btn-o" onclick="openMeth()" style="font-size:14px">Download the Methodology</button>
+  </div>
+  <div class="cta-note">DIFC · Dubai · UAE &nbsp;·&nbsp; Responding within 24 hours &nbsp;·&nbsp; <a href="mailto:demo@wealthwise.ae" style="color:rgba(255,255,255,.35);text-decoration:none">demo@wealthwise.ae</a></div>
+</section>
+
+<!-- FOOTER -->
+<footer>
+  <div class="ft-inner">
+    <div class="ft-top">
+      <div>
+        <div class="ft-logo"><div class="ft-lic"><span>W</span></div><span class="ft-wm">WealthWise</span></div>
+        <div class="ft-tl">Goal Intelligence OS.<br>Built for UAE wealth advisors, EAMs, and family offices.</div>
+      </div>
+      <div class="ft-links">
+        <div class="ft-lg"><div class="ft-lt">Platform</div><a href="#platform" class="ft-lnk">Goal Intelligence Engine</a><a href="#alternatives" class="ft-lnk">Private Equity</a><a href="#credit" class="ft-lnk">Private Credit</a><a href="#realestate" class="ft-lnk">Real Estate & Alternatives</a><a href="#uae" class="ft-lnk">UAE-Native Features</a></div>
+        <div class="ft-lg"><div class="ft-lt">Compliance</div><a href="#platform" class="ft-lnk">DFSA Audit Trail</a><a href="#uae" class="ft-lnk">AAOIFI Sharia Screening</a><a href="#uae" class="ft-lnk">DIFC Will Intelligence</a><a href="#uae" class="ft-lnk">LRS & DTAA Tracking</a></div>
+        <div class="ft-lg"><div class="ft-lt">Company</div><a href="#methodology" class="ft-lnk">Methodology</a><a href="#" onclick="event.preventDefault();openDemo()" class="ft-lnk">Request a Demo</a><a href="mailto:demo@wealthwise.ae" class="ft-lnk">Contact</a><a href="https://hive.difc.ae" class="ft-lnk" target="_blank" rel="noopener">DIFC FinTech Hive ↗</a></div>
+      </div>
+    </div>
+    <div class="ft-bot">
+      <div class="ft-copy">© 2026 WealthWise. Proudly built in Dubai, UAE.</div>
+      <div class="ft-badge">DIFC · Goal Intelligence OS</div>
+    </div>
+  </div>
+</footer>
+
+<style>
+/* ── MODAL ───────────────────────────────── */
+.modal-overlay{
+  position:fixed;inset:0;z-index:9999;
+  background:rgba(6,11,24,.82);
+  backdrop-filter:blur(10px);
+  display:flex;align-items:center;justify-content:center;
+  padding:20px;opacity:0;pointer-events:none;
+  transition:opacity .25s cubic-bezier(.4,0,.2,1);
+}
+.modal-overlay.open{opacity:1;pointer-events:all}
+.modal{
+  background:#0F1729;border:1px solid rgba(255,255,255,.1);
+  border-radius:14px;width:100%;max-width:500px;
+  padding:40px;position:relative;
+  transform:translateY(18px) scale(.98);
+  transition:transform .28s cubic-bezier(.4,0,.2,1);
+  box-shadow:0 40px 100px rgba(0,0,0,.6);
+}
+.modal-overlay.open .modal{transform:none}
+.modal-close{
+  position:absolute;top:16px;right:16px;
+  width:32px;height:32px;border-radius:50%;
+  background:rgba(255,255,255,.07);border:1px solid rgba(255,255,255,.1);
+  color:rgba(255,255,255,.5);font-size:16px;cursor:pointer;
+  display:flex;align-items:center;justify-content:center;
+  transition:all .15s;font-family:var(--sans);line-height:1;
+}
+.modal-close:hover{background:rgba(255,255,255,.12);color:#FFF}
+.modal-tag{font-size:10px;font-weight:600;letter-spacing:.12em;text-transform:uppercase;color:var(--acc-l);font-family:var(--sans);margin-bottom:10px;display:block}
+.modal-title{font-family:var(--serif);font-size:28px;font-weight:200;font-style:italic;color:#FFF;line-height:1.1;margin-bottom:8px;letter-spacing:-.02em}
+.modal-sub{font-size:13px;color:rgba(255,255,255,.4);font-family:var(--sans);line-height:1.6;margin-bottom:28px}
+.modal-form{display:flex;flex-direction:column;gap:14px}
+.form-row{display:grid;grid-template-columns:1fr 1fr;gap:14px}
+.form-group{display:flex;flex-direction:column;gap:5px}
+.form-label{font-size:10px;font-weight:600;letter-spacing:.08em;text-transform:uppercase;color:rgba(255,255,255,.35);font-family:var(--sans)}
+.form-input,.form-select,.form-textarea{
+  background:#141E30;border:1px solid rgba(255,255,255,.1);
+  border-radius:7px;padding:10px 14px;
+  font-size:13px;color:#F0EDE8;font-family:var(--sans);
+  outline:none;transition:border-color .15s;width:100%;
+  -webkit-appearance:none;
+}
+.form-input::placeholder,.form-textarea::placeholder{color:rgba(255,255,255,.2)}
+.form-input:focus,.form-select:focus,.form-textarea:focus{border-color:rgba(107,159,212,.5);background:#1A2640}
+.form-select{color:#F0EDE8;cursor:pointer}
+.form-select option{background:#141E30;color:#F0EDE8}
+.form-textarea{resize:none;height:80px;line-height:1.5}
+.form-submit{
+  background:var(--acc);color:#FFF;border:none;border-radius:7px;
+  padding:13px;font-size:14px;font-weight:600;font-family:var(--sans);
+  cursor:pointer;transition:all .18s;letter-spacing:-.01em;
+  display:flex;align-items:center;justify-content:center;gap:8px;
+  margin-top:4px;
+}
+.form-submit:hover{background:#243F72;transform:translateY(-1px)}
+.form-submit:disabled{opacity:.5;cursor:not-allowed;transform:none}
+.form-note{font-size:11px;color:rgba(255,255,255,.2);font-family:var(--sans);text-align:center;margin-top:8px}
+/* Success state */
+.modal-success{display:none;text-align:center;padding:20px 0}
+.modal-success.show{display:block}
+.modal-form-wrap.hide{display:none}
+.success-icon{font-size:48px;margin-bottom:16px;display:block}
+.success-title{font-family:var(--serif);font-size:24px;font-weight:300;color:#FFF;margin-bottom:10px;letter-spacing:-.01em}
+.success-sub{font-size:14px;color:rgba(255,255,255,.45);font-family:var(--sans);line-height:1.65;max-width:320px;margin:0 auto 24px}
+.success-detail{font-size:12px;color:rgba(255,255,255,.25);font-family:var(--sans);line-height:1.6;padding:14px;background:rgba(255,255,255,.04);border-radius:7px;border:1px solid rgba(255,255,255,.07);text-align:left}
+
+/* Methodology download modal variant */
+.modal.modal-meth{max-width:440px}
+</style>
+
+<!-- DEMO MODAL -->
+<div class="modal-overlay" id="demo-modal" onclick="handleOverlayClick(event)">
+  <div class="modal">
+    <button class="modal-close" onclick="closeModal('demo-modal')" aria-label="Close">✕</button>
+    <span class="modal-tag">30-minute demo</span>
+    <div class="modal-title">Request a Demo</div>
+    <p class="modal-sub">We'll set up a live session using your client archetype — real data, real probabilities, real UAE intelligence.</p>
+    <div class="modal-form-wrap" id="demo-form-wrap">
+      <form class="modal-form" id="demo-form" onsubmit="submitDemo(event)">
+        <div class="form-row">
+          <div class="form-group"><label class="form-label">First name</label><input class="form-input" type="text" placeholder="Ankur" required id="f-fname"></div>
+          <div class="form-group"><label class="form-label">Last name</label><input class="form-input" type="text" placeholder="Kansal" required id="f-lname"></div>
+        </div>
+        <div class="form-group"><label class="form-label">Work email</label><input class="form-input" type="email" placeholder="name@firm.ae" required id="f-email"></div>
+        <div class="form-group"><label class="form-label">Firm name</label><input class="form-input" type="text" placeholder="Your advisory firm" id="f-firm"></div>
+        <div class="form-group">
+          <label class="form-label">I am a</label>
+          <select class="form-select" id="f-role">
+            <option value="">Select your role…</option>
+            <option value="difc-advisor">DIFC-Licensed Advisor</option>
+            <option value="eam">External Asset Manager (EAM)</option>
+            <option value="family-office">Single Family Office</option>
+            <option value="compliance">Compliance / Risk Officer</option>
+            <option value="other">Other</option>
+          </select>
+        </div>
+        <div class="form-group"><label class="form-label">What's most important to you? (optional)</label><textarea class="form-textarea" placeholder="e.g. PE capital call tracking, Islamic finance, DFSA compliance…" id="f-note"></textarea></div>
+        <button class="form-submit" type="submit" id="demo-submit">
+          <span id="demo-submit-text">Request Demo →</span>
+        </button>
+        <div class="form-note">DIFC · Dubai · UAE · Responding within 24 hours</div>
+      </form>
+    </div>
+    <div class="modal-success" id="demo-success">
+      <span class="success-icon">✓</span>
+      <div class="success-title">Demo request received</div>
+      <p class="success-sub">We'll be in touch within 24 hours to confirm your 30-minute session.</p>
+      <div class="success-detail">
+        <strong style="color:rgba(255,255,255,.6);font-size:11px;letter-spacing:.06em;text-transform:uppercase">What to expect</strong><br><br>
+        We'll load the Al-Mansoori, Richardson, or Torres household based on your context — and walk through the exact actions, goal probabilities, and UAE intelligence WealthWise surfaces on day one.<br><br>
+        In the meantime: <a href="mailto:demo@wealthwise.ae" style="color:var(--acc-l)">demo@wealthwise.ae</a>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- METHODOLOGY DOWNLOAD MODAL -->
+<div class="modal-overlay" id="meth-modal" onclick="handleOverlayClick(event)">
+  <div class="modal modal-meth">
+    <button class="modal-close" onclick="closeModal('meth-modal')" aria-label="Close">✕</button>
+    <span class="modal-tag">Methodology document</span>
+    <div class="modal-title">Download the Methodology</div>
+    <p class="modal-sub">The WealthWise Goal Intelligence methodology — CFA Level III framework applied to UAE HNW wealth planning. We'll email it to you immediately.</p>
+    <div class="modal-form-wrap" id="meth-form-wrap">
+      <form class="modal-form" id="meth-form" onsubmit="submitMeth(event)">
+        <div class="form-group"><label class="form-label">Your name</label><input class="form-input" type="text" placeholder="Name" required id="mf-name"></div>
+        <div class="form-group"><label class="form-label">Work email</label><input class="form-input" type="email" placeholder="name@firm.ae" required id="mf-email"></div>
+        <button class="form-submit" type="submit">Get the Methodology →</button>
+        <div class="form-note">Sent immediately · No spam ever</div>
+      </form>
+    </div>
+    <div class="modal-success" id="meth-success">
+      <span class="success-icon">📄</span>
+      <div class="success-title">On its way</div>
+      <p class="success-sub">Check your inbox — the methodology document is being sent now.</p>
+      <div class="success-detail" style="font-size:12px;color:rgba(255,255,255,.35)">
+        Can't find it? Check your spam folder or email us directly at <a href="mailto:demo@wealthwise.ae" style="color:var(--acc-l)">demo@wealthwise.ae</a>
+      </div>
+    </div>
+  </div>
+</div>
+
+<script>
+/* ── SCROLL REVEAL ──────────────────────── */
+const obs = new IntersectionObserver((entries) => {
+  entries.forEach((e, i) => {
+    if (e.isIntersecting) {
+      setTimeout(() => e.target.classList.add('vis'), i * 70);
+      obs.unobserve(e.target);
+    }
+  });
+}, { threshold: .06, rootMargin: '0px 0px -28px 0px' });
+document.querySelectorAll('.reveal').forEach(el => obs.observe(el));
+
+/* ── NAV SCROLL ─────────────────────────── */
+window.addEventListener('scroll', () => {
+  document.getElementById('nav').style.background =
+    window.scrollY > 60 ? 'rgba(6,11,24,.97)' : 'rgba(8,14,28,.88)';
+});
+
+/* ── SMOOTH SCROLL for all anchor links ─── */
+document.querySelectorAll('a[href^="#"]').forEach(a => {
+  a.addEventListener('click', e => {
+    const href = a.getAttribute('href');
+    if (href === '#') return;
+    // Demo and modal triggers handled separately
+    if (href === '#demo') { e.preventDefault(); openModal('demo-modal'); return; }
+    const target = document.querySelector(href);
+    if (target) {
+      e.preventDefault();
+      const top = target.getBoundingClientRect().top + window.scrollY - 72;
+      window.scrollTo({ top, behavior: 'smooth' });
+    }
+  });
+});
+
+/* ── MODAL OPEN / CLOSE ─────────────────── */
+function openModal(id) {
+  document.getElementById(id).classList.add('open');
+  document.body.style.overflow = 'hidden';
+}
+function closeModal(id) {
+  document.getElementById(id).classList.remove('open');
+  document.body.style.overflow = '';
+}
+function handleOverlayClick(e) {
+  if (e.target === e.currentTarget) closeModal(e.currentTarget.id);
+}
+document.addEventListener('keydown', e => {
+  if (e.key === 'Escape') {
+    closeModal('demo-modal');
+    closeModal('meth-modal');
+  }
+});
+
+/* ── OPEN DEMO from any button ─────────── */
+function openDemo() { openModal('demo-modal'); }
+function openMeth() { openModal('meth-modal'); }
+
+/* ── DEMO FORM SUBMIT ───────────────────── */
+function submitDemo(e) {
+  e.preventDefault();
+  const btn = document.getElementById('demo-submit');
+  const txt = document.getElementById('demo-submit-text');
+  btn.disabled = true;
+  txt.textContent = 'Sending…';
+
+  // Build mailto with form data
+  const name = document.getElementById('f-fname').value + ' ' + document.getElementById('f-lname').value;
+  const email = document.getElementById('f-email').value;
+  const firm = document.getElementById('f-firm').value || 'Not provided';
+  const role = document.getElementById('f-role').value || 'Not specified';
+  const note = document.getElementById('f-note').value || 'None';
+  const body = encodeURIComponent(
+    `Name: ${name}\nEmail: ${email}\nFirm: ${firm}\nRole: ${role}\nNote: ${note}\n\nSent from WealthWise website demo form.`
+  );
+  const subject = encodeURIComponent(`Demo Request — ${name} · ${firm}`);
+
+  // Try mailto, fall back gracefully
+  try {
+    window.location.href = `mailto:demo@wealthwise.ae?subject=${subject}&body=${body}`;
+  } catch(err) {}
+
+  // Always show success after short delay
+  setTimeout(() => {
+    document.getElementById('demo-form-wrap').classList.add('hide');
+    document.getElementById('demo-success').classList.add('show');
+    btn.disabled = false;
+    txt.textContent = 'Request Demo →';
+  }, 900);
+}
+
+/* ── METHODOLOGY FORM SUBMIT ────────────── */
+function submitMeth(e) {
+  e.preventDefault();
+  const name = document.getElementById('mf-name').value;
+  const email = document.getElementById('mf-email').value;
+  const body = encodeURIComponent(`Name: ${name}\nEmail: ${email}\n\nSent from WealthWise website methodology form.`);
+  const subject = encodeURIComponent(`Methodology Download — ${name}`);
+  try {
+    window.location.href = `mailto:demo@wealthwise.ae?subject=${subject}&body=${body}`;
+  } catch(err) {}
+  setTimeout(() => {
+    document.getElementById('meth-form-wrap').classList.add('hide');
+    document.getElementById('meth-success').classList.add('show');
+  }, 700);
+}
+
+/* ── LIVE DUBAI TIME ────────────────────── */
+function tick() {
+  try {
+    const t = new Date().toLocaleTimeString('en-US', { timeZone: 'Asia/Dubai', hour: '2-digit', minute: '2-digit', hour12: true });
+    const el = document.getElementById('hp-ttl');
+    if (el) el.textContent = `WealthWise — Goal Intelligence OS · Dubai ${t}`;
+  } catch(e) {}
+}
+tick(); setInterval(tick, 30000);
+</script>
+</body>
+</html>
