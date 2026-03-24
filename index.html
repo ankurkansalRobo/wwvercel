@@ -1184,11 +1184,11 @@ tick(); setInterval(tick, 30000);
     const offsetX = 0;
 
     // --- GRID LINES ---
-    const lineAlpha = 0.10;
+    const lineAlpha = 0.22;
 
     ctx.save();
-    ctx.strokeStyle = `rgba(90,140,255,${lineAlpha})`;
-    ctx.lineWidth = 0.7;
+    ctx.strokeStyle = `rgba(100,160,255,${lineAlpha})`;
+    ctx.lineWidth = 1.0;
 
     // Horizontal lines
     for (let r = -1; r <= rows + 1; r++) {
@@ -1220,7 +1220,7 @@ tick(); setInterval(tick, 30000);
           const phase = (r * 7 + c * 13) * 0.4;
           const breath = 0.4 + 0.6 * (0.5 + 0.5 * Math.sin(t + phase));
           const radius = 1.5 + 0.8 * Math.sin(t * 0.7 + phase);
-          const alpha = 0.18 * breath;
+          const alpha = 0.45 * breath;
 
           ctx.beginPath();
           ctx.arc(x, y, radius, 0, Math.PI * 2);
@@ -1300,9 +1300,9 @@ tick(); setInterval(tick, 30000);
     }
 
     // --- EDGE VIGNETTE: fade grid at viewport edges ---
-    const vignette = ctx.createRadialGradient(W/2, H/2, H*0.25, W/2, H/2, H*0.85);
+    const vignette = ctx.createRadialGradient(W/2, H/2, H*0.35, W/2, H/2, H*0.95);
     vignette.addColorStop(0, 'rgba(0,0,0,0)');
-    vignette.addColorStop(1, 'rgba(6,9,26,0.72)');
+    vignette.addColorStop(1, 'rgba(6,9,26,0.45)');
     ctx.fillStyle = vignette;
     ctx.fillRect(0, 0, W, H);
 
