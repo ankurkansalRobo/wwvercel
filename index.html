@@ -150,8 +150,45 @@ nav{position:fixed;top:0;left:0;right:0;z-index:999;height:58px;display:flex;ali
 .problem .sh2 em{color:var(--crit-d);font-style:italic}
 .problem .ssub{color:rgba(255,255,255,.4)}
 .p-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:18px;margin-top:52px}
-.persona{border-radius:10px;padding:28px 24px;background:#0F1729;border:1px solid rgba(255,255,255,.08);position:relative;overflow:hidden}
-.persona::before{content:'';position:absolute;top:0;left:0;right:0;height:2px}
+
+/* Persona base */
+.persona{border-radius:10px;padding:28px 24px;border:1px solid rgba(255,255,255,.08);position:relative;overflow:hidden;transition:background .7s ease,border-color .7s ease,box-shadow .7s ease}
+.persona::before{content:'';position:absolute;top:0;left:0;right:0;height:2px;transition:opacity .7s}
+
+/* DARK state (default) */
+.persona.pstate-dark{background:#0F1729;border-color:rgba(255,255,255,.08)}
+.persona.pstate-dark .p-name{color:#F0EDE8}
+.persona.pstate-dark .p-det{color:rgba(255,255,255,.3)}
+.persona.pstate-dark .p-clbl{color:rgba(255,255,255,.3)}
+.persona.pstate-dark .p-cost{color:var(--crit-d)}
+.persona.pstate-dark .p-csub{color:rgba(255,255,255,.28)}
+.persona.pstate-dark .p-issue{color:rgba(255,255,255,.5)}
+.persona.pstate-dark .p-badge{background:rgba(255,255,255,.07);color:rgba(255,255,255,.4)}
+
+/* LIGHT state */
+.persona.pstate-light{background:#FDFCF9;border-color:rgba(0,0,0,.1);box-shadow:0 8px 32px rgba(0,0,0,.15)}
+.persona.pstate-light .p-name{color:#1A1A18}
+.persona.pstate-light .p-det{color:#6B6860}
+.persona.pstate-light .p-clbl{color:#9B9890}
+.persona.pstate-light .p-cost{color:#dc2626}
+.persona.pstate-light .p-csub{color:#9B9890}
+.persona.pstate-light .p-issue{color:#6B6860}
+.persona.pstate-light .p-badge{background:rgba(27,58,107,.08);color:#1B3A6B}
+
+/* HIGHLIGHT state */
+.persona.pstate-highlight{background:#0F1729;border-color:rgba(252,165,138,.25);box-shadow:0 0 0 1px rgba(252,165,138,.12),0 12px 40px rgba(122,32,16,.3)}
+.persona.pstate-highlight .p-cost{animation:costPulse 1.1s cubic-bezier(.4,0,.2,1) forwards}
+.persona.pstate-highlight .p-issue{opacity:0;animation:issueIn .4s ease forwards}
+.persona.pstate-highlight .p-issue:nth-child(1){animation-delay:.05s}
+.persona.pstate-highlight .p-issue:nth-child(2){animation-delay:.18s}
+.persona.pstate-highlight .p-issue:nth-child(3){animation-delay:.31s}
+.persona.pstate-highlight .p-issue:nth-child(4){animation-delay:.44s}
+
+@keyframes costPulse{0%{transform:scale(.9);opacity:.4}60%{transform:scale(1.04)}100%{transform:scale(1);opacity:1}}
+@keyframes issueIn{0%{opacity:0;transform:translateX(-8px)}100%{opacity:1;transform:none}}
+
+/* Mode badge top-right */
+.p-badge{position:absolute;top:14px;right:14px;font-size:9px;font-weight:600;letter-spacing:.06em;text-transform:uppercase;padding:2px 9px;border-radius:100px;transition:background .5s,color .5s}
 .p1::before{background:linear-gradient(90deg,var(--crit-fill-d),var(--crit-d))}
 .p2::before{background:linear-gradient(90deg,var(--warn-fill-d),var(--warn-d))}
 .p3::before{background:linear-gradient(90deg,var(--acc),var(--acc-l))}
@@ -442,7 +479,8 @@ footer{background:#060B18;border-top:1px solid rgba(255,255,255,.06);padding:48p
       <p class="ssub">Three real advisor archetypes. Three real gaps. Most platforms cannot even see the problem.</p>
     </div>
     <div class="p-grid reveal">
-      <div class="persona p1">
+      <div class="persona p1 pstate-dark" id="persona-1">
+        <div class="p-badge" id="badge-1">Dark</div>
         <div class="p-flag">🇬🇧</div>
         <div class="p-name">James & Sarah Richardson</div>
         <div class="p-det">British expat · Dubai 8yr · $4.2M · 9 goals</div>
@@ -456,7 +494,8 @@ footer{background:#060B18;border-top:1px solid rgba(255,255,255,.06);padding:48p
           <div class="p-issue"><span class="pid" style="background:var(--warn-d)"></span>UK IHT nil-rate band unplanned — £325K threshold</div>
         </div>
       </div>
-      <div class="persona p2">
+      <div class="persona p2 pstate-dark" id="persona-2">
+        <div class="p-badge" id="badge-2">Dark</div>
         <div class="p-flag">🇺🇸</div>
         <div class="p-name">Michael & Jennifer Torres</div>
         <div class="p-det">American expat · Dubai 3yr · $3.1M · 5 goals</div>
@@ -470,7 +509,8 @@ footer{background:#060B18;border-top:1px solid rgba(255,255,255,.06);padding:48p
           <div class="p-issue"><span class="pid" style="background:var(--warn-d)"></span>LRS utilisation 72% — India repatriation at risk</div>
         </div>
       </div>
-      <div class="persona p3">
+      <div class="persona p3 pstate-dark" id="persona-3">
+        <div class="p-badge" id="badge-3">Dark</div>
         <div class="p-flag">🇦🇪</div>
         <div class="p-name">Khalid & Fatima Al-Mansouri</div>
         <div class="p-det">UAE National · Dubai · $8.7M · 9 goals</div>
@@ -1109,6 +1149,53 @@ tick(); setInterval(tick, 30000);
     timer = setTimeout(() => { goTo((cur + 1) % total); schedule(); }, interval);
   }
   schedule();
+})();
+
+/* ── PERSONA CARD ANIMATOR ───────────────── */
+(function(){
+  const states = ['dark','light','highlight'];
+  const labels = {dark:'Dark',light:'Light',highlight:'Loss'};
+  const cur = [0,0,0];
+
+  // Sequence: ripple through states across cards
+  const seq = [
+    [0,0,0],[1,0,0],[1,1,0],[1,1,1],
+    [2,1,1],[2,2,1],[2,2,2],[0,2,2],
+    [0,0,2],[0,0,0]
+  ];
+  let step = 0;
+
+  function applyState(idx, state) {
+    const p = document.getElementById('persona-'+(idx+1));
+    const b = document.getElementById('badge-'+(idx+1));
+    if(!p) return;
+
+    // force re-trigger highlight animation by removing/re-adding class
+    p.classList.remove('pstate-dark','pstate-light','pstate-highlight');
+    void p.offsetWidth; // reflow
+    p.classList.add('pstate-'+state);
+
+    if(b) {
+      b.textContent = labels[state];
+      b.style.background = state==='dark'?'rgba(107,159,212,.12)':state==='light'?'rgba(27,58,107,.1)':'rgba(252,165,138,.15)';
+      b.style.color = state==='dark'?'#6B9FD4':state==='light'?'#1B3A6B':'#FCA58A';
+    }
+  }
+
+  function tick() {
+    const s = seq[step % seq.length];
+    s.forEach((state, i) => applyState(i, states[state]));
+    step++;
+    setTimeout(tick, 1800);
+  }
+
+  // Only start when section is in view
+  const section = document.getElementById('problem');
+  if(!section){ return; }
+  const obs = new IntersectionObserver(entries => {
+    if(entries[0].isIntersecting){ obs.disconnect(); setTimeout(tick, 600); }
+  }, {threshold:0.2});
+  obs.observe(section);
 })();
 
 /* ── GLOBAL ANIMATED GRID CANVAS ─────────── */
