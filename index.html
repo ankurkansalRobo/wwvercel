@@ -69,16 +69,19 @@ nav{position:fixed;top:0;left:0;right:0;z-index:999;height:58px;display:flex;ali
 .nav-cta:hover{background:#243F72;transform:translateY(-1px)}
 
 /* ── HERO ─────────────────────────────────── */
-.hero{min-height:100vh;background:transparent;position:relative;overflow:hidden;display:flex;flex-direction:column;align-items:center;justify-content:center;text-align:center;padding:110px 40px 80px}
-.hero-bg{position:absolute;inset:0;pointer-events:none;background:radial-gradient(ellipse 90% 70% at 50% 10%,rgba(37,82,160,.65) 0%,rgba(27,58,107,.3) 45%,transparent 70%),radial-gradient(ellipse 50% 40% at 50% 55%,rgba(20,50,120,.2) 0%,transparent 60%),radial-gradient(ellipse 35% 25% at 15% 85%,rgba(84,21,8,.2) 0%,transparent 60%),radial-gradient(ellipse 35% 25% at 85% 75%,rgba(10,56,64,.18) 0%,transparent 60%)}
+.hero{min-height:100vh;background:transparent;position:relative;overflow:hidden;display:flex;flex-direction:column;align-items:center;justify-content:flex-start;text-align:center;padding:0}
+.hero::after{content:'';position:absolute;bottom:0;left:0;right:0;height:35%;background:linear-gradient(to bottom,transparent,#06091A);z-index:5;pointer-events:none}
+.hero-bg{position:absolute;inset:0;pointer-events:none;background:radial-gradient(ellipse 100% 60% at 50% 0%,rgba(37,82,160,.5) 0%,rgba(20,40,100,.15) 50%,transparent 80%)}
 /* hero-grid replaced by global canvas */
-.hero-tag{display:inline-flex;align-items:center;gap:8px;font-size:10px;font-weight:600;letter-spacing:.12em;text-transform:uppercase;color:var(--acc-l);border:1px solid rgba(107,159,212,.22);border-radius:100px;padding:5px 16px;margin-bottom:28px;font-family:var(--sans);position:relative;z-index:1}
+.hero-text{position:absolute;top:0;left:0;right:0;z-index:10;display:flex;flex-direction:column;align-items:center;padding:120px 40px 0;pointer-events:none}
+.hero-text>*{pointer-events:auto}
+.hero-tag{display:inline-flex;align-items:center;gap:8px;font-size:10px;font-weight:600;letter-spacing:.12em;text-transform:uppercase;color:var(--acc-l);border:1px solid rgba(107,159,212,.22);border-radius:100px;padding:5px 16px;margin-bottom:24px;font-family:var(--sans);position:relative;z-index:1}
 .htd{width:5px;height:5px;border-radius:50%;background:var(--acc-l)}
-.hero-h1{font-family:var(--serif);font-weight:200;font-size:clamp(52px,7.5vw,92px);line-height:1.0;letter-spacing:-.035em;color:#FFF;margin-bottom:10px;position:relative;z-index:1;max-width:840px}
+.hero-h1{font-family:var(--serif);font-weight:200;font-size:clamp(48px,6.5vw,84px);line-height:1.0;letter-spacing:-.035em;color:#FFF;margin-bottom:10px;position:relative;z-index:1;max-width:840px;text-shadow:0 2px 40px rgba(0,0,0,.5)}
 .hero-h1-os{font-style:italic;color:var(--acc-l);display:block}
-.hero-sub{font-size:clamp(14px,1.4vw,17px);line-height:1.75;color:rgba(255,255,255,.48);max-width:540px;font-family:var(--sans);margin-bottom:40px;position:relative;z-index:1}
-.hero-sub strong{color:rgba(255,255,255,.82);font-weight:500}
-.hero-btns{display:flex;align-items:center;gap:12px;justify-content:center;position:relative;z-index:1;margin-bottom:72px;flex-wrap:wrap}
+.hero-sub{font-size:clamp(14px,1.3vw,16px);line-height:1.75;color:rgba(255,255,255,.55);max-width:520px;font-family:var(--sans);margin-bottom:32px;position:relative;z-index:1;text-shadow:0 1px 20px rgba(0,0,0,.6)}
+.hero-sub strong{color:rgba(255,255,255,.85);font-weight:500}
+.hero-btns{display:flex;align-items:center;gap:12px;justify-content:center;position:relative;z-index:1;margin-bottom:0;flex-wrap:wrap}
 .btn-p{font-size:14px;font-weight:600;padding:13px 28px;border-radius:7px;background:var(--acc);color:#FFF;border:none;cursor:pointer;font-family:var(--sans);text-decoration:none;transition:all .18s;letter-spacing:-.01em;display:inline-block}
 .btn-p:hover{background:#243F72;transform:translateY(-1px)}
 .btn-o{font-size:14px;font-weight:500;padding:12px 24px;border-radius:7px;background:transparent;color:rgba(255,255,255,.65);border:1px solid rgba(255,255,255,.16);cursor:pointer;font-family:var(--sans);text-decoration:none;transition:all .18s;display:inline-block}
@@ -86,25 +89,26 @@ nav{position:fixed;top:0;left:0;right:0;z-index:999;height:58px;display:flex;ali
 
 
 /* ── MACBOOK PRO MOCKUP ─────────────────── */
-.mbp-wrap{width:100%;max-width:1020px;margin:0 auto;position:relative;z-index:1}
-.mbp{width:100%;filter:drop-shadow(0 50px 100px rgba(0,0,0,.65)) drop-shadow(0 0 80px rgba(37,82,160,.3));transform:perspective(1800px) rotateX(1.5deg);transform-origin:bottom center}
+.mbp-wrap{position:absolute;bottom:-8%;left:50%;transform:translateX(-50%);width:100%;max-width:1400px;z-index:2;padding:0 0}
+.mbp{width:100%;filter:drop-shadow(0 60px 120px rgba(0,0,0,.9)) drop-shadow(0 20px 60px rgba(0,0,0,.8));transform:perspective(2200px) rotateX(12deg);transform-origin:bottom center}
 
 /* LID */
 .mbp-lid{
   background:linear-gradient(175deg,#3a3a3c 0%,#2c2c2e 40%,#252527 100%);
   border-radius:16px 16px 4px 4px;
-  padding:14px 14px 0;
+  padding:12px 12px 0;
   box-shadow:inset 0 1px 0 rgba(255,255,255,.14),inset 0 -1px 0 rgba(0,0,0,.3),0 0 0 1px rgba(0,0,0,.4);
   position:relative;
 }
+.mbp-lid::after{content:'';position:absolute;inset:-40px;background:radial-gradient(ellipse 80% 60% at 50% 40%,rgba(60,120,255,.18) 0%,transparent 70%);pointer-events:none;z-index:-1}
 .mbp-lid::before{content:'';position:absolute;top:8px;left:50%;transform:translateX(-50%);width:10px;height:10px;border-radius:50%;background:radial-gradient(circle,rgba(255,255,255,.06) 0%,transparent 70%);box-shadow:0 0 0 1px rgba(0,0,0,.4)}
 .mbp-notch{position:absolute;top:0;left:50%;transform:translateX(-50%);width:120px;height:26px;background:linear-gradient(175deg,#1a1a1c,#111113);border-radius:0 0 12px 12px;z-index:2;box-shadow:inset 0 -1px 0 rgba(255,255,255,.04)}
 .mbp-screen-bezel{
-  background:#0c0c0e;
+  background:#080810;
   border-radius:8px 8px 2px 2px;
   overflow:hidden;
   border:1px solid rgba(255,255,255,.05);
-  box-shadow:inset 0 0 0 1px rgba(0,0,0,.6);
+  box-shadow:inset 0 0 0 1px rgba(0,0,0,.8),0 0 80px rgba(60,120,255,.12);
 }
 
 /* SCREEN */
@@ -136,10 +140,10 @@ nav{position:fixed;top:0;left:0;right:0;z-index:999;height:58px;display:flex;ali
 /* BASE */
 .mbp-base{
   background:linear-gradient(175deg,#3c3c3e 0%,#2e2e30 60%,#262628 100%);
-  border-radius:0 0 14px 14px;
-  padding:20px 80px 16px;
-  box-shadow:inset 0 1px 0 rgba(255,255,255,.08),0 0 0 1px rgba(0,0,0,.4),0 8px 24px rgba(0,0,0,.4);
-  display:flex;flex-direction:column;align-items:center;gap:14px;
+  border-radius:0 0 16px 16px;
+  padding:18px 100px 14px;
+  box-shadow:inset 0 1px 0 rgba(255,255,255,.06),0 0 0 1px rgba(0,0,0,.5),0 12px 40px rgba(0,0,0,.6);
+  display:flex;flex-direction:column;align-items:center;gap:12px;
 }
 
 /* Keyboard */
@@ -405,15 +409,14 @@ footer{background:#060B18;border-top:1px solid rgba(255,255,255,.06);padding:48p
 @media(max-width:960px){
   nav{padding:0 20px}
   .nav-links{display:none}
-  .hero,.problem,.platform,.pe-section,.credit-section,.re-section,.uae,.bf,.methodology,.cta-sec{padding:68px 22px}
+  .problem,.platform,.pe-section,.credit-section,.re-section,.uae,.bf,.methodology,.cta-sec{padding:68px 22px}
   .p-grid,.uae-g,.bf-g,.feats{grid-template-columns:1fr}
   .rungs{grid-template-columns:1fr 1fr}
   .pe-layout,.credit-layout,.re-layout,.meth-inner{grid-template-columns:1fr;gap:40px}
   footer{padding:40px 22px 24px}
   .ft-top{flex-direction:column}
-  .hp-z1,.hp-z3{display:none}
-  .hero{padding:110px 22px 64px}
-  .hero-preview{border-radius:8px}
+  .hero-text{padding:90px 22px 0}
+  .mbp-wrap{bottom:-4%}
 }
 </style>
 </head>
@@ -438,14 +441,20 @@ footer{background:#060B18;border-top:1px solid rgba(255,255,255,.06);padding:48p
 <!-- HERO -->
 <section class="hero" id="home">
   <div class="hero-bg"></div>
-  <div class="hero-tag reveal"><span class="htd"></span>DIFC-Focused · DFSA-Ready · AI-Powered</div>
-  <h1 class="hero-h1 reveal">Goal Intelligence<span class="hero-h1-os">OS</span></h1>
-  <p class="hero-sub reveal">The only platform that understands <strong>Golden Visa constraints</strong>, <strong>Zakat obligations</strong>, <strong>EOSB accruals</strong>, and <strong>multi-currency goal risk</strong> — built for how UAE wealth actually works.</p>
-  <div class="hero-btns reveal">
-    <button class="btn-p" onclick="openDemo()">Request a Demo</button>
-    <a href="#platform" class="btn-o">See the Platform →</a>
+
+  <!-- Text overlay — sits above laptop -->
+  <div class="hero-text">
+    <div class="hero-tag reveal"><span class="htd"></span>DIFC-Focused · DFSA-Ready · AI-Powered</div>
+    <h1 class="hero-h1 reveal">Goal Intelligence<span class="hero-h1-os">OS</span></h1>
+    <p class="hero-sub reveal">The only platform that understands <strong>Golden Visa constraints</strong>, <strong>Zakat obligations</strong>, <strong>EOSB accruals</strong>, and <strong>multi-currency goal risk</strong> — built for how UAE wealth actually works.</p>
+    <div class="hero-btns reveal">
+      <button class="btn-p" onclick="openDemo()">Request a Demo</button>
+      <a href="#platform" class="btn-o">See the Platform →</a>
+    </div>
   </div>
-  <div class="mbp-wrap reveal">
+
+  <!-- Full-bleed laptop -->
+  <div class="mbp-wrap">
 
     <!-- MacBook Pro shell -->
     <div class="mbp">
