@@ -56,10 +56,10 @@
 }
 html{scroll-behavior:smooth}
 body{font-family:var(--sans);background:#06091A;color:#F0EDE8;overflow-x:hidden}
+nav,section,.modal-overlay{position:relative;z-index:1}
 
 /* ── NAV ─────────────────────────────────── */
-nav{position:fixed;top:0;left:0;right:0;z-index:999;height:58px;display:flex;align-items:center;padding:0 48px;justify-content:space-between;background:rgba(6,9,26,.92);backdrop-filter:blur(18px);border-bottom:1px solid rgba(100,150,255,.08);transition:all .3s}
-.nav-logo{display:flex;align-items:center;gap:9px;text-decoration:none}
+nav{position:fixed;top:0;left:0;right:0;z-index:999;height:58px;display:flex;align-items:center;padding:0 48px;justify-content:space-between;background:rgba(6,9,26,.92);backdrop-filter:blur(18px);border-bottom:1px solid rgba(100,150,255,.08);transition:all .3s}.nav-logo{display:flex;align-items:center;gap:9px;text-decoration:none}
 .nav-ic{width:28px;height:28px;border-radius:6px;background:var(--acc);display:flex;align-items:center;justify-content:center}
 .nav-ic span{font-family:var(--serif);font-style:italic;color:#FFF;font-size:13px;font-weight:300}
 .nav-wm{font-family:var(--sans);font-size:15px;font-weight:600;color:#FFF;letter-spacing:-.01em}
@@ -72,7 +72,7 @@ nav{position:fixed;top:0;left:0;right:0;z-index:999;height:58px;display:flex;ali
 /* ── HERO ─────────────────────────────────── */
 .hero{min-height:100vh;background:linear-gradient(160deg,#0A1535 0%,#06091A 45%,#080E22 100%);position:relative;overflow:hidden;display:flex;flex-direction:column;align-items:center;justify-content:center;text-align:center;padding:110px 40px 80px}
 .hero-bg{position:absolute;inset:0;pointer-events:none;background:radial-gradient(ellipse 80% 60% at 50% 20%,rgba(37,82,160,.55) 0%,rgba(27,58,107,.25) 40%,transparent 70%),radial-gradient(ellipse 50% 40% at 50% 50%,rgba(20,50,120,.2) 0%,transparent 60%),radial-gradient(ellipse 35% 25% at 15% 85%,rgba(84,21,8,.2) 0%,transparent 60%),radial-gradient(ellipse 35% 25% at 85% 75%,rgba(10,56,64,.18) 0%,transparent 60%)}
-.hero-grid{position:absolute;inset:0;pointer-events:none;background-image:linear-gradient(rgba(100,150,255,.18) 1px,transparent 1px),linear-gradient(90deg,rgba(100,150,255,.18) 1px,transparent 1px);background-size:52px 52px;mask-image:radial-gradient(ellipse 90% 80% at 50% 35%,#000 10%,rgba(0,0,0,.6) 50%,transparent 100%)}
+/* hero-grid replaced by global canvas */
 .hero-tag{display:inline-flex;align-items:center;gap:8px;font-size:10px;font-weight:600;letter-spacing:.12em;text-transform:uppercase;color:var(--acc-l);border:1px solid rgba(107,159,212,.22);border-radius:100px;padding:5px 16px;margin-bottom:28px;font-family:var(--sans);position:relative;z-index:1}
 .htd{width:5px;height:5px;border-radius:50%;background:var(--acc-l)}
 .hero-h1{font-family:var(--serif);font-weight:200;font-size:clamp(52px,7.5vw,92px);line-height:1.0;letter-spacing:-.035em;color:#FFF;margin-bottom:10px;position:relative;z-index:1;max-width:840px}
@@ -379,6 +379,7 @@ footer{background:#060B18;border-top:1px solid rgba(255,255,255,.06);padding:48p
 <body>
 
 <!-- NAV -->
+<canvas id="grid-canvas" style="position:fixed;top:0;left:0;width:100%;height:100%;z-index:0;pointer-events:none;opacity:1"></canvas>
 <nav id="nav">
   <a href="#" class="nav-logo">
     <div class="nav-ic"><span>W</span></div>
@@ -396,7 +397,6 @@ footer{background:#060B18;border-top:1px solid rgba(255,255,255,.06);padding:48p
 <!-- HERO -->
 <section class="hero" id="home">
   <div class="hero-bg"></div>
-  <div class="hero-grid"></div>
   <div class="hero-tag reveal"><span class="htd"></span>DIFC-Focused · DFSA-Ready · AI-Powered</div>
   <h1 class="hero-h1 reveal">Goal Intelligence<span class="hero-h1-os">OS</span></h1>
   <p class="hero-sub reveal">The only platform that understands <strong>Golden Visa constraints</strong>, <strong>Zakat obligations</strong>, <strong>EOSB accruals</strong>, and <strong>multi-currency goal risk</strong> — built for how UAE wealth actually works.</p>
@@ -1118,6 +1118,207 @@ function tick() {
   } catch(e) {}
 }
 tick(); setInterval(tick, 30000);
+
+/* ── GLOBAL ANIMATED GRID CANVAS ─────────── */
+(function(){
+  const canvas = document.getElementById('grid-canvas');
+  const ctx = canvas.getContext('2d');
+
+  const CELL = 58;           // grid cell size px
+  const PARALLAX = 0.18;     // how much grid drifts vs scroll
+  const NODE_EVERY = 3;      // node dot at every Nth intersection
+  const MAX_PULSES = 14;     // simultaneous data-flow packets
+
+  let W, H, cols, rows;
+  let scrollY = 0;
+  let t = 0; // animation time
+
+  // Data-flow pulses: travel along a grid line
+  const pulses = [];
+  function spawnPulse() {
+    const horiz = Math.random() > 0.5;
+    const col = Math.floor(Math.random() * (cols + 1));
+    const row = Math.floor(Math.random() * (rows + 1));
+    pulses.push({
+      horiz,
+      col, row,
+      // progress 0→1 across the full page dimension
+      prog: 0,
+      speed: 0.0008 + Math.random() * 0.0012,
+      len: 0.08 + Math.random() * 0.1,   // pulse tail length as fraction
+      bright: 0.5 + Math.random() * 0.5,
+      color: Math.random() > 0.3 ? [80,140,255] : [0,210,255],
+    });
+  }
+
+  function resize() {
+    W = canvas.width  = window.innerWidth;
+    H = canvas.height = window.innerHeight;
+    cols = Math.ceil(W / CELL) + 2;
+    rows = Math.ceil(H / CELL) + 2;
+  }
+
+  window.addEventListener('resize', resize);
+  window.addEventListener('scroll', () => { scrollY = window.scrollY; }, {passive:true});
+  resize();
+
+  // Seed initial pulses
+  for (let i = 0; i < MAX_PULSES; i++) spawnPulse();
+
+  function sectionAlpha(y) {
+    // returns opacity multiplier based on section color at that y
+    // dark sections: full opacity; light sections: reduced
+    const secs = document.querySelectorAll('section');
+    for (const s of secs) {
+      const r = s.getBoundingClientRect();
+      if (y >= r.top && y < r.bottom) {
+        const bg = getComputedStyle(s).background || '';
+        if (bg.includes('F8F6F1') || bg.includes('FDFCF9') || bg.includes('warm') ||
+            s.classList.contains('platform-sec') || s.classList.contains('pe-section') ||
+            s.classList.contains('re-section') || s.classList.contains('uae-section') ||
+            s.classList.contains('builtfor')) return 0.35;
+        return 1;
+      }
+    }
+    return 1;
+  }
+
+  function draw() {
+    ctx.clearRect(0, 0, W, H);
+    t += 0.012;
+
+    // Parallax offset: grid drifts at fraction of scroll speed
+    const offsetY = -(scrollY * PARALLAX) % CELL;
+    const offsetX = 0;
+
+    // --- GRID LINES ---
+    const lineAlpha = 0.10;
+
+    ctx.save();
+    ctx.strokeStyle = `rgba(90,140,255,${lineAlpha})`;
+    ctx.lineWidth = 0.7;
+
+    // Horizontal lines
+    for (let r = -1; r <= rows + 1; r++) {
+      const y = r * CELL + offsetY;
+      ctx.beginPath();
+      ctx.moveTo(0, y);
+      ctx.lineTo(W, y);
+      ctx.stroke();
+    }
+    // Vertical lines
+    for (let c = -1; c <= cols + 1; c++) {
+      const x = c * CELL + offsetX;
+      ctx.beginPath();
+      ctx.moveTo(x, 0);
+      ctx.lineTo(x, H);
+      ctx.stroke();
+    }
+    ctx.restore();
+
+    // --- NODE DOTS at intersections ---
+    for (let r = -1; r <= rows + 1; r++) {
+      for (let c = -1; c <= cols + 1; c++) {
+        if ((r % NODE_EVERY === 0) && (c % NODE_EVERY === 0)) {
+          const x = c * CELL + offsetX;
+          const y = r * CELL + offsetY;
+          if (x < -4 || x > W + 4 || y < -4 || y > H + 4) continue;
+
+          // breathing pulse: each node phase offset by position
+          const phase = (r * 7 + c * 13) * 0.4;
+          const breath = 0.4 + 0.6 * (0.5 + 0.5 * Math.sin(t + phase));
+          const radius = 1.5 + 0.8 * Math.sin(t * 0.7 + phase);
+          const alpha = 0.18 * breath;
+
+          ctx.beginPath();
+          ctx.arc(x, y, radius, 0, Math.PI * 2);
+          ctx.fillStyle = `rgba(100,160,255,${alpha})`;
+          ctx.fill();
+        }
+      }
+    }
+
+    // --- DATA-FLOW PULSES ---
+    for (let i = pulses.length - 1; i >= 0; i--) {
+      const p = pulses[i];
+      p.prog += p.speed;
+
+      const [r, g, b] = p.color;
+
+      if (p.horiz) {
+        // travel left→right across full width
+        const y = p.row * CELL + offsetY;
+        const headX = p.prog * (W + CELL * 2) - CELL;
+        const tailX = headX - p.len * (W + CELL * 2);
+
+        if (y < -2 || y > H + 2) { p.prog = 0; continue; }
+
+        const grad = ctx.createLinearGradient(tailX, y, headX, y);
+        grad.addColorStop(0, `rgba(${r},${g},${b},0)`);
+        grad.addColorStop(0.6, `rgba(${r},${g},${b},${0.55 * p.bright})`);
+        grad.addColorStop(1, `rgba(${r},${g},${b},0.9)`);
+
+        ctx.beginPath();
+        ctx.strokeStyle = grad;
+        ctx.lineWidth = 1.5;
+        ctx.moveTo(tailX, y);
+        ctx.lineTo(headX, y);
+        ctx.stroke();
+
+        // glow head dot
+        if (headX > 0 && headX < W) {
+          ctx.beginPath();
+          ctx.arc(headX, y, 2.5, 0, Math.PI * 2);
+          ctx.fillStyle = `rgba(${r},${g},${b},${0.9 * p.bright})`;
+          ctx.fill();
+        }
+      } else {
+        // travel top→bottom across full height
+        const x = p.col * CELL + offsetX;
+        const headY = p.prog * (H + CELL * 2) - CELL;
+        const tailY = headY - p.len * (H + CELL * 2);
+
+        if (x < -2 || x > W + 2) { p.prog = 0; continue; }
+
+        const grad = ctx.createLinearGradient(x, tailY, x, headY);
+        grad.addColorStop(0, `rgba(${r},${g},${b},0)`);
+        grad.addColorStop(0.6, `rgba(${r},${g},${b},${0.45 * p.bright})`);
+        grad.addColorStop(1, `rgba(${r},${g},${b},0.85)`);
+
+        ctx.beginPath();
+        ctx.strokeStyle = grad;
+        ctx.lineWidth = 1.5;
+        ctx.moveTo(x, tailY);
+        ctx.lineTo(x, headY);
+        ctx.stroke();
+
+        if (headY > 0 && headY < H) {
+          ctx.beginPath();
+          ctx.arc(x, headY, 2.5, 0, Math.PI * 2);
+          ctx.fillStyle = `rgba(${r},${g},${b},${0.85 * p.bright})`;
+          ctx.fill();
+        }
+      }
+
+      // Recycle pulse when done
+      if (p.prog > 1.1) {
+        pulses.splice(i, 1);
+        spawnPulse();
+      }
+    }
+
+    // --- EDGE VIGNETTE: fade grid at viewport edges ---
+    const vignette = ctx.createRadialGradient(W/2, H/2, H*0.25, W/2, H/2, H*0.85);
+    vignette.addColorStop(0, 'rgba(0,0,0,0)');
+    vignette.addColorStop(1, 'rgba(6,9,26,0.72)');
+    ctx.fillStyle = vignette;
+    ctx.fillRect(0, 0, W, H);
+
+    requestAnimationFrame(draw);
+  }
+
+  draw();
+})();
 </script>
 </body>
 </html>
