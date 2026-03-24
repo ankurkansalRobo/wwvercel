@@ -56,7 +56,6 @@
 }
 html{scroll-behavior:smooth}
 body{font-family:var(--sans);background:#06091A;color:#F0EDE8;overflow-x:hidden}
-nav,section,.modal-overlay{position:relative;z-index:1}
 
 /* ── NAV ─────────────────────────────────── */
 nav{position:fixed;top:0;left:0;right:0;z-index:999;height:58px;display:flex;align-items:center;padding:0 48px;justify-content:space-between;background:rgba(6,9,26,.92);backdrop-filter:blur(18px);border-bottom:1px solid rgba(100,150,255,.08);transition:all .3s}.nav-logo{display:flex;align-items:center;gap:9px;text-decoration:none}
@@ -70,8 +69,8 @@ nav{position:fixed;top:0;left:0;right:0;z-index:999;height:58px;display:flex;ali
 .nav-cta:hover{background:#243F72;transform:translateY(-1px)}
 
 /* ── HERO ─────────────────────────────────── */
-.hero{min-height:100vh;background:linear-gradient(160deg,#0A1535 0%,#06091A 45%,#080E22 100%);position:relative;overflow:hidden;display:flex;flex-direction:column;align-items:center;justify-content:center;text-align:center;padding:110px 40px 80px}
-.hero-bg{position:absolute;inset:0;pointer-events:none;background:radial-gradient(ellipse 80% 60% at 50% 20%,rgba(37,82,160,.55) 0%,rgba(27,58,107,.25) 40%,transparent 70%),radial-gradient(ellipse 50% 40% at 50% 50%,rgba(20,50,120,.2) 0%,transparent 60%),radial-gradient(ellipse 35% 25% at 15% 85%,rgba(84,21,8,.2) 0%,transparent 60%),radial-gradient(ellipse 35% 25% at 85% 75%,rgba(10,56,64,.18) 0%,transparent 60%)}
+.hero{min-height:100vh;background:transparent;position:relative;overflow:hidden;display:flex;flex-direction:column;align-items:center;justify-content:center;text-align:center;padding:110px 40px 80px}
+.hero-bg{position:absolute;inset:0;pointer-events:none;background:radial-gradient(ellipse 90% 70% at 50% 10%,rgba(37,82,160,.65) 0%,rgba(27,58,107,.3) 45%,transparent 70%),radial-gradient(ellipse 50% 40% at 50% 55%,rgba(20,50,120,.2) 0%,transparent 60%),radial-gradient(ellipse 35% 25% at 15% 85%,rgba(84,21,8,.2) 0%,transparent 60%),radial-gradient(ellipse 35% 25% at 85% 75%,rgba(10,56,64,.18) 0%,transparent 60%)}
 /* hero-grid replaced by global canvas */
 .hero-tag{display:inline-flex;align-items:center;gap:8px;font-size:10px;font-weight:600;letter-spacing:.12em;text-transform:uppercase;color:var(--acc-l);border:1px solid rgba(107,159,212,.22);border-radius:100px;padding:5px 16px;margin-bottom:28px;font-family:var(--sans);position:relative;z-index:1}
 .htd{width:5px;height:5px;border-radius:50%;background:var(--acc-l)}
@@ -140,7 +139,7 @@ nav{position:fixed;top:0;left:0;right:0;z-index:999;height:58px;display:flex;ali
 .si{max-width:1100px;margin:0 auto}
 
 /* ── PROBLEM (dark) ─────────────────────── */
-.problem{background:linear-gradient(160deg,#0A1535 0%,#070C1E 100%);padding:96px 48px;border-top:1px solid rgba(100,150,255,.08)}
+.problem{background:transparent;padding:96px 48px;border-top:1px solid rgba(100,150,255,.08)}
 .problem .stag{color:var(--acc-l)}
 .problem .sh2{color:#F0EDE8}
 .problem .sh2 em{color:var(--crit-d);font-style:italic}
@@ -222,7 +221,7 @@ nav{position:fixed;top:0;left:0;right:0;z-index:999;height:58px;display:flex;ali
 .pm-call-date{font-size:9px;color:var(--tx3);font-family:var(--sans)}
 
 /* ── CREDIT SECTION (dark) ───────────────── */
-.credit-section{background:linear-gradient(160deg,#070C1E 0%,#0A1535 100%);padding:96px 48px;border-top:1px solid rgba(100,150,255,.08)}
+.credit-section{background:transparent;padding:96px 48px;border-top:1px solid rgba(100,150,255,.08)}
 .credit-section .stag{color:var(--acc-l)}
 .credit-section .sh2{color:#F0EDE8}
 .credit-section .sh2 em{color:var(--acc-l);font-style:italic}
@@ -312,7 +311,7 @@ nav{position:fixed;top:0;left:0;right:0;z-index:999;height:58px;display:flex;ali
 .bf-cta:hover{background:var(--acc);color:#FFF}
 
 /* ── METHODOLOGY (dark) ──────────────────── */
-.methodology{background:linear-gradient(160deg,#0A1535 0%,#06091A 100%);padding:96px 48px;border-top:1px solid rgba(100,150,255,.08)}
+.methodology{background:transparent;padding:96px 48px;border-top:1px solid rgba(100,150,255,.08)}
 .methodology .stag{color:var(--acc-l)}
 .meth-inner{max-width:1100px;margin:0 auto;display:grid;grid-template-columns:1fr 1fr;gap:64px;align-items:start}
 .meth-pull{font-family:var(--serif);font-size:clamp(20px,2.2vw,28px);font-weight:200;font-style:italic;line-height:1.5;color:#F0EDE8;margin-bottom:26px;border-left:2px solid var(--acc);padding-left:22px}
@@ -330,7 +329,7 @@ nav{position:fixed;top:0;left:0;right:0;z-index:999;height:58px;display:flex;ali
 .meth-item-s{font-size:12px;color:rgba(255,255,255,.35);font-family:var(--sans);line-height:1.5}
 
 /* ── CTA ─────────────────────────────────── */
-.cta-sec{background:linear-gradient(160deg,#0A1535 0%,#06091A 60%,#0A1535 100%);padding:100px 48px;text-align:center;border-top:1px solid rgba(100,150,255,.08);position:relative;overflow:hidden}
+.cta-sec{background:transparent;padding:100px 48px;text-align:center;border-top:1px solid rgba(100,150,255,.08);position:relative;overflow:hidden}
 .cta-glow{position:absolute;top:50%;left:50%;transform:translate(-50%,-50%);width:600px;height:300px;background:radial-gradient(ellipse,rgba(27,58,107,.35) 0%,transparent 70%);pointer-events:none}
 .cta-tg{font-size:10px;font-weight:600;letter-spacing:.12em;text-transform:uppercase;color:var(--acc-l);font-family:var(--sans);margin-bottom:18px;position:relative;z-index:1;display:block}
 .cta-h2{font-family:var(--serif);font-size:clamp(30px,5vw,58px);font-weight:200;font-style:italic;letter-spacing:-.025em;color:#FFF;margin-bottom:18px;position:relative;z-index:1;line-height:1.08}
@@ -379,7 +378,7 @@ footer{background:#060B18;border-top:1px solid rgba(255,255,255,.06);padding:48p
 <body>
 
 <!-- NAV -->
-<canvas id="grid-canvas" style="position:fixed;top:0;left:0;width:100%;height:100%;z-index:0;pointer-events:none;opacity:1"></canvas>
+<canvas id="grid-canvas" style="position:fixed;top:0;left:0;width:100%;height:100%;z-index:-1;pointer-events:none;opacity:1"></canvas>
 <nav id="nav">
   <a href="#" class="nav-logo">
     <div class="nav-ic"><span>W</span></div>
