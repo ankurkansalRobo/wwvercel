@@ -84,51 +84,129 @@ nav{position:fixed;top:0;left:0;right:0;z-index:999;height:58px;display:flex;ali
 .btn-o{font-size:14px;font-weight:500;padding:12px 24px;border-radius:7px;background:transparent;color:rgba(255,255,255,.65);border:1px solid rgba(255,255,255,.16);cursor:pointer;font-family:var(--sans);text-decoration:none;transition:all .18s;display:inline-block}
 .btn-o:hover{border-color:rgba(255,255,255,.35);color:#FFF}
 
-/* hero platform preview */
-.hero-preview{position:relative;z-index:1;width:100%;max-width:980px;margin:0 auto;border-radius:12px;overflow:hidden;border:1px solid rgba(255,255,255,.1);box-shadow:0 40px 100px rgba(0,0,0,.6),0 0 0 1px rgba(255,255,255,.04)}
-.hp-bar{height:38px;background:#0D1830;border-bottom:1px solid rgba(255,255,255,.08);display:flex;align-items:center;padding:0 14px;gap:7px}
-.hpd{width:10px;height:10px;border-radius:50%}
-.hp-ttl{font-size:11px;color:rgba(255,255,255,.28);font-family:var(--sans);margin-left:6px}
-.hp-body{background:#091325;display:flex;height:330px}
-.hp-sb{width:44px;background:#0F1729;border-right:1px solid rgba(255,255,255,.07);padding:10px 0;display:flex;flex-direction:column;align-items:center;gap:4px}
-.hp-si{width:32px;height:32px;border-radius:7px;display:flex;align-items:center;justify-content:center;font-size:14px}
-.hp-si.a{background:rgba(107,159,212,.13);color:var(--acc-l)}
-.hp-si.o{color:rgba(255,255,255,.2)}
-.hp-m{flex:1;display:flex;flex-direction:column;overflow:hidden}
-.hp-gh{padding:13px 16px 10px;border-bottom:1px solid rgba(255,255,255,.07)}
-.hp-gdate{font-size:8px;font-weight:600;letter-spacing:.1em;text-transform:uppercase;color:rgba(255,255,255,.25);font-family:var(--sans);margin-bottom:3px}
-.hp-ggreet{font-family:var(--serif);font-size:19px;font-weight:200;color:#F0EDE8;line-height:1.1}
-.hp-gattn{font-family:var(--serif);font-size:19px;font-weight:200;color:var(--crit-d);line-height:1.1}
-.hp-ks{display:flex;border-bottom:1px solid rgba(255,255,255,.07);background:#0F1E3A}
-.hp-k{flex:1;padding:8px 11px;border-right:1px solid rgba(255,255,255,.07)}
-.hp-k:last-child{border-right:none}
-.hp-kv{font-family:var(--serif);font-size:17px;font-weight:300;line-height:1;letter-spacing:-.02em}
-.hp-kl{font-size:8px;font-weight:600;letter-spacing:.07em;text-transform:uppercase;color:rgba(255,255,255,.28);font-family:var(--sans);margin-top:2px}
-.hp-zones{display:flex;flex:1;overflow:hidden}
-.hp-z1{width:185px;border-right:1px solid rgba(255,255,255,.07);padding:10px;background:#0F1729;overflow:hidden}
-.hp-zh{font-size:8px;font-weight:600;letter-spacing:.08em;text-transform:uppercase;color:rgba(255,255,255,.25);font-family:var(--sans);margin-bottom:8px;display:flex;align-items:center;gap:5px}
-.hp-zdash{width:10px;height:2px;background:var(--acc-l);border-radius:1px;flex-shrink:0}
-.hp-nba{border-radius:5px;padding:7px 9px;margin-bottom:5px;border:1px solid rgba(255,255,255,.07)}
-.hp-nb{font-size:8px;font-weight:600;border-radius:2px;padding:1px 5px;font-family:var(--sans);display:inline-block;margin-bottom:3px}
-.hp-nt{font-size:9px;font-weight:500;color:#F0EDE8;font-family:var(--sans);line-height:1.3;margin-bottom:2px}
-.hp-ns{font-size:8px;color:rgba(255,255,255,.35);font-family:var(--sans)}
-.hp-z2{flex:1;padding:10px;position:relative;overflow:hidden}
-.hp-dotbg{position:absolute;inset:0;background-image:radial-gradient(circle,rgba(255,255,255,.18) 1px,transparent 1px);background-size:18px 18px;opacity:.1;pointer-events:none}
-.hp-z2i{position:relative;z-index:1}
-.hp-mt{font-family:var(--serif);font-size:13px;font-weight:300;color:#F0EDE8;margin-bottom:7px}
-.hp-tm{display:flex;flex-direction:column;gap:2px}
-.hp-tr{display:flex;gap:2px}
-.hp-tc{border-radius:4px;padding:6px 8px;display:flex;flex-direction:column;position:relative;overflow:hidden}
-.hp-tsh{position:absolute;top:0;left:0;right:0;height:45%;background:rgba(255,255,255,.04)}
-.hp-tn{font-size:8px;font-weight:500;color:rgba(255,255,255,.62);font-family:var(--sans)}
-.hp-tv{font-family:var(--serif);font-size:11px;font-weight:300;color:#FFF;margin-top:auto}
-.hp-z3{width:175px;border-left:1px solid rgba(255,255,255,.07);padding:10px;background:#0F1729;overflow:hidden}
-.hp-fi{padding:5px 0;border-bottom:1px solid rgba(255,255,255,.07)}
-.hp-fi:last-child{border-bottom:none}
-.hp-ftop{display:flex;align-items:flex-start;gap:5px}
-.hp-fdot{width:5px;height:5px;border-radius:50%;flex-shrink:0;margin-top:2px}
-.hp-ftit{font-size:9px;font-weight:500;color:#F0EDE8;font-family:var(--sans);line-height:1.3;flex:1}
-.hp-fsub{font-size:8px;color:rgba(255,255,255,.3);font-family:var(--sans);margin-top:1px;padding-left:10px}
+
+/* ── LAPTOP MOCKUP ─────────────────────── */
+.laptop-wrap{width:100%;max-width:960px;margin:0 auto;position:relative;z-index:1;perspective:1200px}
+.laptop{width:100%;transform:rotateX(2deg);transform-origin:bottom center;filter:drop-shadow(0 60px 120px rgba(0,0,0,.7)) drop-shadow(0 0 60px rgba(37,82,160,.25))}
+.laptop-lid{width:100%;background:linear-gradient(160deg,#2a2a2e,#1a1a1e);border-radius:14px 14px 0 0;padding:10px 10px 0;box-shadow:inset 0 1px 0 rgba(255,255,255,.08)}
+.laptop-bezel{background:#0a0a0c;border-radius:8px 8px 0 0;overflow:hidden;position:relative;border:1px solid rgba(255,255,255,.06)}
+.laptop-screen{width:100%;height:0;padding-bottom:62%;position:relative;overflow:hidden;background:#060912}
+.laptop-hinge{height:8px;background:linear-gradient(180deg,#1a1a1e,#2a2a2e);border-radius:0;box-shadow:0 2px 8px rgba(0,0,0,.4)}
+.laptop-base{background:linear-gradient(160deg,#2e2e32,#1e1e22);border-radius:0 0 10px 10px;padding:18px 60px 14px;display:flex;justify-content:center}
+.laptop-trackpad{width:120px;height:70px;background:linear-gradient(160deg,#252528,#1c1c1f);border-radius:8px;border:1px solid rgba(255,255,255,.06)}
+
+/* SLIDES */
+.ls-slide{position:absolute;inset:0;transition:opacity .9s cubic-bezier(.4,0,.2,1);font-family:var(--sans);display:flex;flex-direction:column}
+.ls-dark{background:#06091A}
+.ls-light{background:#F5F4F0}
+.ls-bar{height:7%;background:#0D1830;display:flex;align-items:center;padding:0 2% ;gap:1%;flex-shrink:0;border-bottom:1px solid rgba(255,255,255,.07)}
+.light-bar{background:#E8E7E2;border-bottom:1px solid rgba(0,0,0,.08)}
+.ls-dots{display:flex;gap:4px}.ls-dots span{width:8px;height:8px;border-radius:50%;flex-shrink:0}
+.ls-title{font-size:.6vw;color:rgba(255,255,255,.25);margin-left:4px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.ls-body{display:flex;flex:1;overflow:hidden}
+.ls-sidebar{width:6%;background:#0F1729;border-right:1px solid rgba(255,255,255,.07);display:flex;flex-direction:column;align-items:center;padding:2% 0;gap:3%}
+.light-sb{background:#ECEAE4;border-right:1px solid rgba(0,0,0,.08)}
+.ls-si{width:70%;aspect-ratio:1;border-radius:5px;display:flex;align-items:center;justify-content:center;font-size:.9vw;color:rgba(255,255,255,.2);cursor:pointer}
+.ls-si.active{background:rgba(107,159,212,.15);color:#6B9FD4}
+.light-si{color:rgba(0,0,0,.25)}.light-si-a{background:rgba(27,58,107,.1);color:#1B3A6B}
+.ls-main{flex:1;display:flex;flex-direction:column;overflow:hidden}
+.light-main{background:#F8F7F3}
+.ls-header{padding:1.5% 2%;border-bottom:1px solid rgba(255,255,255,.07);flex-shrink:0}
+.light-hd{border-bottom:1px solid rgba(0,0,0,.06)}
+.dark-hd{}
+.ls-date{font-size:.5vw;font-weight:600;letter-spacing:.1em;text-transform:uppercase;color:rgba(255,255,255,.25);margin-bottom:.3em}
+.ls-greet{font-family:var(--serif);font-size:1.4vw;font-weight:200;color:#F0EDE8;line-height:1.1}
+.ls-attn{font-family:var(--serif);font-size:1.1vw;font-weight:200;color:var(--crit-d);line-height:1.1}
+.ls-kpis{display:flex;flex-shrink:0}
+.dark-kpis{background:#0F1E3A;border-bottom:1px solid rgba(255,255,255,.07)}
+.ls-kpi{flex:1;padding:1% 1.5%;border-right:1px solid rgba(255,255,255,.07)}
+.ls-kpi:last-child{border-right:none}
+.ls-kv{font-family:var(--serif);font-size:1.3vw;font-weight:300;line-height:1}
+.ls-kl{font-size:.45vw;font-weight:600;letter-spacing:.07em;text-transform:uppercase;color:rgba(255,255,255,.28);margin-top:.2em}
+.ls-content{display:flex;flex:1;overflow:hidden}
+.ls-actions{width:28%;border-right:1px solid rgba(255,255,255,.07);padding:1.5%;background:#0F1729;overflow:hidden;display:flex;flex-direction:column;gap:.6%}
+.ls-ah{font-size:.45vw;font-weight:600;letter-spacing:.08em;text-transform:uppercase;color:rgba(255,255,255,.25);margin-bottom:.5em;display:flex;align-items:center;gap:4px}
+.ls-ah::before{content:'';width:8px;height:2px;background:#6B9FD4;border-radius:1px;flex-shrink:0}
+.ls-action{border-radius:4px;padding:.8% 1%;border:1px solid rgba(255,255,255,.07);flex-shrink:0}
+.crit-a{background:rgba(122,32,16,.2);border-left:2px solid #7A2010}
+.warn-a{background:rgba(122,96,16,.2);border-left:2px solid #7A6010}
+.blue-a{background:rgba(27,58,107,.2);border-left:2px solid #6B9FD4}
+.ls-badge{font-size:.45vw;font-weight:600;border-radius:2px;padding:.1em .4em;display:inline-block;margin-bottom:.3em}
+.crit-b{background:rgba(140,40,20,.2);color:#FCA58A}
+.warn-b{background:rgba(160,120,20,.2);color:#FCD080}
+.blue-b{background:rgba(107,159,212,.15);color:#6B9FD4}
+.ls-at{font-size:.55vw;font-weight:500;color:#F0EDE8;line-height:1.3;margin-bottom:.2em}
+.ls-as{font-size:.45vw;color:rgba(255,255,255,.35)}
+.ls-map{flex:1;padding:1.5%;overflow:hidden;display:flex;flex-direction:column}
+.ls-maptitle{font-family:var(--serif);font-size:.9vw;font-weight:300;color:#F0EDE8;margin-bottom:.8%}
+.ls-treemap{display:flex;flex-direction:column;gap:2px;flex:1}
+.ls-row{display:flex;gap:2px;flex:1}
+.ls-cell{border-radius:4px;padding:.5% .8%;display:flex;flex-direction:column;justify-content:space-between;font-size:.45vw;font-weight:500;color:rgba(255,255,255,.6);overflow:hidden}
+.ls-cell span{font-family:var(--serif);font-size:.75vw;font-weight:300;color:#FFF;display:block}
+.ls-cell.sm{font-size:.4vw}
+.ls-feed{width:26%;border-left:1px solid rgba(255,255,255,.07);padding:1.5%;background:#0F1729;overflow:hidden;display:flex;flex-direction:column;gap:.4%}
+.ls-fi{display:flex;align-items:flex-start;gap:.5%;padding:.5% 0;border-bottom:1px solid rgba(255,255,255,.06)}
+.ls-fi:last-child{border-bottom:none}
+.ls-fdot{width:5px;height:5px;border-radius:50%;flex-shrink:0;margin-top:.2em}
+.ls-ft{font-size:.5vw;font-weight:500;color:#F0EDE8;line-height:1.3}
+.ls-fs{font-size:.42vw;color:rgba(255,255,255,.3);margin-top:.1em}
+
+/* GOAL SCREEN (light) */
+.ls-goals-wrap{flex:1;padding:1.5%;overflow:hidden;display:flex;flex-direction:column;gap:.8%}
+.ls-goals-hd{display:flex;justify-content:space-between;align-items:center;flex-shrink:0}
+.ls-goals-title{font-family:var(--serif);font-size:1vw;font-weight:300;color:#1A1A18}
+.ls-goals-wgp{font-size:.55vw;color:#6B6860;font-weight:500}
+.ls-goals-wgp strong{color:#1B3A6B;font-size:.75vw}
+.ls-goals-list{display:flex;flex-direction:column;gap:.6%;flex:1}
+.ls-goal{display:flex;align-items:center;gap:1.5%}
+.ls-gname{font-size:.55vw;color:#1A1A18;font-weight:500;width:28%;flex-shrink:0;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.ls-gbar-wrap{flex:1;background:rgba(0,0,0,.07);border-radius:100px;height:.5vw;overflow:hidden}
+.ls-gbar{height:100%;border-radius:100px;transition:width 1.5s ease}
+.ls-gpct{font-size:.55vw;font-weight:600;width:8%;text-align:right;flex-shrink:0}
+.good-pct{color:#16a34a}.warn-pct{color:#d97706}.crit-pct{color:#dc2626}.blue-pct{color:#2563eb}
+.ls-insight{background:rgba(27,58,107,.08);border:1px solid rgba(27,58,107,.15);border-radius:6px;padding:.8% 1.2%;display:flex;align-items:center;gap:.8%;flex-shrink:0}
+.ls-insight-ic{font-size:.8vw;flex-shrink:0}
+.ls-insight span:last-child{font-size:.5vw;color:#1B3A6B;font-weight:500;line-height:1.4}
+
+/* PE SCREEN (dark) */
+.ls-pe-wrap{flex:1;padding:1.5%;overflow:hidden;display:flex;flex-direction:column;gap:.8%}
+.ls-pe-table{background:#0F1729;border-radius:6px;overflow:hidden;flex-shrink:0;border:1px solid rgba(255,255,255,.07)}
+.ls-pe-hdr{display:grid;grid-template-columns:2fr 1fr 1fr 1fr .8fr 1fr;padding:.6% 1%;background:#0a0f1e;border-bottom:1px solid rgba(255,255,255,.07)}
+.ls-pe-hdr span{font-size:.4vw;font-weight:600;letter-spacing:.07em;text-transform:uppercase;color:rgba(255,255,255,.28)}
+.ls-pe-row{display:grid;grid-template-columns:2fr 1fr 1fr 1fr .8fr 1fr;padding:.5% 1%;border-bottom:1px solid rgba(255,255,255,.05);align-items:center}
+.ls-pe-row:last-child{border-bottom:none}
+.ls-pe-row span{font-size:.5vw;color:rgba(255,255,255,.7)}
+.crit-row{background:rgba(122,32,16,.12)}
+.ls-pe-badge{font-size:.4vw;font-weight:600;padding:.15em .5em;border-radius:2px;display:inline-block}
+.crit-badge{background:rgba(140,40,20,.25);color:#FCA58A}
+.warn-badge{background:rgba(160,120,20,.25);color:#FCD080}
+.ok-badge{background:rgba(22,163,74,.15);color:#4ade80}
+.blue-badge{background:rgba(107,159,212,.15);color:#6B9FD4}
+.ls-pe-calls{display:flex;flex-direction:column;gap:.6%;flex:1}
+.ls-pec-hd{font-size:.5vw;font-weight:600;letter-spacing:.08em;text-transform:uppercase;color:rgba(255,255,255,.3);margin-bottom:.3%}
+.ls-pec{display:flex;align-items:center;gap:1%;background:#0F1729;border-radius:4px;padding:.6% 1%;border:1px solid rgba(255,255,255,.07)}
+.overdue-pec{border-left:2px solid #7A2010}
+.warn-pec{border-left:2px solid #7A6010}
+.ok-pec{border-left:2px solid #0A3840}
+.ls-pec-left{display:flex;flex-direction:column;gap:.2%;width:18%;flex-shrink:0}
+.ls-pec-fund{font-size:.5vw;font-weight:600;color:#F0EDE8}
+.ls-pec-status{font-size:.38vw;font-weight:600;letter-spacing:.06em}
+.overdue-s{color:#FCA58A}.warn-s{color:#FCD080}.ok-s{color:#67E8F9}
+.ls-pec-bar-wrap{flex:1;background:rgba(255,255,255,.07);border-radius:100px;height:.4vw;overflow:hidden}
+.ls-pec-bar{height:100%;border-radius:100px}
+.ls-pec-amt{font-size:.55vw;font-weight:600;width:12%;text-align:right;flex-shrink:0}
+.ls-pec-date{font-size:.45vw;width:10%;text-align:right;flex-shrink:0;color:rgba(255,255,255,.4)}
+.warn-pct{color:#FCD080}
+
+/* NAV DOTS */
+.ls-dots-nav{position:absolute;bottom:2%;left:50%;transform:translateX(-50%);display:flex;gap:5px;z-index:10}
+.ls-dnav{width:5px;height:5px;border-radius:50%;background:rgba(255,255,255,.2);cursor:pointer;transition:all .3s}
+.ls-dnav.active{background:#6B9FD4;width:14px;border-radius:3px}
+
+/* colour helpers */
+.warn{color:#FCD080}.crit{color:#FCA58A}.blue{color:#6B9FD4}
+
+
 
 /* ── LIGHT SECTIONS SHARED ─────────────── */
 .ls{background:var(--warm-page);color:var(--tx1)}
@@ -403,60 +481,154 @@ footer{background:#060B18;border-top:1px solid rgba(255,255,255,.06);padding:48p
     <button class="btn-p" onclick="openDemo()">Request a Demo</button>
     <a href="#platform" class="btn-o">See the Platform →</a>
   </div>
-  <div class="hero-preview reveal">
-    <div class="hp-bar">
-      <div class="hpd" style="background:#FF5F57"></div><div class="hpd" style="background:#FFBD2E"></div><div class="hpd" style="background:#28CA41"></div>
-      <span class="hp-ttl" id="hp-ttl">WealthWise — Goal Intelligence OS · Dubai 10:14 AM</span>
-    </div>
-    <div class="hp-body">
-      <div class="hp-sb">
-        <div class="hp-si a">⊞</div><div class="hp-si o">◻</div><div class="hp-si o">◎</div><div class="hp-si o">△</div><div class="hp-si o">⚡</div><div class="hp-si o">☽</div>
-      </div>
-      <div class="hp-m">
-        <div class="hp-gh">
-          <div class="hp-gdate">Monday, 23 March 2026</div>
-          <div class="hp-ggreet">Good morning, Advisor.</div>
-          <div class="hp-gattn">7 clients need your attention.</div>
-        </div>
-        <div class="hp-ks">
-          <div class="hp-k"><div class="hp-kv" style="color:var(--warn-d)">38%</div><div class="hp-kl">Avg WGP</div></div>
-          <div class="hp-k"><div class="hp-kv" style="color:var(--crit-d)">7</div><div class="hp-kl">Critical</div></div>
-          <div class="hp-k"><div class="hp-kv" style="color:var(--crit-d)">$85K</div><div class="hp-kl">Due Today</div></div>
-          <div class="hp-k"><div class="hp-kv" style="color:var(--acc-l)">AED 8.9M</div><div class="hp-kl">AUM</div></div>
-        </div>
-        <div class="hp-zones">
-          <div class="hp-z1">
-            <div class="hp-zh"><span class="hp-zdash"></span>TODAY · ACTIONS</div>
-            <div class="hp-nba" style="background:#141E30;border-left:2px solid var(--crit-fill-d)"><div class="hp-nb" style="background:var(--crit-bg);color:var(--crit-d)">Protect</div><div class="hp-nt">Capital call DUE — Vista IX $85K</div><div class="hp-ns">Al-Mansoori · Liquidity needed</div></div>
-            <div class="hp-nba" style="background:#141E30;border-left:2px solid var(--warn-fill-d)"><div class="hp-nb" style="background:var(--warn-bg);color:var(--warn-d)">Recover</div><div class="hp-nt">Retirement at 25% — plan needed</div><div class="hp-ns">+15pp with intervention</div></div>
-            <div class="hp-nba" style="background:#141E30;border-left:2px solid var(--acc-l)"><div class="hp-nb" style="background:rgba(107,159,212,.15);color:var(--acc-l)">Comply</div><div class="hp-nt">UAE TRC required — India DTAA</div><div class="hp-ns">$5,000+ annual benefit</div></div>
-          </div>
-          <div class="hp-z2">
-            <div class="hp-dotbg"></div>
-            <div class="hp-z2i">
-              <div class="hp-mt">Client Portfolio Map</div>
-              <div class="hp-tm">
-                <div class="hp-tr">
-                  <div class="hp-tc" style="background:var(--crit-fill-d);flex:3;height:66px"><div class="hp-tsh"></div><div class="hp-tn">Al-Mansoori</div><div style="flex:1"></div><div class="hp-tv">AED 32M</div></div>
-                  <div class="hp-tc" style="background:var(--crit-fill-d);flex:2;height:66px"><div class="hp-tsh"></div><div class="hp-tn">Richardson</div><div style="flex:1"></div><div class="hp-tv">$4.2M</div></div>
+  <div class="laptop-wrap reveal">
+    <!-- LAPTOP SVG SHELL -->
+    <div class="laptop">
+      <div class="laptop-lid">
+        <div class="laptop-bezel">
+          <div class="laptop-screen" id="laptop-screen">
+
+            <!-- SCREEN 1: DARK — Dashboard Overview -->
+            <div class="ls-slide ls-dark" id="ls-1">
+              <div class="ls-bar">
+                <div class="ls-dots"><span style="background:#FF5F57"></span><span style="background:#FFBD2E"></span><span style="background:#28CA41"></span></div>
+                <span class="ls-title" id="ls-clock">WealthWise · Dubai <span id="ls-time"></span></span>
+              </div>
+              <div class="ls-body">
+                <div class="ls-sidebar dark-sb">
+                  <div class="ls-si active">⊞</div><div class="ls-si">◻</div><div class="ls-si">◎</div><div class="ls-si">△</div><div class="ls-si">⚡</div>
                 </div>
-                <div class="hp-tr">
-                  <div class="hp-tc" style="background:var(--warn-fill-d);flex:2;height:42px"><div class="hp-tsh"></div><div class="hp-tn">Torres</div><div style="flex:1"></div><div class="hp-tv">$3.1M</div></div>
-                  <div class="hp-tc" style="background:var(--warn-fill-d);flex:2;height:42px"><div class="hp-tsh"></div><div class="hp-tn">Kapoor</div><div style="flex:1"></div><div class="hp-tv">$2.8M</div></div>
-                  <div class="hp-tc" style="background:var(--good-fill-d);flex:1;height:42px"><div class="hp-tsh"></div><div class="hp-tn">Al-Ahmad</div><div style="flex:1"></div><div class="hp-tv">AED 3M</div></div>
+                <div class="ls-main">
+                  <div class="ls-header dark-hd">
+                    <div class="ls-date">MONDAY, 23 MARCH 2026</div>
+                    <div class="ls-greet">Good morning, Advisor.</div>
+                    <div class="ls-attn">7 clients need your attention.</div>
+                  </div>
+                  <div class="ls-kpis dark-kpis">
+                    <div class="ls-kpi"><div class="ls-kv warn">38%</div><div class="ls-kl">AVG WGP</div></div>
+                    <div class="ls-kpi"><div class="ls-kv crit">7</div><div class="ls-kl">CRITICAL</div></div>
+                    <div class="ls-kpi"><div class="ls-kv crit">$85K</div><div class="ls-kl">DUE TODAY</div></div>
+                    <div class="ls-kpi"><div class="ls-kv blue">AED 8.9M</div><div class="ls-kl">AUM</div></div>
+                  </div>
+                  <div class="ls-content">
+                    <div class="ls-actions">
+                      <div class="ls-ah">— TODAY · ACTIONS</div>
+                      <div class="ls-action crit-a"><span class="ls-badge crit-b">Protect</span><div class="ls-at">Capital call DUE — Vista IX $85K</div><div class="ls-as">Al-Mansoori · Liquidity needed</div></div>
+                      <div class="ls-action warn-a"><span class="ls-badge warn-b">Recover</span><div class="ls-at">Retirement at 25% — plan needed</div><div class="ls-as">+15pp with intervention</div></div>
+                      <div class="ls-action blue-a"><span class="ls-badge blue-b">Comply</span><div class="ls-at">UAE TRC required — India DTAA</div><div class="ls-as">$5,000+ annual benefit</div></div>
+                    </div>
+                    <div class="ls-map">
+                      <div class="ls-maptitle">Client Portfolio Map</div>
+                      <div class="ls-treemap">
+                        <div class="ls-row">
+                          <div class="ls-cell" style="flex:3;background:#7A2010">Al-Mansoori<br><span>AED 32M</span></div>
+                          <div class="ls-cell" style="flex:2;background:#7A2010">Richardson<br><span>$4.2M</span></div>
+                        </div>
+                        <div class="ls-row">
+                          <div class="ls-cell sm" style="flex:2;background:#7A6010">Torres<br><span>$3.1M</span></div>
+                          <div class="ls-cell sm" style="flex:2;background:#7A6010">Kapoor<br><span>$2.8M</span></div>
+                          <div class="ls-cell sm" style="flex:1;background:#0A3840">Al-Ahmad<br><span>AED 3M</span></div>
+                        </div>
+                      </div>
+                    </div>
+                    <div class="ls-feed">
+                      <div class="ls-ah">— UPCOMING · 30 DAYS</div>
+                      <div class="ls-fi"><span class="ls-fdot" style="background:#FCA58A"></span><div><div class="ls-ft">Vista IX $85K — Due Today</div><div class="ls-fs">Al-Mansoori · PENDING</div></div></div>
+                      <div class="ls-fi"><span class="ls-fdot" style="background:#FCA58A"></span><div><div class="ls-ft">DIFC Will — AED 19.4M</div><div class="ls-fs">Al-Mansoori · EST-001</div></div></div>
+                      <div class="ls-fi"><span class="ls-fdot" style="background:#FCD080"></span><div><div class="ls-ft">Zakat overdue — $7,543</div><div class="ls-fs">Al-Mansoori · OVERDUE</div></div></div>
+                      <div class="ls-fi"><span class="ls-fdot" style="background:#67E8F9"></span><div><div class="ls-ft">Emirates NBD FAIL · ISL-001</div><div class="ls-fs">Alternatives: DIB, ADIB</div></div></div>
+                    </div>
+                  </div>
                 </div>
               </div>
             </div>
-          </div>
-          <div class="hp-z3">
-            <div class="hp-zh"><span class="hp-zdash"></span>UPCOMING · 30 DAYS</div>
-            <div class="hp-fi"><div class="hp-ftop"><span class="hp-fdot" style="background:var(--crit-d)"></span><span class="hp-ftit">Vista IX $85K — Due Today</span></div><div class="hp-fsub">Al-Mansoori · PENDING</div></div>
-            <div class="hp-fi"><div class="hp-ftop"><span class="hp-fdot" style="background:var(--crit-d)"></span><span class="hp-ftit">DIFC Will missing — AED 19.4M</span></div><div class="hp-fsub">Al-Mansoori · EST-001</div></div>
-            <div class="hp-fi"><div class="hp-ftop"><span class="hp-fdot" style="background:var(--warn-d)"></span><span class="hp-ftit">Zakat overdue — $7,543 1447H</span></div><div class="hp-fsub">Al-Mansoori · OVERDUE</div></div>
-            <div class="hp-fi"><div class="hp-ftop"><span class="hp-fdot" style="background:var(--warn-d)"></span><span class="hp-ftit">LRS 72% — $180K of $250K</span></div><div class="hp-fsub">Rashid · UAE-001</div></div>
-            <div class="hp-fi"><div class="hp-ftop"><span class="hp-fdot" style="background:var(--good-d)"></span><span class="hp-ftit">Emirates NBD FAIL · ISL-001</span></div><div class="hp-fsub">Alternatives: DIB, ADIB</div></div>
-          </div>
+
+            <!-- SCREEN 2: LIGHT — Goal Probability View -->
+            <div class="ls-slide ls-light" id="ls-2" style="opacity:0;pointer-events:none">
+              <div class="ls-bar light-bar">
+                <div class="ls-dots"><span style="background:#FF5F57"></span><span style="background:#FFBD2E"></span><span style="background:#28CA41"></span></div>
+                <span class="ls-title" style="color:rgba(0,0,0,.35)">WealthWise · Goal Intelligence</span>
+              </div>
+              <div class="ls-body">
+                <div class="ls-sidebar light-sb">
+                  <div class="ls-si active light-si-a">◎</div><div class="ls-si light-si">⊞</div><div class="ls-si light-si">◻</div><div class="ls-si light-si">△</div>
+                </div>
+                <div class="ls-main light-main">
+                  <div class="ls-header light-hd">
+                    <div class="ls-date" style="color:rgba(0,0,0,.35)">AL-MANSOORI FAMILY · GOAL INTELLIGENCE</div>
+                    <div class="ls-greet" style="color:#1A1A18">Rashid & Aisha Al-Mansoori</div>
+                    <div class="ls-attn" style="color:#6B6860">AED 13M · 9 Goals · Golden Visa · Islamic Finance</div>
+                  </div>
+                  <div class="ls-goals-wrap">
+                    <div class="ls-goals-hd">
+                      <span class="ls-goals-title">Goal Probability Dashboard</span>
+                      <span class="ls-goals-wgp">WGP <strong>72%</strong></span>
+                    </div>
+                    <div class="ls-goals-list">
+                      <div class="ls-goal"><div class="ls-gname">Retirement (2038)</div><div class="ls-gbar-wrap"><div class="ls-gbar" style="width:78%;background:linear-gradient(90deg,#22c55e,#16a34a)"></div></div><div class="ls-gpct good-pct">78%</div></div>
+                      <div class="ls-goal"><div class="ls-gname">Children Education</div><div class="ls-gbar-wrap"><div class="ls-gbar" style="width:65%;background:linear-gradient(90deg,#3b82f6,#2563eb)"></div></div><div class="ls-gpct blue-pct">65%</div></div>
+                      <div class="ls-goal"><div class="ls-gname">Golden Visa Maintain</div><div class="ls-gbar-wrap"><div class="ls-gbar" style="width:91%;background:linear-gradient(90deg,#22c55e,#16a34a)"></div></div><div class="ls-gpct good-pct">91%</div></div>
+                      <div class="ls-goal"><div class="ls-gname">EOSB Repatriation</div><div class="ls-gbar-wrap"><div class="ls-gbar" style="width:44%;background:linear-gradient(90deg,#f59e0b,#d97706)"></div></div><div class="ls-gpct warn-pct">44%</div></div>
+                      <div class="ls-goal"><div class="ls-gname">India Property (INR)</div><div class="ls-gbar-wrap"><div class="ls-gbar" style="width:28%;background:linear-gradient(90deg,#ef4444,#dc2626)"></div></div><div class="ls-gpct crit-pct">28%</div></div>
+                      <div class="ls-goal"><div class="ls-gname">Zakat Compliance</div><div class="ls-gbar-wrap"><div class="ls-gbar" style="width:100%;background:linear-gradient(90deg,#22c55e,#16a34a)"></div></div><div class="ls-gpct good-pct">100%</div></div>
+                    </div>
+                    <div class="ls-insight">
+                      <span class="ls-insight-ic">⚡</span>
+                      <span>Optimising EOSB repatriation +26pp adds AED 840K to retirement probability</span>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            <!-- SCREEN 3: DARK — Private Equity Capital Calls -->
+            <div class="ls-slide ls-dark" id="ls-3" style="opacity:0;pointer-events:none">
+              <div class="ls-bar">
+                <div class="ls-dots"><span style="background:#FF5F57"></span><span style="background:#FFBD2E"></span><span style="background:#28CA41"></span></div>
+                <span class="ls-title">WealthWise · Private Markets Intelligence</span>
+              </div>
+              <div class="ls-body">
+                <div class="ls-sidebar dark-sb">
+                  <div class="ls-si">⊞</div><div class="ls-si">◻</div><div class="ls-si">◎</div><div class="ls-si active">△</div><div class="ls-si">⚡</div>
+                </div>
+                <div class="ls-main">
+                  <div class="ls-header dark-hd">
+                    <div class="ls-date">PRIVATE EQUITY · CAPITAL CALL INTELLIGENCE</div>
+                    <div class="ls-greet">4 funds · $2.1M committed · 3 calls pending</div>
+                    <div class="ls-attn">Next call: Vista IX $85K — in 0 days</div>
+                  </div>
+                  <div class="ls-pe-wrap">
+                    <div class="ls-pe-table">
+                      <div class="ls-pe-hdr"><span>Fund</span><span>Commitment</span><span>Called</span><span>NAV</span><span>IRR</span><span>Status</span></div>
+                      <div class="ls-pe-row crit-row"><span>Vista IX</span><span>$500K</span><span>$340K</span><span>$412K</span><span class="good-pct">18.4%</span><span class="ls-pe-badge crit-badge">OVERDUE</span></div>
+                      <div class="ls-pe-row"><span>Sequoia G</span><span>$300K</span><span>$180K</span><span>$224K</span><span class="good-pct">22.1%</span><span class="ls-pe-badge ok-badge">CALLED</span></div>
+                      <div class="ls-pe-row"><span>Gulf Capital</span><span>AED 750K</span><span>AED 450K</span><span>AED 512K</span><span class="warn-pct">14.7%</span><span class="ls-pe-badge warn-badge">PENDING</span></div>
+                      <div class="ls-pe-row"><span>Thoma Bravo</span><span>$400K</span><span>$80K</span><span>$88K</span><span class="blue-pct">—</span><span class="ls-pe-badge blue-badge">ACTIVE</span></div>
+                    </div>
+                    <div class="ls-pe-calls">
+                      <div class="ls-pec-hd">Capital Call Forecast — Next 90 Days</div>
+                      <div class="ls-pec overdue-pec"><div class="ls-pec-left"><span class="ls-pec-fund">Vista IX</span><span class="ls-pec-status overdue-s">OVERDUE</span></div><div class="ls-pec-bar-wrap"><div class="ls-pec-bar" style="width:100%;background:#7A2010"></div></div><div class="ls-pec-amt crit-pct">$85K</div><div class="ls-pec-date crit-pct">14 Mar</div></div>
+                      <div class="ls-pec warn-pec"><div class="ls-pec-left"><span class="ls-pec-fund">Gulf Capital</span><span class="ls-pec-status warn-s">PENDING</span></div><div class="ls-pec-bar-wrap"><div class="ls-pec-bar" style="width:72%;background:#7A6010"></div></div><div class="ls-pec-amt warn-pct">AED 150K</div><div class="ls-pec-date warn-pct">28 Mar</div></div>
+                      <div class="ls-pec ok-pec"><div class="ls-pec-left"><span class="ls-pec-fund">Thoma Bravo</span><span class="ls-pec-status ok-s">FORECAST</span></div><div class="ls-pec-bar-wrap"><div class="ls-pec-bar" style="width:45%;background:#0A3840"></div></div><div class="ls-pec-amt blue-pct">$60K</div><div class="ls-pec-date blue-pct">15 Apr</div></div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            <!-- MODE INDICATOR DOTS -->
+            <div class="ls-dots-nav">
+              <span class="ls-dnav active" data-s="1"></span>
+              <span class="ls-dnav" data-s="2"></span>
+              <span class="ls-dnav" data-s="3"></span>
+            </div>
+
+          </div><!-- /bezel -->
         </div>
+      </div>
+      <div class="laptop-hinge"></div>
+      <div class="laptop-base">
+        <div class="laptop-trackpad"></div>
       </div>
     </div>
   </div>
@@ -1109,14 +1281,67 @@ function submitMeth(e) {
 }
 
 /* ── LIVE DUBAI TIME ────────────────────── */
-function tick() {
-  try {
-    const t = new Date().toLocaleTimeString('en-US', { timeZone: 'Asia/Dubai', hour: '2-digit', minute: '2-digit', hour12: true });
-    const el = document.getElementById('hp-ttl');
-    if (el) el.textContent = `WealthWise — Goal Intelligence OS · Dubai ${t}`;
-  } catch(e) {}
-}
-tick(); setInterval(tick, 30000);
+/* ── LAPTOP SLIDE TRANSITIONS ───────────── */
+(function(){
+  const slides = ['ls-1','ls-2','ls-3'];
+  const durations = [5000, 5500, 5000]; // ms per slide
+  let current = 0;
+
+  function goTo(n) {
+    const prev = slides[current];
+    const next = slides[n];
+    const prevEl = document.getElementById(prev);
+    const nextEl = document.getElementById(next);
+    if (!prevEl || !nextEl) return;
+
+    nextEl.style.opacity = '0';
+    nextEl.style.pointerEvents = 'none';
+    nextEl.style.display = 'flex';
+
+    // crossfade
+    requestAnimationFrame(() => {
+      nextEl.style.transition = 'opacity .9s cubic-bezier(.4,0,.2,1)';
+      nextEl.style.opacity = '1';
+      nextEl.style.pointerEvents = 'auto';
+      prevEl.style.transition = 'opacity .9s cubic-bezier(.4,0,.2,1)';
+      prevEl.style.opacity = '0';
+      prevEl.style.pointerEvents = 'none';
+    });
+
+    // update nav dots
+    document.querySelectorAll('.ls-dnav').forEach((d,i) => {
+      d.classList.toggle('active', i === n);
+    });
+
+    current = n;
+  }
+
+  // dot clicks
+  document.querySelectorAll('.ls-dnav').forEach((d,i) => {
+    d.addEventListener('click', () => { clearTimeout(timer); goTo(i); scheduleNext(); });
+  });
+
+  let timer;
+  function scheduleNext() {
+    timer = setTimeout(() => {
+      goTo((current + 1) % slides.length);
+      scheduleNext();
+    }, durations[current]);
+  }
+
+  scheduleNext();
+
+  // Update clock in slide 1
+  function updateClock() {
+    try {
+      const t = new Date().toLocaleTimeString('en-US',{timeZone:'Asia/Dubai',hour:'2-digit',minute:'2-digit',hour12:true});
+      const el = document.getElementById('ls-time');
+      if (el) el.textContent = t;
+    } catch(e){}
+  }
+  updateClock();
+  setInterval(updateClock, 30000);
+})();
 
 /* ── GLOBAL ANIMATED GRID CANVAS ─────────── */
 (function(){
