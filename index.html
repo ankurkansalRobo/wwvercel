@@ -395,7 +395,177 @@ footer{background:#080808;border-top:1px solid rgba(201,160,80,.1);padding:0}
 .ft-badge{font-size:9px;font-weight:600;letter-spacing:.1em;text-transform:uppercase;color:var(--gold-dim);border:1px solid rgba(201,160,80,.18);border-radius:3px;padding:3px 9px}
 .ft-brand{font-family:var(--serif);font-size:20px;font-weight:300;color:var(--tx)}
 .ft-brand span{color:var(--gold);font-style:italic}
-</style>
+
+/* ── INLINE GRID CLASSES ── */
+.pt0-grid{display:grid;grid-template-columns:200px 1fr 200px;height:100%}
+.pt2-kpis{display:grid;grid-template-columns:1fr 1fr 1fr 1fr;border-bottom:1px solid var(--border)}
+@media(max-width:768px){
+  .pt0-grid{grid-template-columns:1fr}
+  .pt0-grid>div:first-child,.pt0-grid>div:last-child{display:none}
+  .pt2-kpis{grid-template-columns:1fr 1fr}
+}
+@media(max-width:480px){
+  .pt2-kpis{grid-template-columns:1fr 1fr}
+}
+
+
+@media(max-width:1024px){
+  nav{padding:0 28px}
+  .nav-os-badge{display:none}
+  .section{padding:72px 32px}
+  .gi-divider{padding:0 32px}
+
+  /* Grids → 2 col */
+  .uae-grid{grid-template-columns:repeat(2,1fr)}
+  .ft-inner{grid-template-columns:1fr 1fr;gap:32px;padding:40px 32px 32px}
+
+  /* Intel */
+  .intel-layout{gap:16px}
+
+  /* Goal network */
+  .goalnet-layout{grid-template-columns:1fr;gap:20px}
+  #net-canvas{height:340px}
+  .goalnet-nodes-list{display:grid;grid-template-columns:1fr 1fr;gap:6px}
+
+  /* Alternatives */
+  .doc-intel-wrap{grid-template-columns:1fr}
+  .ga-wrap{grid-template-columns:1fr;gap:14px}
+
+  /* Platform tour panels */
+  .pt-panel{height:auto;min-height:300px}
+  .df-body{height:auto;min-height:280px}
+
+  /* Footer */
+  .ft-bottom{padding:16px 32px}
+}
+
+/* ══════════════════════════════════════
+   RESPONSIVE — MOBILE (≤768px)
+══════════════════════════════════════ */
+@media(max-width:768px){
+  /* Nav */
+  nav{padding:0 18px;height:54px}
+  .nav-links{display:none}
+  .nav-os-badge{display:none}
+  .nav-cta{padding:7px 14px;font-size:10px}
+
+  /* Hero */
+  .hero{padding:80px 20px 60px}
+  .hero-h1{font-size:clamp(36px,10vw,56px) !important}
+  .hero-sub{font-size:14px;margin:20px auto 28px}
+  .hero-btns{gap:10px;margin-bottom:40px}
+  .btn-gold,.btn-outline{font-size:11px;padding:11px 20px}
+  .scroll-hint{display:none}
+
+  /* Dashboard frame — hide sidebar and feed on mobile */
+  .df-sb{display:none}
+  .df-z3{display:none}
+  .df-body{height:280px}
+  .df-kpis .df-kpi:last-child{display:none}
+  .df-kv{font-size:14px}
+  .df-kl{font-size:7px}
+  .df-hgreet{font-size:15px}
+  .df-hattn{font-size:13px}
+
+  /* Sections */
+  .section{padding:56px 20px}
+  .gi-divider{padding:0 20px}
+  .sh2{font-size:clamp(26px,7vw,38px) !important}
+  .ssub{font-size:14px}
+
+  /* Platform tour */
+  .pt-tabs{flex-wrap:wrap;gap:3px}
+  .pt-tab{flex:none;width:calc(50% - 2px);font-size:9px;padding:7px 8px}
+  .pt-panel{height:auto;min-height:260px;overflow-y:auto}
+  /* Hide complex inner columns in tour panels on mobile */
+  #pt-0 > div{grid-template-columns:1fr !important}
+  #pt-0 > div > div:first-child{display:none}
+  #pt-0 > div > div:last-child{display:none}
+  .pt-desc{font-size:12px}
+
+  /* Problem section */
+  .p-grid{grid-template-columns:1fr;gap:14px}
+  .p-total{flex-direction:column;gap:14px;text-align:center}
+  .pt-n{font-size:40px}
+
+  /* Intelligence */
+  .intel-layout{grid-template-columns:1fr;gap:16px}
+  .ring-wrap{flex-direction:column;align-items:center;gap:20px}
+  .ring-svg-wrap svg{width:150px;height:150px}
+
+  /* UAE */
+  .uae-grid{grid-template-columns:1fr 1fr;gap:12px}
+  .uae-title{font-size:15px}
+  .uae-desc{font-size:11px}
+  .uae-ic-wrap{width:36px;height:36px;font-size:16px;margin-bottom:12px}
+
+  /* Currency */
+  .currency-layout{grid-template-columns:1fr;gap:28px}
+
+  /* Projection */
+  .proj-header{flex-direction:column;align-items:flex-start;gap:10px}
+  .proj-prob-pill{font-size:11px}
+  #fan-canvas{height:220px !important}
+  .proj-legend{gap:10px}
+  .proj-leg-item{font-size:10px}
+  .proj-stat-v{font-size:22px}
+
+  /* Goal network */
+  .goalnet-layout{grid-template-columns:1fr}
+  #net-canvas{height:280px}
+  .goalnet-nodes-list{grid-template-columns:1fr 1fr;gap:5px}
+  .gn-node-item{padding:6px 8px}
+  .gn-name{font-size:10px}
+  .goalnet-panel{gap:10px}
+
+  /* Alternatives */
+  .alts-panel-tabs{flex-direction:column}
+  .alts-tab{flex-direction:row;align-items:center;gap:10px;border-right:none;border-bottom:1px solid var(--border)}
+  .alts-tab:last-child{border-bottom:none}
+  .alts-tab-label{font-size:11px}
+  .alts-content{padding:16px}
+  .doc-intel-wrap{grid-template-columns:1fr;gap:14px}
+  .doc-preview{min-height:160px}
+  .ga-wrap{grid-template-columns:1fr}
+  .ga-asset-card{padding:14px}
+  .ccf-bar-label{width:120px}
+  .ccf-bar-amt{width:52px;font-size:10px}
+  .ccf-total{flex-direction:column;gap:16px}
+
+  /* CTA */
+  .cta-section .sh2{font-size:clamp(24px,7vw,36px) !important}
+
+  /* Footer */
+  .ft-inner{grid-template-columns:1fr;gap:28px;padding:36px 20px 24px}
+  .ft-bottom{padding:14px 20px;flex-direction:column;align-items:flex-start;gap:10px}
+  .ft-credentials{gap:5px}
+  .ft-about-text{font-size:11px}
+}
+
+/* ══════════════════════════════════════
+   RESPONSIVE — SMALL MOBILE (≤480px)
+══════════════════════════════════════ */
+@media(max-width:480px){
+  .hero-h1{font-size:32px !important;line-height:1.05}
+  .hero-h1-gold{font-size:32px}
+  .hero-btns{flex-direction:column;width:100%}
+  .btn-gold,.btn-outline{width:100%;text-align:center}
+
+  .uae-grid{grid-template-columns:1fr}
+  .goalnet-nodes-list{grid-template-columns:1fr}
+  .pt-tab{width:100%}
+
+  .df-body{height:240px}
+  .df-kpis .df-kpi:nth-child(3){display:none}
+
+  .p-cost{font-size:28px}
+  .pt-n{font-size:34px}
+
+  .alts-panel-tabs{gap:0}
+  .intel-card{padding:18px}
+  .ring-svg-wrap svg{width:130px;height:130px}
+}
+
 </head>
 <body>
 
@@ -530,7 +700,7 @@ footer{background:#080808;border-top:1px solid rgba(201,160,80,.1);padding:0}
       </div>
       <!-- PANEL 0: Dashboard -->
       <div class="pt-panel" id="pt-0">
-        <div style="display:grid;grid-template-columns:200px 1fr 200px;height:100%">
+        <div class="pt0-grid">
           <div style="border-right:1px solid var(--border);padding:12px;background:#0E0E0E;display:flex;flex-direction:column;gap:6px">
             <div class="df-zh">Today · Actions</div>
             <div class="df-action crit"><div class="df-badge crit-badge">Protect</div><div class="df-at">Capital call DUE — Vista IX $85K</div><div class="df-as">Al-Mansoori</div></div>
@@ -596,7 +766,7 @@ footer{background:#080808;border-top:1px solid rgba(201,160,80,.1);padding:0}
             <div style="background:rgba(255,255,255,.06);border:1px solid var(--border);border-radius:4px;padding:5px 12px;font-size:10px;font-weight:600;color:var(--txm)">Show Client</div>
           </div>
         </div>
-        <div style="display:grid;grid-template-columns:1fr 1fr 1fr 1fr;border-bottom:1px solid var(--border)">
+        <div class="pt2-kpis">
           <div style="padding:12px 16px;border-right:1px solid var(--border)"><div style="font-size:8px;color:var(--txd);margin-bottom:4px">MEMBERS</div><div style="font-family:var(--serif);font-size:20px;color:var(--tx)">2</div></div>
           <div style="padding:12px 16px;border-right:1px solid var(--border)"><div style="font-size:8px;color:var(--txd);margin-bottom:4px">GOALS</div><div style="font-family:var(--serif);font-size:20px;color:var(--tx)">9</div></div>
           <div style="padding:12px 16px;border-right:1px solid var(--border)"><div style="font-size:8px;color:var(--txd);margin-bottom:4px">WGP</div><div style="font-family:var(--serif);font-size:20px;color:var(--warn)">72%</div></div>
