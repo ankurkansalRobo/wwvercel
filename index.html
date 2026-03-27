@@ -593,11 +593,11 @@ footer{background:#080808;border-top:1px solid rgba(201,160,80,.1);padding:0}
 </div>
 <script>
   function goUAE(){localStorage.setItem('ww-region','uae');document.getElementById('location-modal').style.display='none'}
-  function goUSA(){localStorage.setItem('ww-region','usa');window.location.href='/usa'}
+  function goUSA(){localStorage.setItem('ww-region','usa');window.location.href='https://wealthwise-usa.vercel.app'}
   function dismissModal(){localStorage.setItem('ww-region','both');document.getElementById('location-modal').style.display='none'}
   // Auto-dismiss if already chose
   if(localStorage.getItem('ww-region')){
-    if(localStorage.getItem('ww-region')==='usa') window.location.href='/usa';
+    if(localStorage.getItem('ww-region')==='usa') window.location.href='https://wealthwise-usa.vercel.app';
     else document.getElementById('location-modal').style.display='none';
   }
 </script>
@@ -618,7 +618,7 @@ footer{background:#080808;border-top:1px solid rgba(201,160,80,.1);padding:0}
     <a href="#alternatives" class="nav-link">Alternatives</a>
   </div>
   <div style="display:flex;align-items:center;gap:8px">
-    <a href="/usa" style="font-size:10px;font-weight:600;letter-spacing:.08em;text-transform:uppercase;color:var(--txd);border:1px solid var(--border);border-radius:4px;padding:6px 10px;text-decoration:none;transition:all .2s" onmouseover="this.style.color='var(--tx)'" onmouseout="this.style.color='var(--txd)'">🇺🇸 US Version</a>
+    <a href="https://wealthwise-usa.vercel.app" style="font-size:10px;font-weight:600;letter-spacing:.08em;text-transform:uppercase;color:var(--txd);border:1px solid var(--border);border-radius:4px;padding:6px 10px;text-decoration:none;transition:all .2s" onmouseover="this.style.color='var(--tx)'" onmouseout="this.style.color='var(--txd)'">🇺🇸 US Version</a>
     <a href="#" class="nav-cta">Request Demo</a>
   </div>
 </nav>
