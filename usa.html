@@ -1,0 +1,999 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>WealthWise — Goal Intelligence OS for American Advisors</title>
+<meta name="description" content="The only wealth platform that optimises 401(k), IRA, Social Security, RMDs, and estate tax simultaneously — across unified household wealth. Built for US RIAs and family offices.">
+<link rel="canonical" href="https://wealthwiseos.vercel.app/usa">
+<meta property="og:title" content="WealthWise — Goal Intelligence OS for US Advisors">
+<meta property="og:description" content="401(k) optimization, Social Security timing, RMD planning, federal estate tax — all connected to one goal probability score.">
+<meta property="og:url" content="https://wealthwiseos.vercel.app/usa">
+<meta name="theme-color" content="#080808">
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;1,300;1,400&family=Instrument+Sans:wght@400;500;600&display=swap" rel="stylesheet">
+<style>
+*{box-sizing:border-box;margin:0;padding:0}
+:root{
+  --black:#080808;--black2:#111;--black3:#181818;
+  --gold:#C9A050;--gold-l:#D4AF6A;--gold-dim:#8A6E35;
+  --gold-bg:rgba(201,160,80,.08);--gold-border:rgba(201,160,80,.18);
+  --tx:#F5F0E8;--txm:rgba(245,240,232,.55);--txd:rgba(245,240,232,.28);
+  --crit:#FF6B5B;--warn:#F5C842;--good:#4ECDC4;--blue:#5B9BD5;
+  --border:rgba(255,255,255,.07);
+  --serif:'Cormorant Garamond',Georgia,serif;
+  --sans:'Instrument Sans',system-ui,sans-serif;
+}
+html{scroll-behavior:smooth}
+body{font-family:var(--sans);background:var(--black);color:var(--tx);overflow-x:hidden}
+#grid-canvas{position:fixed;top:0;left:0;width:100%;height:100%;z-index:-1;pointer-events:none}
+
+/* NAV */
+nav{position:fixed;top:0;left:0;right:0;z-index:999;height:60px;display:flex;align-items:center;padding:0 52px;justify-content:space-between;background:rgba(8,8,8,.92);backdrop-filter:blur(20px);border-bottom:1px solid rgba(201,160,80,.1)}
+.nav-logo{display:flex;align-items:center;gap:10px;text-decoration:none}
+.nav-ic{width:30px;height:30px;border-radius:6px;background:var(--gold-bg);border:1px solid var(--gold-border);display:flex;align-items:center;justify-content:center;font-family:var(--serif);color:var(--gold);font-size:14px}
+.nav-wm{font-size:15px;font-weight:600;color:var(--tx);letter-spacing:-.01em}
+.nav-os-badge{font-size:9px;font-weight:600;letter-spacing:.1em;text-transform:uppercase;color:var(--gold-dim);border:1px solid rgba(201,160,80,.2);border-radius:3px;padding:2px 7px;margin-left:4px}
+.nav-flag{font-size:14px;background:rgba(255,255,255,.06);border:1px solid var(--border);border-radius:4px;padding:3px 8px;font-size:11px;font-weight:600;color:var(--txd)}
+.nav-links{display:flex;align-items:center;gap:2px}
+.nav-link{font-size:11px;font-weight:600;letter-spacing:.08em;text-transform:uppercase;color:var(--txd);text-decoration:none;padding:6px 12px;border-radius:4px;transition:color .15s}
+.nav-link:hover{color:var(--tx)}
+.nav-link-gi{color:var(--gold) !important;position:relative}
+.nav-link-gi::after{content:'';position:absolute;bottom:-2px;left:12px;right:12px;height:1px;background:var(--gold);opacity:.4}
+.nav-switch{font-size:10px;font-weight:600;letter-spacing:.08em;text-transform:uppercase;color:var(--txd);border:1px solid var(--border);border-radius:4px;padding:6px 12px;text-decoration:none;transition:all .2s}
+.nav-switch:hover{color:var(--tx);border-color:rgba(255,255,255,.2)}
+.nav-cta{font-size:11px;font-weight:600;letter-spacing:.1em;text-transform:uppercase;padding:9px 22px;border-radius:4px;background:transparent;color:var(--gold);border:1px solid var(--gold-border);cursor:pointer;font-family:var(--sans);text-decoration:none;transition:all .2s}
+.nav-cta:hover{background:var(--gold);color:var(--black)}
+
+/* HERO */
+.hero{min-height:100vh;background:transparent;position:relative;display:flex;flex-direction:column;align-items:center;justify-content:center;text-align:center;padding:120px 40px 80px;overflow:hidden}
+.hero-bg{position:absolute;inset:0;pointer-events:none;background:radial-gradient(ellipse 80% 60% at 50% 20%,rgba(201,160,80,.1) 0%,transparent 65%),radial-gradient(ellipse 50% 40% at 20% 80%,rgba(91,155,213,.06) 0%,transparent 60%)}
+.hero-tag{display:inline-flex;align-items:center;gap:8px;font-size:10px;font-weight:600;letter-spacing:.14em;text-transform:uppercase;color:var(--gold);border:1px solid var(--gold-border);border-radius:100px;padding:5px 18px;margin-bottom:32px;position:relative;z-index:1}
+.hero-dot{width:5px;height:5px;border-radius:50%;background:var(--gold);animation:pulse 2s ease-in-out infinite}
+@keyframes pulse{0%,100%{opacity:1;transform:scale(1)}50%{opacity:.5;transform:scale(.8)}}
+.hero-h1{font-family:var(--serif);font-weight:300;font-size:clamp(44px,7vw,88px);line-height:1.0;letter-spacing:-.02em;color:var(--tx);position:relative;z-index:1}
+.hero-h1-gold{color:var(--gold);font-style:italic;display:block}
+.hero-sub{font-size:clamp(14px,1.3vw,16px);line-height:1.8;color:var(--txm);max-width:540px;margin:28px auto 40px;position:relative;z-index:1}
+.hero-btns{display:flex;align-items:center;gap:14px;justify-content:center;margin-bottom:64px;position:relative;z-index:1;flex-wrap:wrap}
+.btn-gold{font-size:12px;font-weight:600;letter-spacing:.1em;text-transform:uppercase;padding:14px 32px;border-radius:4px;background:var(--gold);color:var(--black);border:none;cursor:pointer;font-family:var(--sans);transition:all .2s;text-decoration:none;display:inline-block}
+.btn-gold:hover{background:var(--gold-l);transform:translateY(-1px)}
+.btn-outline{font-size:12px;font-weight:600;letter-spacing:.1em;text-transform:uppercase;padding:13px 28px;border-radius:4px;background:transparent;color:var(--txm);border:1px solid var(--border);cursor:pointer;font-family:var(--sans);transition:all .2s;text-decoration:none;display:inline-block}
+.btn-outline:hover{color:var(--tx);border-color:rgba(255,255,255,.2)}
+
+/* LIVE DASHBOARD */
+.dash-wrap{position:relative;z-index:1;width:100%;max-width:980px;margin:0 auto}
+.dash-frame{border-radius:12px;overflow:hidden;border:1px solid rgba(201,160,80,.15);box-shadow:0 40px 100px rgba(0,0,0,.7),0 0 60px rgba(201,160,80,.06)}
+.df-bar{height:36px;background:#0E0E0E;border-bottom:1px solid rgba(255,255,255,.07);display:flex;align-items:center;padding:0 14px;gap:7px}
+.df-dot{width:10px;height:10px;border-radius:50%}
+.df-title{font-size:11px;color:rgba(255,255,255,.25);flex:1;margin-left:6px}
+.df-live{font-size:9px;font-weight:600;letter-spacing:.08em;color:var(--gold);display:flex;align-items:center;gap:5px}
+.df-live::before{content:'';width:5px;height:5px;border-radius:50%;background:var(--gold);animation:pulse 1.5s infinite;flex-shrink:0}
+.df-body{background:#0A0A0A;display:flex;height:360px}
+.df-sb{width:46px;background:#0E0E0E;border-right:1px solid rgba(255,255,255,.06);padding:10px 0;display:flex;flex-direction:column;align-items:center;gap:4px}
+.df-si{width:32px;height:32px;border-radius:7px;display:flex;align-items:center;justify-content:center;font-size:13px;color:rgba(255,255,255,.2)}
+.df-si.active{background:rgba(201,160,80,.12);color:var(--gold)}
+.df-main{flex:1;display:flex;flex-direction:column;overflow:hidden}
+.df-hd{padding:12px 18px 10px;border-bottom:1px solid rgba(255,255,255,.06)}
+.df-hdate{font-size:8px;font-weight:600;letter-spacing:.1em;text-transform:uppercase;color:rgba(255,255,255,.22);margin-bottom:3px}
+.df-hgreet{font-family:var(--serif);font-size:19px;font-weight:300;color:var(--tx)}
+.df-hattn{font-family:var(--serif);font-size:15px;font-weight:300;color:var(--crit)}
+.df-kpis{display:flex;border-bottom:1px solid rgba(255,255,255,.06);background:#0E0E0E}
+.df-kpi{flex:1;padding:8px 12px;border-right:1px solid rgba(255,255,255,.06)}
+.df-kpi:last-child{border-right:none}
+.df-kv{font-family:var(--serif);font-size:17px;font-weight:300;line-height:1}
+.df-kl{font-size:7px;font-weight:600;letter-spacing:.07em;text-transform:uppercase;color:rgba(255,255,255,.25);margin-top:2px}
+.df-zones{display:flex;flex:1;overflow:hidden}
+.df-z1{width:195px;border-right:1px solid rgba(255,255,255,.06);padding:10px;background:#0E0E0E;display:flex;flex-direction:column;gap:5px;overflow:hidden}
+.df-zh{font-size:8px;font-weight:600;letter-spacing:.08em;text-transform:uppercase;color:rgba(255,255,255,.22);margin-bottom:2px;display:flex;align-items:center;gap:5px}
+.df-zh::before{content:'';width:10px;height:2px;background:var(--gold);border-radius:1px;flex-shrink:0}
+.df-action{border-radius:5px;padding:7px 9px;border:1px solid rgba(255,255,255,.06)}
+.df-action.crit{border-left:2px solid var(--crit);background:rgba(255,107,91,.05)}
+.df-action.warn{border-left:2px solid var(--warn);background:rgba(245,200,66,.05)}
+.df-action.gold{border-left:2px solid var(--gold);background:rgba(201,160,80,.05)}
+.df-badge{font-size:8px;font-weight:600;border-radius:2px;padding:1px 5px;display:inline-block;margin-bottom:3px}
+.crit-badge{background:rgba(255,107,91,.15);color:var(--crit)}
+.warn-badge{background:rgba(245,200,66,.15);color:var(--warn)}
+.gold-badge{background:rgba(201,160,80,.12);color:var(--gold)}
+.df-at{font-size:9px;font-weight:500;color:var(--tx);line-height:1.3;margin-bottom:1px}
+.df-as{font-size:8px;color:rgba(255,255,255,.3)}
+.df-z2{flex:1;padding:10px 12px;display:flex;flex-direction:column;gap:7px;overflow:hidden}
+.df-wgp{background:rgba(201,160,80,.06);border:1px solid rgba(201,160,80,.12);border-radius:6px;padding:7px 10px;display:flex;align-items:center;justify-content:space-between;flex-shrink:0}
+.df-wgp-lbl{font-size:8px;font-weight:600;letter-spacing:.08em;text-transform:uppercase;color:var(--gold-dim)}
+.df-wgp-val{font-family:var(--serif);font-size:20px;font-weight:300;color:var(--gold);transition:all .5s}
+.df-goal-row{display:flex;align-items:center;gap:8px}
+.df-gname{font-size:9px;font-weight:500;color:rgba(255,255,255,.5);width:110px;flex-shrink:0;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.df-gbar-wrap{flex:1;background:rgba(255,255,255,.06);border-radius:100px;height:4px;overflow:hidden}
+.df-gbar{height:100%;border-radius:100px;transition:width 1.5s cubic-bezier(.4,0,.2,1)}
+.df-gpct{font-size:9px;font-weight:600;width:30px;text-align:right}
+.df-z3{width:175px;border-left:1px solid rgba(255,255,255,.06);padding:10px;background:#0E0E0E;display:flex;flex-direction:column;gap:4px;overflow:hidden}
+.df-fi{display:flex;align-items:flex-start;gap:5px;padding:4px 0;border-bottom:1px solid rgba(255,255,255,.05)}
+.df-fi:last-child{border-bottom:none}
+.df-fdot{width:5px;height:5px;border-radius:50%;flex-shrink:0;margin-top:2px}
+.df-ft{font-size:9px;font-weight:500;color:var(--tx);line-height:1.3}
+.df-fs{font-size:8px;color:rgba(255,255,255,.28);margin-top:1px}
+
+/* SHARED SECTION */
+.section{padding:96px 48px;position:relative}
+.si{max-width:1100px;margin:0 auto}
+.stag{font-size:10px;font-weight:600;letter-spacing:.14em;text-transform:uppercase;color:var(--gold);display:block;margin-bottom:14px}
+.sh2{font-family:var(--serif);font-size:clamp(30px,4.5vw,54px);font-weight:300;letter-spacing:-.02em;line-height:1.05;color:var(--tx);margin-bottom:16px}
+.sh2 em{font-style:italic;color:var(--gold)}
+.sh2-split{font-family:var(--serif);font-size:clamp(28px,3.5vw,44px);font-weight:300;letter-spacing:-.02em;line-height:1.1;color:var(--tx)}
+.sh2-italic{font-style:italic;color:rgba(245,240,232,.4);display:block}
+.ssub{font-size:15px;line-height:1.75;color:var(--txm);max-width:500px}
+.reveal{opacity:0;transform:translateY(24px);transition:opacity .7s cubic-bezier(.4,0,.2,1),transform .7s cubic-bezier(.4,0,.2,1)}
+.reveal.vis{opacity:1;transform:none}
+
+/* GI DIVIDER */
+.gi-divider{display:flex;align-items:center;gap:0;padding:0 48px;overflow:hidden}
+.gi-line{flex:1;height:1px;background:linear-gradient(90deg,transparent,rgba(201,160,80,.3),transparent)}
+.gi-label{font-size:9px;font-weight:600;letter-spacing:.2em;text-transform:uppercase;color:var(--gold-dim);padding:12px 24px;border:1px solid rgba(201,160,80,.15);border-radius:2px;white-space:nowrap}
+.gi-label::before{content:'◆';margin-right:8px;font-size:7px;color:var(--gold)}
+
+/* PROBLEM — US PERSONAS */
+.problem{background:transparent;border-top:1px solid rgba(201,160,80,.08)}
+.p-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:18px;margin-top:52px}
+.persona{border-radius:10px;padding:26px 22px;border:1px solid var(--border);position:relative;overflow:hidden;transition:background .7s,border-color .7s,box-shadow .7s}
+.persona::before{content:'';position:absolute;top:0;left:0;right:0;height:2px;transition:opacity .5s}
+.persona.pstate-dark{background:#111}
+.persona.pstate-dark::before{background:linear-gradient(90deg,var(--crit),transparent)}
+.persona.pstate-light{background:#F8F6F1;border-color:rgba(0,0,0,.1);box-shadow:0 8px 40px rgba(0,0,0,.2)}
+.persona.pstate-light .p-name{color:#1A1A18}
+.persona.pstate-light .p-det,.persona.pstate-light .p-clbl,.persona.pstate-light .p-csub{color:#9B9890}
+.persona.pstate-light .p-cost{color:#dc2626}
+.persona.pstate-light .p-issue{color:#6B6860}
+.persona.pstate-light .p-badge{background:rgba(27,58,107,.08);color:#1B3A6B}
+.persona.pstate-highlight{background:#111;border-color:rgba(255,107,91,.25);box-shadow:0 0 0 1px rgba(255,107,91,.1),0 12px 40px rgba(255,107,91,.12)}
+.persona.pstate-highlight .p-cost{animation:costPop 1s cubic-bezier(.4,0,.2,1) forwards}
+.persona.pstate-highlight .p-issue{opacity:0;animation:issueSlide .4s ease forwards}
+.persona.pstate-highlight .p-issue:nth-child(1){animation-delay:.05s}
+.persona.pstate-highlight .p-issue:nth-child(2){animation-delay:.17s}
+.persona.pstate-highlight .p-issue:nth-child(3){animation-delay:.29s}
+.persona.pstate-highlight .p-issue:nth-child(4){animation-delay:.41s}
+@keyframes costPop{0%{transform:scale(.88);opacity:.3}60%{transform:scale(1.05)}100%{transform:scale(1);opacity:1}}
+@keyframes issueSlide{0%{opacity:0;transform:translateX(-8px)}100%{opacity:1;transform:none}}
+.p-badge{position:absolute;top:12px;right:12px;font-size:9px;font-weight:600;letter-spacing:.06em;text-transform:uppercase;padding:2px 9px;border-radius:100px;background:rgba(201,160,80,.1);color:var(--gold);transition:background .5s,color .5s}
+.p-flag{font-size:20px;margin-bottom:10px}
+.p-name{font-size:15px;font-weight:500;color:var(--tx);margin-bottom:2px}
+.p-det{font-size:11px;color:var(--txd);margin-bottom:16px}
+.p-clbl{font-size:9px;font-weight:600;letter-spacing:.1em;text-transform:uppercase;color:var(--txd);margin-bottom:3px}
+.p-cost{font-family:var(--serif);font-size:34px;font-weight:300;color:var(--crit);letter-spacing:-.02em;line-height:1;margin-bottom:2px}
+.p-csub{font-size:11px;color:var(--txd);margin-bottom:14px}
+.p-issues{display:flex;flex-direction:column;gap:6px}
+.p-issue{display:flex;align-items:flex-start;gap:6px;font-size:11px;color:rgba(245,240,232,.48);line-height:1.45}
+.pid{width:5px;height:5px;border-radius:50%;flex-shrink:0;margin-top:3px}
+.p-total{margin-top:32px;padding:28px 32px;background:#111;border:1px solid rgba(201,160,80,.12);border-radius:10px;display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:20px}
+.pt-lbl{font-size:9px;font-weight:600;letter-spacing:.1em;text-transform:uppercase;color:var(--txd);margin-bottom:6px}
+.pt-n{font-family:var(--serif);font-size:50px;font-weight:300;color:var(--crit);letter-spacing:-.03em;line-height:1}
+.pt-s{font-size:13px;color:var(--txm);max-width:360px;line-height:1.65}
+
+/* INTELLIGENCE */
+.intel-section{background:transparent;border-top:1px solid rgba(201,160,80,.08)}
+.intel-layout{display:grid;grid-template-columns:1fr 1fr;gap:20px;margin-top:56px}
+.intel-card{background:#111;border:1px solid var(--border);border-radius:12px;padding:28px;transition:border-color .3s}
+.intel-card:hover{border-color:rgba(201,160,80,.2)}
+.ring-live-label{font-size:9px;font-weight:600;letter-spacing:.1em;text-transform:uppercase;color:var(--gold);display:flex;align-items:center;gap:6px;margin-bottom:20px}
+.ring-live-label::before{content:'';width:6px;height:6px;border-radius:50%;background:var(--gold);animation:pulse 1.5s infinite}
+.ring-wrap{display:flex;align-items:center;gap:28px}
+.ring-info .ring-desc{font-size:13px;color:var(--txm);line-height:1.6;margin-bottom:18px}
+.ring-stats{display:flex;flex-direction:column;gap:9px}
+.ring-stat{display:flex;justify-content:space-between}
+.ring-stat-lbl{font-size:11px;color:var(--txd)}
+.ring-stat-val{font-size:13px;font-weight:600}
+.alloc-ic{width:40px;height:40px;background:var(--gold-bg);border:1px solid var(--gold-border);border-radius:8px;display:flex;align-items:center;justify-content:center;font-size:18px;margin-bottom:16px}
+.alloc-bars{margin-top:18px;display:flex;flex-direction:column;gap:12px}
+.alloc-row{display:flex;flex-direction:column;gap:4px}
+.alloc-hd{display:flex;justify-content:space-between}
+.alloc-lbl{font-size:10px;font-weight:600;letter-spacing:.08em;text-transform:uppercase;color:var(--txd)}
+.alloc-pct{font-size:10px;font-weight:600}
+.alloc-track{background:rgba(255,255,255,.06);border-radius:100px;height:3px;overflow:hidden}
+.alloc-bar{height:100%;border-radius:100px;transition:width 1.8s cubic-bezier(.4,0,.2,1)}
+
+/* US-NATIVE SECTION */
+.us-section{background:transparent;border-top:1px solid rgba(201,160,80,.08)}
+.us-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:16px;margin-top:52px}
+.us-card{background:#111;border:1px solid var(--border);border-radius:10px;padding:24px;transition:border-color .3s,transform .25s,box-shadow .25s;cursor:pointer;position:relative;overflow:hidden}
+.us-card::before{content:'';position:absolute;inset:0;background:radial-gradient(ellipse 80% 60% at 50% 0%,rgba(201,160,80,.06),transparent);opacity:0;transition:opacity .3s}
+.us-card:hover{border-color:rgba(201,160,80,.3);transform:translateY(-4px);box-shadow:0 20px 60px rgba(0,0,0,.4)}
+.us-card:hover::before{opacity:1}
+.us-ic{width:44px;height:44px;background:var(--gold-bg);border:1px solid var(--gold-border);border-radius:8px;display:flex;align-items:center;justify-content:center;margin-bottom:20px;font-size:20px;transition:background .3s}
+.us-card:hover .us-ic{background:rgba(201,160,80,.15)}
+.us-title{font-family:var(--serif);font-size:18px;font-weight:400;color:var(--tx);margin-bottom:10px}
+.us-desc{font-size:12px;color:var(--txm);line-height:1.65}
+.us-stat{margin-top:14px;padding-top:12px;border-top:1px solid rgba(255,255,255,.06);font-size:11px;color:var(--gold);font-weight:600}
+
+/* ADVISOR TYPES */
+.advisors-section{background:transparent;border-top:1px solid rgba(201,160,80,.08)}
+.advisors-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:20px;margin-top:52px}
+.advisor-card{background:#111;border:1px solid var(--border);border-radius:12px;padding:28px;position:relative;overflow:hidden;transition:border-color .3s}
+.advisor-card:hover{border-color:rgba(201,160,80,.2)}
+.advisor-card::before{content:'';position:absolute;top:0;left:0;right:0;height:2px}
+.advisor-ria::before{background:linear-gradient(90deg,var(--gold),transparent)}
+.advisor-mfo::before{background:linear-gradient(90deg,var(--good),transparent)}
+.advisor-expat::before{background:linear-gradient(90deg,var(--blue),transparent)}
+.advisor-badge{font-size:9px;font-weight:600;letter-spacing:.08em;text-transform:uppercase;padding:3px 9px;border-radius:3px;display:inline-block;margin-bottom:14px}
+.advisor-title{font-family:var(--serif);font-size:20px;font-weight:300;color:var(--tx);margin-bottom:6px}
+.advisor-sub{font-size:11px;color:var(--txd);margin-bottom:20px}
+.advisor-metrics{display:flex;flex-direction:column;gap:8px}
+.advisor-metric{display:flex;justify-content:space-between;padding:7px 10px;background:rgba(255,255,255,.03);border-radius:5px;border:1px solid rgba(255,255,255,.05)}
+.advisor-metric-lbl{font-size:11px;color:var(--txm)}
+.advisor-metric-val{font-size:11px;font-weight:600}
+
+/* PROJECTION */
+.projection-section{background:transparent;border-top:1px solid rgba(201,160,80,.08)}
+.proj-stat{text-align:center}
+.proj-stat-v{font-family:var(--serif);font-size:26px;font-weight:300;line-height:1}
+.proj-stat-l{font-size:10px;font-weight:600;letter-spacing:.08em;text-transform:uppercase;color:var(--txd);margin-top:4px}
+.proj-card{background:#111;border:1px solid rgba(201,160,80,.14);border-radius:12px;overflow:hidden}
+.proj-header{padding:16px 22px;border-bottom:1px solid rgba(255,255,255,.06);display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:10px}
+.proj-client{font-family:var(--serif);font-size:16px;font-weight:300;color:var(--tx);margin-bottom:2px}
+.proj-target{font-size:11px;color:var(--txd)}
+.proj-prob-pill{display:flex;align-items:center;gap:8px;background:rgba(78,205,196,.08);border:1px solid rgba(78,205,196,.2);border-radius:100px;padding:5px 14px;font-size:12px;font-weight:600;color:var(--good)}
+.proj-prob-pill::before{content:'';width:6px;height:6px;border-radius:50%;background:var(--good);animation:pulse 1.5s infinite;flex-shrink:0}
+.proj-legend{display:flex;gap:18px;padding:10px 22px;background:#0E0E0E;border-top:1px solid rgba(255,255,255,.05);flex-wrap:wrap}
+.proj-leg-item{display:flex;align-items:center;gap:6px;font-size:10px;color:var(--txd)}
+.proj-leg-item span{width:22px;height:9px;border-radius:2px;flex-shrink:0;display:block}
+
+/* GOAL NETWORK */
+.goalnet-section{background:transparent;border-top:1px solid rgba(201,160,80,.08)}
+.goalnet-layout{display:grid;grid-template-columns:1fr 340px;gap:28px;align-items:start}
+.goalnet-canvas-wrap{background:#111;border:1px solid var(--border);border-radius:12px;position:relative;overflow:hidden}
+#net-canvas{width:100%;height:480px;display:block;cursor:pointer}
+.goalnet-hint{position:absolute;bottom:12px;left:50%;transform:translateX(-50%);font-size:10px;font-weight:600;letter-spacing:.1em;text-transform:uppercase;color:var(--txd);pointer-events:none}
+.goalnet-panel{display:flex;flex-direction:column;gap:14px}
+.goalnet-title{font-family:var(--serif);font-size:19px;font-weight:300;color:var(--tx)}
+.goalnet-legend{display:flex;flex-direction:column;gap:8px;background:#111;border:1px solid var(--border);border-radius:8px;padding:12px 14px}
+.gn-leg{display:flex;align-items:center;gap:10px;font-size:11px;color:var(--txm)}
+.gn-edge{width:24px;height:3px;border-radius:2px;flex-shrink:0;display:block}
+.gn-node-item{display:flex;align-items:center;gap:8px;padding:8px 10px;border-radius:7px;border:1px solid transparent;cursor:pointer;transition:all .2s}
+.gn-node-item:hover,.gn-node-item.active{background:rgba(201,160,80,.06);border-color:rgba(201,160,80,.15)}
+.gn-prob{font-size:10px;font-weight:700;padding:2px 7px;border-radius:4px;flex-shrink:0;min-width:38px;text-align:center}
+.gn-name{font-size:12px;font-weight:500;color:var(--tx);flex:1}
+.gn-currency{font-size:10px;color:var(--txd)}
+.gn-insight{background:rgba(201,160,80,.06);border:1px solid rgba(201,160,80,.15);border-radius:8px;padding:12px 14px}
+.gn-insight-title{font-size:10px;font-weight:600;letter-spacing:.08em;text-transform:uppercase;color:var(--gold);margin-bottom:7px}
+.gn-insight-body{font-size:12px;color:var(--txm);line-height:1.6}
+.gn-insight-body strong{color:var(--tx);font-weight:600}
+
+/* CTA */
+.cta-section{background:transparent;border-top:1px solid rgba(201,160,80,.08);text-align:center}
+
+/* FOOTER */
+footer{background:#080808;border-top:1px solid rgba(201,160,80,.1);padding:0}
+.ft-inner{display:grid;grid-template-columns:2fr 1fr 1fr 1fr;gap:48px;padding:56px 52px 40px;border-bottom:1px solid rgba(255,255,255,.05)}
+.ft-logo{display:flex;align-items:center;gap:10px;margin-bottom:18px}
+.ft-logo-ic{width:30px;height:30px;border-radius:6px;background:var(--gold-bg);border:1px solid var(--gold-border);display:flex;align-items:center;justify-content:center;font-family:var(--serif);color:var(--gold);font-size:14px;flex-shrink:0}
+.ft-brand-name{font-size:15px;font-weight:600;color:var(--tx)}
+.ft-os-pill{font-size:9px;font-weight:600;letter-spacing:.1em;text-transform:uppercase;color:var(--gold-dim);border:1px solid rgba(201,160,80,.18);border-radius:3px;padding:2px 8px}
+.ft-about-text{font-size:12px;color:var(--txd);line-height:1.7;max-width:340px}
+.ft-credentials{display:flex;gap:6px;flex-wrap:wrap;margin-top:16px}
+.ft-cred{font-size:9px;font-weight:600;letter-spacing:.06em;text-transform:uppercase;color:var(--txd);background:rgba(255,255,255,.04);border:1px solid rgba(255,255,255,.07);border-radius:3px;padding:3px 8px}
+.ft-col{display:flex;flex-direction:column;gap:10px;padding-top:4px}
+.ft-col-title{font-size:10px;font-weight:600;letter-spacing:.12em;text-transform:uppercase;color:var(--gold-dim);margin-bottom:4px}
+.ft-link{font-size:12px;color:var(--txd);text-decoration:none;transition:color .15s;line-height:1}
+.ft-link:hover{color:var(--tx)}
+.ft-text{font-size:12px;color:var(--txd);line-height:1}
+.ft-bottom{display:flex;align-items:center;justify-content:space-between;padding:18px 52px;flex-wrap:wrap;gap:10px}
+.ft-copy{font-size:11px;color:rgba(245,240,232,.18)}
+.ft-badge{font-size:9px;font-weight:600;letter-spacing:.1em;text-transform:uppercase;color:var(--gold-dim);border:1px solid rgba(201,160,80,.18);border-radius:3px;padding:3px 9px}
+.ft-bottom-right{display:flex;gap:8px}
+
+/* RESPONSIVE */
+@media(max-width:1024px){
+  nav{padding:0 28px}
+  .nav-os-badge{display:none}
+  .section{padding:72px 32px}
+  .gi-divider{padding:0 32px}
+  .us-grid{grid-template-columns:repeat(2,1fr)}
+  .advisors-grid{grid-template-columns:1fr 1fr}
+  .goalnet-layout{grid-template-columns:1fr;gap:20px}
+  #net-canvas{height:340px}
+  .intel-layout{gap:16px}
+  .ft-inner{grid-template-columns:1fr 1fr;gap:28px;padding:36px 32px}
+  .ft-bottom{padding:16px 32px}
+}
+@media(max-width:768px){
+  nav{padding:0 18px;height:54px}
+  .nav-links{display:none}
+  .nav-cta{padding:7px 14px;font-size:10px}
+  .hero{padding:80px 20px 56px}
+  .hero-sub{font-size:14px;margin:20px auto 28px}
+  .hero-btns{gap:10px;margin-bottom:40px}
+  .btn-gold,.btn-outline{font-size:11px;padding:11px 20px}
+  .df-sb,.df-z3{display:none}
+  .df-body{height:260px}
+  .section{padding:56px 20px}
+  .gi-divider{padding:0 20px}
+  .p-grid{grid-template-columns:1fr;gap:14px}
+  .p-total{flex-direction:column;gap:14px}
+  .us-grid{grid-template-columns:1fr}
+  .advisors-grid{grid-template-columns:1fr}
+  .intel-layout{grid-template-columns:1fr;gap:14px}
+  .ring-wrap{flex-direction:column;align-items:center;gap:16px}
+  .goalnet-layout{grid-template-columns:1fr}
+  #net-canvas{height:280px}
+  .gn-node-item{display:grid;grid-template-columns:auto 1fr auto;gap:6px}
+  .ft-inner{grid-template-columns:1fr;gap:24px;padding:32px 20px}
+  .ft-bottom{padding:14px 20px;flex-direction:column;align-items:flex-start}
+}
+@media(max-width:480px){
+  .hero-h1{font-size:34px !important;line-height:1.05}
+  .hero-btns{flex-direction:column;width:100%}
+  .btn-gold,.btn-outline{width:100%;text-align:center}
+  .sh2{font-size:26px !important}
+}
+</style>
+</head>
+<body>
+<canvas id="grid-canvas"></canvas>
+
+<!-- NAV -->
+<nav>
+  <a href="/usa" class="nav-logo">
+    <div class="nav-ic">W</div>
+    <span class="nav-wm">WealthWise</span>
+    <span class="nav-os-badge">Goal Intelligence OS</span>
+  </a>
+  <div class="nav-links">
+    <a href="#intel" class="nav-link nav-link-gi">Goal Intelligence</a>
+    <a href="#platform" class="nav-link">Platform</a>
+    <a href="#us-native" class="nav-link">US-Native</a>
+    <a href="#advisors" class="nav-link">Who It's For</a>
+    <a href="/" class="nav-switch">🇦🇪 UAE Version</a>
+  </div>
+  <a href="#" class="nav-cta" onclick="openDemo()">Request Demo</a>
+</nav>
+
+<!-- ══ HERO ══ -->
+<section class="hero">
+  <div class="hero-bg"></div>
+  <div class="hero-tag reveal"><span class="hero-dot"></span>For US Advisors · SEC/FINRA Ready · DOL Fiduciary</div>
+  <h1 class="hero-h1 reveal">
+    The Only Platform That
+    <span class="hero-h1-gold">Optimises Every Goal</span>
+    Simultaneously.
+  </h1>
+  <p class="hero-sub reveal">Unified household wealth across 401(k), IRA, Roth, real estate, and private assets. One probability score connecting every goal — from retirement to estate to Social Security timing. Built for the US HNW advisor.</p>
+  <div class="hero-btns reveal">
+    <a href="#platform" class="btn-gold">See the Platform →</a>
+    <a href="#intel" class="btn-outline">Goal Intelligence ↓</a>
+  </div>
+
+  <!-- LIVE DASHBOARD — US VERSION -->
+  <div class="dash-wrap reveal">
+    <div class="dash-frame">
+      <div class="df-bar">
+        <div class="df-dot" style="background:#FF5F57"></div>
+        <div class="df-dot" style="background:#FFBD2E"></div>
+        <div class="df-dot" style="background:#28CA41"></div>
+        <span class="df-title">WealthWise — Goal Intelligence OS · New York <span id="us-time"></span></span>
+        <span class="df-live">LIVE</span>
+      </div>
+      <div class="df-body">
+        <div class="df-sb">
+          <div class="df-si active">⊞</div><div class="df-si">◻</div><div class="df-si">◎</div><div class="df-si">△</div><div class="df-si">⚡</div>
+        </div>
+        <div class="df-main">
+          <div class="df-hd">
+            <div class="df-hdate" id="us-date">THURSDAY, 27 MARCH 2025</div>
+            <div class="df-hgreet">Good morning, Advisor.</div>
+            <div class="df-hattn">6 clients need your attention.</div>
+          </div>
+          <div class="df-kpis">
+            <div class="df-kpi"><div class="df-kv" style="color:var(--warn)">68%</div><div class="df-kl">Avg WGP</div></div>
+            <div class="df-kpi"><div class="df-kv" style="color:var(--crit)">6</div><div class="df-kl">Critical</div></div>
+            <div class="df-kpi"><div class="df-kv" style="color:var(--warn)">$42K</div><div class="df-kl">RMD Due</div></div>
+            <div class="df-kpi"><div class="df-kv" style="color:var(--gold)">$18.4M</div><div class="df-kl">AUM</div></div>
+          </div>
+          <div class="df-zones">
+            <div class="df-z1">
+              <div class="df-zh">Today · Actions</div>
+              <div class="df-action crit"><div class="df-badge crit-badge">Protect</div><div class="df-at">RMD deadline — Johnson account $42K</div><div class="df-as">IRS penalty exposure · Act today</div></div>
+              <div class="df-action warn"><div class="df-badge warn-badge">Optimise</div><div class="df-at">Roth conversion window — Martinez</div><div class="df-as">+12pp retirement probability</div></div>
+              <div class="df-action gold"><div class="df-badge gold-badge">Review</div><div class="df-at">SS claim age optimal — Chen family</div><div class="df-as">Age 70 adds $84K lifetime value</div></div>
+            </div>
+            <div class="df-z2">
+              <div class="df-wgp">
+                <span class="df-wgp-lbl">Weighted Goal Probability</span>
+                <span class="df-wgp-val" id="us-wgp">68%</span>
+              </div>
+              <div class="df-zh">Goal Probability · Johnson Family</div>
+              <div class="df-goal-row"><span class="df-gname">Retirement 2031</span><div class="df-gbar-wrap"><div class="df-gbar" id="ug1" style="width:0%;background:linear-gradient(90deg,#22c55e,#16a34a)"></div></div><span class="df-gpct" style="color:#22c55e">82%</span></div>
+              <div class="df-goal-row"><span class="df-gname">Children College</span><div class="df-gbar-wrap"><div class="df-gbar" id="ug2" style="width:0%;background:linear-gradient(90deg,var(--blue),#2563eb)"></div></div><span class="df-gpct" style="color:var(--blue)">71%</span></div>
+              <div class="df-goal-row"><span class="df-gname">Estate Transfer</span><div class="df-gbar-wrap"><div class="df-gbar" id="ug3" style="width:0%;background:linear-gradient(90deg,var(--warn),#d97706)"></div></div><span class="df-gpct" style="color:var(--warn)">55%</span></div>
+              <div class="df-goal-row"><span class="df-gname">SS Optimisation</span><div class="df-gbar-wrap"><div class="df-gbar" id="ug4" style="width:0%;background:linear-gradient(90deg,var(--gold),#d97706)"></div></div><span class="df-gpct" style="color:var(--gold)">94%</span></div>
+              <div class="df-goal-row"><span class="df-gname">Roth Conversion</span><div class="df-gbar-wrap"><div class="df-gbar" id="ug5" style="width:0%;background:linear-gradient(90deg,var(--crit),#dc2626)"></div></div><span class="df-gpct" style="color:var(--crit)">38%</span></div>
+            </div>
+            <div class="df-z3">
+              <div class="df-zh">Upcoming · 30 Days</div>
+              <div class="df-fi"><span class="df-fdot" style="background:var(--crit)"></span><div><div class="df-ft">RMD $42K — Johnson</div><div class="df-fs">IRS deadline · URGENT</div></div></div>
+              <div class="df-fi"><span class="df-fdot" style="background:var(--warn)"></span><div><div class="df-ft">401(k) contribution limit</div><div class="df-fs">Martinez · $7K catchup</div></div></div>
+              <div class="df-fi"><span class="df-fdot" style="background:var(--warn)"></span><div><div class="df-ft">FBAR filing due</div><div class="df-fs">Chen · Foreign accounts</div></div></div>
+              <div class="df-fi"><span class="df-fdot" style="background:var(--good)"></span><div><div class="df-ft">Estate plan review</div><div class="df-fs">Wilson · $13.6M exemption</div></div></div>
+              <div class="df-fi"><span class="df-fdot" style="background:var(--blue)"></span><div><div class="df-ft">Form ADV update due</div><div class="df-fs">Firm · SEC compliance</div></div></div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div style="position:absolute;bottom:32px;left:50%;transform:translateX(-50%);font-size:9px;letter-spacing:.15em;text-transform:uppercase;color:var(--txd);display:flex;flex-direction:column;align-items:center;gap:8px;z-index:1">
+    <span>SCROLL</span>
+    <span style="width:1px;height:28px;background:linear-gradient(180deg,var(--gold-dim),transparent);animation:scrollFade 2s infinite"></span>
+  </div>
+  @keyframes scrollFade{0%,100%{opacity:.3}50%{opacity:1}}
+</section>
+
+<div class="gi-divider"><div class="gi-line"></div><div class="gi-label">Goal Intelligence OS</div><div class="gi-line"></div></div>
+
+<!-- ══ PROBLEM ══ -->
+<section class="section problem" id="problem">
+  <div class="si">
+    <div class="reveal">
+      <span class="stag">The cost of inaction</span>
+      <h2 class="sh2">Your clients are losing <em>$870,000</em><br>you haven't quantified yet</h2>
+      <p class="ssub" style="color:rgba(245,240,232,.4)">Three real US advisor archetypes. Three real gaps. Most platforms cannot even see the problem.</p>
+    </div>
+    <div class="p-grid reveal">
+      <div class="persona pstate-dark" id="up-1">
+        <div class="p-badge" id="ubadge-1">Dark</div>
+        <div class="p-flag">🇺🇸</div>
+        <div class="p-name">Robert & Linda Johnson</div>
+        <div class="p-det">Retired couple · Chicago · $4.8M · 8 goals</div>
+        <div class="p-clbl">Cost of inaction</div>
+        <div class="p-cost">$290K</div>
+        <div class="p-csub">Cumulative wealth erosion identified</div>
+        <div class="p-issues">
+          <div class="p-issue"><span class="pid" style="background:var(--crit)"></span>RMD not taken — $42K · IRS 25% penalty exposure</div>
+          <div class="p-issue"><span class="pid" style="background:var(--crit)"></span>SS claim at 62 — lifetime shortfall vs age 70: $84K</div>
+          <div class="p-issue"><span class="pid" style="background:var(--warn)"></span>Estate above $13.6M exemption — no bypass trust</div>
+          <div class="p-issue"><span class="pid" style="background:var(--warn)"></span>401(k) in low-yield default — $12K/year avoidable</div>
+        </div>
+      </div>
+      <div class="persona pstate-dark" id="up-2">
+        <div class="p-badge" id="ubadge-2">Dark</div>
+        <div class="p-flag">🇺🇸</div>
+        <div class="p-name">Carlos & Maria Martinez</div>
+        <div class="p-det">Business owner · Miami · $3.4M · 6 goals</div>
+        <div class="p-clbl">Cost of inaction</div>
+        <div class="p-cost">$240K</div>
+        <div class="p-csub">Cumulative wealth erosion identified</div>
+        <div class="p-issues">
+          <div class="p-issue"><span class="pid" style="background:var(--crit)"></span>Roth conversion window missed — $180K tax-free growth lost</div>
+          <div class="p-issue"><span class="pid" style="background:var(--crit)"></span>SEP-IRA underfunded — $30K/year below max contribution</div>
+          <div class="p-issue"><span class="pid" style="background:var(--warn)"></span>Business succession unplanned — $1.2M liquidity risk</div>
+          <div class="p-issue"><span class="pid" style="background:var(--warn)"></span>State income tax unoptimised — FL vs NY residency</div>
+        </div>
+      </div>
+      <div class="persona pstate-dark" id="up-3">
+        <div class="p-badge" id="ubadge-3">Dark</div>
+        <div class="p-flag">🇺🇸</div>
+        <div class="p-name">David & Wei Chen</div>
+        <div class="p-det">US expat returning · San Francisco · $5.1M · 7 goals</div>
+        <div class="p-clbl">Cost of inaction</div>
+        <div class="p-cost">$340K</div>
+        <div class="p-csub">Cumulative wealth erosion identified</div>
+        <div class="p-issues">
+          <div class="p-issue"><span class="pid" style="background:var(--crit)"></span>FBAR non-compliance — 3 years unreported foreign accounts</div>
+          <div class="p-issue"><span class="pid" style="background:var(--crit)"></span>FATCA exposure — undisclosed HK brokerage $820K</div>
+          <div class="p-issue"><span class="pid" style="background:var(--warn)"></span>Foreign tax credit unclaimed — $28K annual benefit missed</div>
+          <div class="p-issue"><span class="pid" style="background:var(--warn)"></span>Repatriated funds untaxed basis — $210K IRS exposure</div>
+        </div>
+      </div>
+    </div>
+    <div class="p-total reveal">
+      <div><div class="pt-lbl">Combined cost of inaction</div><div class="pt-n">$870,000</div></div>
+      <div class="pt-s">Every number above comes from a single agent run against live client data. This is the gap between what disconnected tools see — and what WealthWise surfaces on day one.</div>
+      <a href="#" class="btn-gold" onclick="openDemo()">See it in a demo →</a>
+    </div>
+  </div>
+</section>
+
+<div class="gi-divider"><div class="gi-line"></div><div class="gi-label">Goal Intelligence OS</div><div class="gi-line"></div></div>
+
+<!-- ══ INTELLIGENCE ══ -->
+<section class="section intel-section" id="intel">
+  <div class="si">
+    <div class="reveal">
+      <h2 class="sh2-split">Unified Intelligence.<br><span class="sh2-italic">One View.</span></h2>
+      <p class="ssub" style="margin-top:14px">Most platforms stop at scenario comparison. WealthWise operates at probability optimisation — simultaneously solving 401(k), IRA, Roth, SS timing, RMDs, and estate across all 10,000 Monte Carlo paths.</p>
+    </div>
+    <div class="intel-layout reveal">
+      <div class="intel-card" style="display:flex;flex-direction:column">
+        <div class="ring-live-label">Live Weighted Goal Probability</div>
+        <div class="ring-wrap">
+          <div style="flex-shrink:0">
+            <svg width="175" height="175" viewBox="0 0 175 175">
+              <circle cx="87.5" cy="87.5" r="70" fill="none" stroke="rgba(255,255,255,.06)" stroke-width="12"/>
+              <circle cx="87.5" cy="87.5" r="70" fill="none" stroke="url(#rg)" stroke-width="12" stroke-linecap="round" stroke-dasharray="440" stroke-dashoffset="440" id="us-ring" transform="rotate(-90 87.5 87.5)" style="transition:stroke-dashoffset 2s cubic-bezier(.4,0,.2,1)"/>
+              <defs><linearGradient id="rg" x1="0%" y1="0%" x2="100%" y2="0%"><stop offset="0%" stop-color="#8A6E35"/><stop offset="100%" stop-color="#C9A050"/></linearGradient></defs>
+              <text x="87.5" y="82" text-anchor="middle" font-family="Cormorant Garamond,serif" font-size="34" font-weight="300" fill="#F5F0E8" id="us-ring-num">0%</text>
+              <text x="87.5" y="100" text-anchor="middle" font-family="Instrument Sans,sans-serif" font-size="8" font-weight="600" fill="rgba(245,240,232,.3)" letter-spacing="2">CONFIDENCE</text>
+            </svg>
+          </div>
+          <div class="ring-info">
+            <p class="ring-desc">10,000 Monte Carlo simulations. Cholesky decomposition. Goal-level attribution. Every 401(k) balance, RMD schedule, and Roth conversion traced to goal probability.</p>
+            <div class="ring-stats">
+              <div class="ring-stat"><span class="ring-stat-lbl">Simulations</span><span class="ring-stat-val" style="color:var(--gold)">10,000</span></div>
+              <div class="ring-stat"><span class="ring-stat-lbl">Goals tracked</span><span class="ring-stat-val" style="color:var(--tx)">8</span></div>
+              <div class="ring-stat"><span class="ring-stat-lbl">Engine</span><span class="ring-stat-val" style="color:var(--good)">DOL Fiduciary</span></div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="intel-card">
+        <div class="alloc-ic">📊</div>
+        <span class="stag" style="margin-bottom:6px">Tax-Optimised Allocation</span>
+        <p class="ssub" style="font-size:13px;margin-top:0">Asset location strategy — which assets belong in taxable, tax-deferred, and Roth accounts to maximise after-tax goal probability.</p>
+        <div class="alloc-bars">
+          <div class="alloc-row"><div class="alloc-hd"><span class="alloc-lbl">401(k) / IRA</span><span class="alloc-pct" style="color:var(--gold)">42%</span></div><div class="alloc-track"><div class="alloc-bar" id="usab1" style="width:0%;background:var(--gold)"></div></div></div>
+          <div class="alloc-row"><div class="alloc-hd"><span class="alloc-lbl">Roth IRA</span><span class="alloc-pct" style="color:var(--good)">18%</span></div><div class="alloc-track"><div class="alloc-bar" id="usab2" style="width:0%;background:var(--good)"></div></div></div>
+          <div class="alloc-row"><div class="alloc-hd"><span class="alloc-lbl">Taxable Brokerage</span><span class="alloc-pct" style="color:var(--blue)">26%</span></div><div class="alloc-track"><div class="alloc-bar" id="usab3" style="width:0%;background:var(--blue)"></div></div></div>
+          <div class="alloc-row"><div class="alloc-hd"><span class="alloc-lbl">Real Estate / PE</span><span class="alloc-pct" style="color:#C084FC">14%</span></div><div class="alloc-track"><div class="alloc-bar" id="usab4" style="width:0%;background:#C084FC"></div></div></div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ══ US NATIVE ══ -->
+<section class="section us-section" id="us-native">
+  <div class="si">
+    <div class="reveal" style="text-align:center">
+      <span class="stag">US-Native Intelligence</span>
+      <h2 class="sh2" style="max-width:580px;margin:0 auto">Not Adapted.<br><em>Purpose-Built.</em></h2>
+      <p class="ssub" style="margin:14px auto 0;text-align:center;max-width:520px">Every US-specific obligation, optimisation, and compliance requirement modelled as a first-class citizen — not bolted on as an afterthought.</p>
+    </div>
+    <div class="us-grid reveal">
+      <div class="us-card">
+        <div class="us-ic">📈</div>
+        <div class="us-title">401(k) & IRA Optimisation</div>
+        <div class="us-desc">Contribution limits, catchup elections, employer match optimisation, and asset location strategy — all connected to retirement probability. Traditional vs Roth trade-off solved across 10,000 paths.</div>
+        <div class="us-stat">+8–14pp retirement probability vs unoptimised</div>
+      </div>
+      <div class="us-card">
+        <div class="us-ic">🔄</div>
+        <div class="us-title">Roth Conversion Ladder</div>
+        <div class="us-desc">Optimal conversion amounts by tax bracket, year by year through retirement. RMD modelling shows the tax cliff before it hits. Roth vs traditional trade-off solved at goal level, not just tax level.</div>
+        <div class="us-stat">Average $180K in lifetime tax savings identified</div>
+      </div>
+      <div class="us-card">
+        <div class="us-ic">📅</div>
+        <div class="us-title">RMD Planning</div>
+        <div class="us-desc">Required Minimum Distribution schedules built into every retirement goal simulation. IRS penalty exposure surfaced automatically. Inherited IRA 10-year rule compliance tracked per beneficiary.</div>
+        <div class="us-stat">25% IRS penalty eliminated — $42K avg exposure</div>
+      </div>
+      <div class="us-card">
+        <div class="us-ic">👴</div>
+        <div class="us-title">Social Security Timing</div>
+        <div class="us-desc">Claim at 62, FRA, or 70 — each scenario run through 10,000 Monte Carlo paths against every goal. Breakeven age, spousal benefit coordination, and survivor benefit optimisation fully modelled.</div>
+        <div class="us-stat">Age 70 vs 62 lifetime value delta: avg $84K</div>
+      </div>
+      <div class="us-card">
+        <div class="us-ic">🏛️</div>
+        <div class="us-title">Federal & State Estate Tax</div>
+        <div class="us-desc">Federal exemption ($13.6M in 2024, sunsetting 2025), state estate taxes, bypass trusts, GRATs, and charitable strategies — all connected to estate transfer probability and Medicaid look-back.</div>
+        <div class="us-stat">Sunset planning: $7M exemption drop modelled</div>
+      </div>
+      <div class="us-card">
+        <div class="us-ic">🌍</div>
+        <div class="us-title">FBAR & FATCA Compliance</div>
+        <div class="us-desc">Foreign Bank Account Reports, FATCA Form 8938 thresholds, foreign tax credits (Form 1116), and treaty analysis for US expats and global families. Cross-border tax exposure quantified automatically.</div>
+        <div class="us-stat">Avg $28K annual foreign tax credit unclaimed</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<div class="gi-divider"><div class="gi-line"></div><div class="gi-label">Goal Intelligence OS</div><div class="gi-line"></div></div>
+
+<!-- ══ WHO IT'S FOR ══ -->
+<section class="section advisors-section" id="advisors">
+  <div class="si">
+    <div class="reveal" style="text-align:center;margin-bottom:48px">
+      <span class="stag">Who It's For</span>
+      <h2 class="sh2" style="max-width:560px;margin:0 auto">Built for advisors who manage<br><em>real complexity</em></h2>
+    </div>
+    <div class="advisors-grid reveal">
+      <div class="advisor-card advisor-ria">
+        <span class="advisor-badge" style="background:rgba(201,160,80,.1);color:var(--gold)">Registered Investment Advisor</span>
+        <div class="advisor-title">RIA Firms</div>
+        <div class="advisor-sub">$50M–$500M AUM · SEC-registered · Fee-only</div>
+        <div class="advisor-metrics">
+          <div class="advisor-metric"><span class="advisor-metric-lbl">Avg clients per advisor</span><span class="advisor-metric-val" style="color:var(--gold)">45–80</span></div>
+          <div class="advisor-metric"><span class="advisor-metric-lbl">Key pain point</span><span class="advisor-metric-val" style="color:var(--crit)">RMD + SS timing</span></div>
+          <div class="advisor-metric"><span class="advisor-metric-lbl">Compliance need</span><span class="advisor-metric-val" style="color:var(--good)">DOL Fiduciary</span></div>
+          <div class="advisor-metric"><span class="advisor-metric-lbl">WGP improvement</span><span class="advisor-metric-val" style="color:var(--good)">+18pp avg</span></div>
+        </div>
+      </div>
+      <div class="advisor-card advisor-mfo">
+        <span class="advisor-badge" style="background:rgba(78,205,196,.1);color:var(--good)">Multi-Family Office</span>
+        <div class="advisor-title">Family Offices</div>
+        <div class="advisor-sub">$100M+ AUM · UHNW clients · Multi-generational</div>
+        <div class="advisor-metrics">
+          <div class="advisor-metric"><span class="advisor-metric-lbl">Avg household NW</span><span class="advisor-metric-val" style="color:var(--gold)">$10M–$100M</span></div>
+          <div class="advisor-metric"><span class="advisor-metric-lbl">Key pain point</span><span class="advisor-metric-val" style="color:var(--crit)">Estate tax sunset</span></div>
+          <div class="advisor-metric"><span class="advisor-metric-lbl">Compliance need</span><span class="advisor-metric-val" style="color:var(--good)">Form ADV + GRAT</span></div>
+          <div class="advisor-metric"><span class="advisor-metric-lbl">PE exposure avg</span><span class="advisor-metric-val" style="color:var(--blue)">35–55%</span></div>
+        </div>
+      </div>
+      <div class="advisor-card advisor-expat">
+        <span class="advisor-badge" style="background:rgba(91,155,213,.1);color:var(--blue)">Cross-Border Specialist</span>
+        <div class="advisor-title">US Expat Advisors</div>
+        <div class="advisor-sub">Global clients · FBAR/FATCA · Treaty planning</div>
+        <div class="advisor-metrics">
+          <div class="advisor-metric"><span class="advisor-metric-lbl">Countries covered</span><span class="advisor-metric-val" style="color:var(--gold)">UAE · UK · SG · HK</span></div>
+          <div class="advisor-metric"><span class="advisor-metric-lbl">Key pain point</span><span class="advisor-metric-val" style="color:var(--crit)">FBAR compliance</span></div>
+          <div class="advisor-metric"><span class="advisor-metric-lbl">Tax credit avg</span><span class="advisor-metric-val" style="color:var(--good)">$28K/yr unclaimed</span></div>
+          <div class="advisor-metric"><span class="advisor-metric-lbl">Treaty analysis</span><span class="advisor-metric-val" style="color:var(--blue)">US–UAE · US–UK</span></div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ══ PROJECTION ══ -->
+<section class="section projection-section" id="projection">
+  <div class="si">
+    <div class="reveal" style="display:flex;justify-content:space-between;align-items:flex-end;flex-wrap:wrap;gap:20px;margin-bottom:36px">
+      <div>
+        <span class="stag">Goal Projection Engine</span>
+        <h2 class="sh2" style="max-width:520px">10,000 paths.<br><em>One probability.</em></h2>
+        <p class="ssub" style="margin-top:12px">The Monte Carlo fan chart shows every possible retirement future for the Johnson household — incorporating 401(k) balance, RMDs, Social Security timing, and estate tax — updated on every portfolio change.</p>
+      </div>
+      <div style="display:flex;gap:20px">
+        <div class="proj-stat"><div class="proj-stat-v" style="color:var(--good)">P95</div><div class="proj-stat-l">Best Case</div></div>
+        <div class="proj-stat"><div class="proj-stat-v" style="color:var(--gold)">P50</div><div class="proj-stat-l">Median</div></div>
+        <div class="proj-stat"><div class="proj-stat-v" style="color:var(--crit)">P5</div><div class="proj-stat-l">Worst Case</div></div>
+      </div>
+    </div>
+    <div class="proj-card reveal" id="us-proj-card">
+      <div class="proj-header">
+        <div>
+          <div class="proj-client">Johnson Household · Retirement Goal 2031</div>
+          <div class="proj-target">Target: $3,200,000 · 7 years · Moderate Risk · RMDs modelled</div>
+        </div>
+        <div class="proj-prob-pill">82% probability · On Track</div>
+      </div>
+      <canvas id="us-fan-canvas" style="width:100%;height:300px;display:block"></canvas>
+      <div class="proj-legend">
+        <div class="proj-leg-item"><span style="background:rgba(78,205,196,.25);border:1px solid var(--good)"></span>P75–P95 Above average</div>
+        <div class="proj-leg-item"><span style="background:rgba(201,160,80,.2);border:1px solid var(--gold)"></span>P25–P75 Median band</div>
+        <div class="proj-leg-item"><span style="background:rgba(255,107,91,.2);border:1px solid var(--crit)"></span>P5–P25 At risk</div>
+        <div class="proj-leg-item"><span style="background:transparent;border:1px dashed rgba(255,255,255,.3)"></span>Target $3.2M</div>
+        <div class="proj-leg-item"><span style="background:transparent;border:1px dashed rgba(245,200,66,.4)"></span>RMD impact</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ══ GOAL NETWORK ══ -->
+<section class="section goalnet-section" id="goalnet">
+  <div class="si">
+    <div class="reveal" style="text-align:center;margin-bottom:44px">
+      <span class="stag">Goal Network Intelligence</span>
+      <h2 class="sh2">401(k), SS, estate, and Roth<br><em>are not independent decisions.</em></h2>
+      <p class="ssub" style="margin:14px auto 0;text-align:center;max-width:540px">WealthWise models every dependency — how delaying Social Security funds retirement but competes with estate goals, how Roth conversions support retirement but block short-term liquidity.</p>
+    </div>
+    <div class="goalnet-layout reveal">
+      <div class="goalnet-canvas-wrap">
+        <canvas id="us-net-canvas"></canvas>
+        <div class="goalnet-hint">Click nodes to explore dependencies</div>
+      </div>
+      <div class="goalnet-panel">
+        <div class="goalnet-title">Johnson Household · 8 Goals</div>
+        <div class="goalnet-legend">
+          <div class="gn-leg"><span class="gn-edge" style="background:var(--gold)"></span>Funds</div>
+          <div class="gn-leg"><span class="gn-edge" style="background:var(--crit)"></span>Competes with</div>
+          <div class="gn-leg"><span class="gn-edge" style="background:var(--good)"></span>Supports</div>
+          <div class="gn-leg"><span class="gn-edge" style="background:rgba(255,255,255,.2)"></span>Blocks</div>
+        </div>
+        <div id="us-gn-list" style="display:flex;flex-direction:column;gap:4px">
+          <div class="gn-node-item active" data-n="0"><span class="gn-prob" style="background:rgba(34,197,94,.12);color:#22c55e">82%</span><span class="gn-name">Retirement 2031</span><span class="gn-currency">$3.2M</span></div>
+          <div class="gn-node-item" data-n="1"><span class="gn-prob" style="background:rgba(201,160,80,.12);color:var(--gold)">94%</span><span class="gn-name">Social Security</span><span class="gn-currency">Age 70</span></div>
+          <div class="gn-node-item" data-n="2"><span class="gn-prob" style="background:rgba(78,205,196,.12);color:var(--good)">71%</span><span class="gn-name">College Fund</span><span class="gn-currency">$280K</span></div>
+          <div class="gn-node-item" data-n="3"><span class="gn-prob" style="background:rgba(245,200,66,.12);color:var(--warn)">55%</span><span class="gn-name">Estate Transfer</span><span class="gn-currency">$14.2M</span></div>
+          <div class="gn-node-item" data-n="4"><span class="gn-prob" style="background:rgba(255,107,91,.15);color:var(--crit)">38%</span><span class="gn-name">Roth Conversion</span><span class="gn-currency">$180K</span></div>
+          <div class="gn-node-item" data-n="5"><span class="gn-prob" style="background:rgba(91,155,213,.12);color:var(--blue)">88%</span><span class="gn-name">Emergency Fund</span><span class="gn-currency">$240K</span></div>
+        </div>
+        <div class="gn-insight">
+          <div class="gn-insight-title">⚡ Key Dependency</div>
+          <div class="gn-insight-body" id="us-gn-insight">Delaying Social Security to age 70 <strong>funds</strong> retirement by $84K lifetime value but <strong>competes with</strong> near-term estate transfer — the optimal solution requires modelling both simultaneously.</div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<div class="gi-divider"><div class="gi-line"></div><div class="gi-label">Goal Intelligence OS</div><div class="gi-line"></div></div>
+
+<!-- ══ CTA ══ -->
+<section class="section cta-section">
+  <div class="si">
+    <div class="reveal" style="text-align:center">
+      <span class="stag">Ready to see it live</span>
+      <h2 class="sh2" style="max-width:680px;margin:0 auto">Built for advisors who manage<br><em>real US complexity</em></h2>
+      <p class="ssub" style="margin:16px auto 40px;text-align:center">SEC-registered RIAs, multi-family offices, and cross-border specialists. Book a live demo using your own client data. DOL fiduciary documentation included.</p>
+      <div style="display:flex;gap:14px;justify-content:center;flex-wrap:wrap">
+        <a href="#" class="btn-gold" onclick="openDemo()">Request a Demo</a>
+        <a href="/" class="btn-outline">🇦🇪 View UAE Version</a>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- FOOTER -->
+<footer>
+  <div class="ft-inner">
+    <div>
+      <div class="ft-logo">
+        <div class="ft-logo-ic">W</div>
+        <span class="ft-brand-name">WealthWise</span>
+        <span class="ft-os-pill">Goal Intelligence OS</span>
+      </div>
+      <p class="ft-about-text">WealthWise is the only wealth platform that simultaneously optimises 401(k), IRA, Roth, Social Security, RMDs, and estate tax across unified household wealth — traced to a single goal probability score.</p>
+      <p class="ft-about-text" style="margin-top:10px">Founded by <strong style="color:var(--tx)">Ankur Kansal CFA, FRM</strong> · Built on CFA Level III institutional methodology. DOL Fiduciary compatible. SEC/FINRA ready.</p>
+      <div class="ft-credentials">
+        <span class="ft-cred">SEC Ready</span>
+        <span class="ft-cred">DOL Fiduciary</span>
+        <span class="ft-cred">FINRA Compliant</span>
+        <span class="ft-cred">CFA Methodology</span>
+      </div>
+    </div>
+    <div class="ft-col">
+      <div class="ft-col-title">Platform</div>
+      <a href="#intel" class="ft-link">Goal Intelligence Engine</a>
+      <a href="#intel" class="ft-link">Monte Carlo Engine</a>
+      <a href="#goalnet" class="ft-link">Goal Network</a>
+      <a href="#projection" class="ft-link">Projection Fan Chart</a>
+      <a href="#us-native" class="ft-link">401(k) Optimisation</a>
+      <a href="#us-native" class="ft-link">Roth Conversion Ladder</a>
+    </div>
+    <div class="ft-col">
+      <div class="ft-col-title">US-Native</div>
+      <a href="#us-native" class="ft-link">RMD Planning</a>
+      <a href="#us-native" class="ft-link">Social Security Timing</a>
+      <a href="#us-native" class="ft-link">Federal Estate Tax</a>
+      <a href="#us-native" class="ft-link">FBAR & FATCA</a>
+      <a href="#us-native" class="ft-link">Roth Conversion</a>
+      <a href="#us-native" class="ft-link">State Tax Planning</a>
+    </div>
+    <div class="ft-col">
+      <div class="ft-col-title">Contact</div>
+      <a href="#" class="ft-link" onclick="openDemo()">Request a Demo</a>
+      <a href="#" class="ft-link">Book a Call</a>
+      <a href="mailto:usa@wealthwise.ae" class="ft-link">usa@wealthwise.ae</a>
+      <div class="ft-col-title" style="margin-top:22px">Also Available</div>
+      <a href="/" class="ft-link">🇦🇪 UAE Version</a>
+      <span class="ft-text">DIFC · Dubai · UAE</span>
+    </div>
+  </div>
+  <div class="ft-bottom">
+    <div class="ft-copy">© 2026 WealthWise · United States · Built for SEC-registered advisors</div>
+    <div class="ft-bottom-right">
+      <span class="ft-badge">Goal Intelligence OS</span>
+      <span class="ft-badge" style="color:var(--txd);border-color:var(--border)">US Edition</span>
+    </div>
+  </div>
+</footer>
+
+<!-- DEMO MODAL -->
+<div id="demo-modal" style="display:none;position:fixed;inset:0;background:rgba(0,0,0,.75);backdrop-filter:blur(8px);z-index:9999;align-items:center;justify-content:center">
+  <div style="background:#111;border:1px solid rgba(201,160,80,.2);border-radius:12px;padding:40px;width:90%;max-width:480px;position:relative">
+    <button onclick="closeDemo()" style="position:absolute;top:16px;right:16px;background:none;border:none;color:var(--txd);font-size:18px;cursor:pointer">×</button>
+    <div style="font-size:10px;font-weight:600;letter-spacing:.12em;text-transform:uppercase;color:var(--gold);margin-bottom:16px">Request a Demo — US Edition</div>
+    <h3 style="font-family:var(--serif);font-size:24px;font-weight:300;color:var(--tx);margin-bottom:8px">See WealthWise live</h3>
+    <p style="font-size:13px;color:var(--txm);margin-bottom:24px;line-height:1.6">We'll run a live demo using your client data. 30 minutes. No slides.</p>
+    <div style="display:flex;flex-direction:column;gap:10px">
+      <input id="dm-name" placeholder="Your name" style="background:#1a1a1a;border:1px solid rgba(255,255,255,.1);border-radius:6px;padding:11px 14px;color:var(--tx);font-size:13px;font-family:var(--sans);outline:none">
+      <input id="dm-email" placeholder="Work email" style="background:#1a1a1a;border:1px solid rgba(255,255,255,.1);border-radius:6px;padding:11px 14px;color:var(--tx);font-size:13px;font-family:var(--sans);outline:none">
+      <input id="dm-firm" placeholder="Firm name" style="background:#1a1a1a;border:1px solid rgba(255,255,255,.1);border-radius:6px;padding:11px 14px;color:var(--tx);font-size:13px;font-family:var(--sans);outline:none">
+      <select id="dm-type" style="background:#1a1a1a;border:1px solid rgba(255,255,255,.1);border-radius:6px;padding:11px 14px;color:var(--txm);font-size:13px;font-family:var(--sans);outline:none">
+        <option value="">Advisor type</option>
+        <option>RIA — SEC registered</option>
+        <option>Multi-family office</option>
+        <option>Cross-border / Expat specialist</option>
+        <option>Independent broker-dealer</option>
+        <option>Wirehouse breakaway</option>
+      </select>
+      <button onclick="submitDemo()" style="background:var(--gold);color:var(--black);border:none;border-radius:6px;padding:13px;font-size:13px;font-weight:600;letter-spacing:.06em;text-transform:uppercase;cursor:pointer;font-family:var(--sans);margin-top:4px" id="dm-btn">Request Demo →</button>
+    </div>
+    <div id="dm-success" style="display:none;text-align:center;padding:20px 0">
+      <div style="font-size:32px;margin-bottom:12px">✓</div>
+      <div style="font-family:var(--serif);font-size:20px;color:var(--tx);margin-bottom:8px">Request received.</div>
+      <div style="font-size:13px;color:var(--txm)">We'll be in touch within 24 hours.</div>
+    </div>
+  </div>
+</div>
+
+<script>
+/* ── GOLD GRID CANVAS ── */
+(function(){
+  const canvas=document.getElementById('grid-canvas'),ctx=canvas.getContext('2d');
+  const CELL=58,PAR=.18,NE=3,MP=12;
+  let W,H,cols,rows,sY=0,t=0;
+  const pulses=[];
+  function sp(){pulses.push({horiz:Math.random()>.5,col:Math.floor(Math.random()*(cols+1)),row:Math.floor(Math.random()*(rows+1)),prog:0,speed:.0007+Math.random()*.001,len:.07+Math.random()*.09,bright:.5+Math.random()*.5,color:Math.random()>.4?[201,160,80]:[180,130,60]})}
+  function resize(){W=canvas.width=window.innerWidth;H=canvas.height=window.innerHeight;cols=Math.ceil(W/CELL)+2;rows=Math.ceil(H/CELL)+2}
+  window.addEventListener('resize',resize);
+  window.addEventListener('scroll',()=>{sY=window.scrollY},{passive:true});
+  resize();for(let i=0;i<MP;i++)sp();
+  function draw(){
+    ctx.clearRect(0,0,W,H);t+=.01;
+    const oy=-(sY*PAR)%CELL;
+    ctx.save();ctx.strokeStyle='rgba(201,160,80,.13)';ctx.lineWidth=.8;
+    for(let r=-1;r<=rows+1;r++){const y=r*CELL+oy;ctx.beginPath();ctx.moveTo(0,y);ctx.lineTo(W,y);ctx.stroke()}
+    for(let c=-1;c<=cols+1;c++){const x=c*CELL;ctx.beginPath();ctx.moveTo(x,0);ctx.lineTo(x,H);ctx.stroke()}
+    ctx.restore();
+    for(let r=-1;r<=rows+1;r++)for(let c=-1;c<=cols+1;c++){if(r%NE===0&&c%NE===0){const x=c*CELL,y=r*CELL+oy;if(x<-4||x>W+4||y<-4||y>H+4)continue;const ph=(r*7+c*13)*.4,br=.4+.6*(.5+.5*Math.sin(t+ph));ctx.beginPath();ctx.arc(x,y,1.4+.7*Math.sin(t*.7+ph),0,Math.PI*2);ctx.fillStyle=`rgba(201,160,80,${.35*br})`;ctx.fill()}}
+    for(let i=pulses.length-1;i>=0;i--){const p=pulses[i];p.prog+=p.speed;const[r,g,b]=p.color;
+      if(p.horiz){const y=p.row*CELL+oy,hx=p.prog*(W+CELL*2)-CELL,tx=hx-p.len*(W+CELL*2);if(y<-2||y>H+2){p.prog=0;continue}const gr=ctx.createLinearGradient(tx,y,hx,y);gr.addColorStop(0,`rgba(${r},${g},${b},0)`);gr.addColorStop(.7,`rgba(${r},${g},${b},${.6*p.bright})`);gr.addColorStop(1,`rgba(${r},${g},${b},.95)`);ctx.beginPath();ctx.strokeStyle=gr;ctx.lineWidth=1.5;ctx.moveTo(tx,y);ctx.lineTo(hx,y);ctx.stroke();if(hx>0&&hx<W){ctx.beginPath();ctx.arc(hx,y,2.5,0,Math.PI*2);ctx.fillStyle=`rgba(${r},${g},${b},${.9*p.bright})`;ctx.fill()}}
+      else{const x=p.col*CELL,hy=p.prog*(H+CELL*2)-CELL,ty=hy-p.len*(H+CELL*2);if(x<-2||x>W+2){p.prog=0;continue}const gr=ctx.createLinearGradient(x,ty,x,hy);gr.addColorStop(0,`rgba(${r},${g},${b},0)`);gr.addColorStop(.7,`rgba(${r},${g},${b},${.5*p.bright})`);gr.addColorStop(1,`rgba(${r},${g},${b},.85)`);ctx.beginPath();ctx.strokeStyle=gr;ctx.lineWidth=1.5;ctx.moveTo(x,ty);ctx.lineTo(x,hy);ctx.stroke();if(hy>0&&hy<H){ctx.beginPath();ctx.arc(x,hy,2.5,0,Math.PI*2);ctx.fillStyle=`rgba(${r},${g},${b},${.85*p.bright})`;ctx.fill()}}
+      if(p.prog>1.1){pulses.splice(i,1);sp()}}
+    const v=ctx.createRadialGradient(W/2,H/2,H*.3,W/2,H/2,H*.9);v.addColorStop(0,'rgba(0,0,0,0)');v.addColorStop(1,'rgba(8,8,8,.45)');ctx.fillStyle=v;ctx.fillRect(0,0,W,H);
+    requestAnimationFrame(draw)}
+  draw();
+})();
+
+/* ── CLOCK ── */
+function tick(){
+  try{
+    const t=new Date().toLocaleTimeString('en-US',{timeZone:'America/New_York',hour:'2-digit',minute:'2-digit',hour12:true});
+    const d=new Date().toLocaleDateString('en-US',{timeZone:'America/New_York',weekday:'long',day:'numeric',month:'long',year:'numeric'}).toUpperCase();
+    const te=document.getElementById('us-time'),de=document.getElementById('us-date');
+    if(te)te.textContent=t;if(de)de.textContent=d;
+  }catch(e){}
+}
+tick();setInterval(tick,30000);
+
+/* ── REVEAL ── */
+const ro=new IntersectionObserver(e=>e.forEach(x=>{if(x.isIntersecting)x.target.classList.add('vis')}),{threshold:.12});
+document.querySelectorAll('.reveal').forEach(el=>ro.observe(el));
+
+/* ── GOAL BARS ON LOAD ── */
+window.addEventListener('load',()=>{
+  setTimeout(()=>{
+    [{id:'ug1',w:82},{id:'ug2',w:71},{id:'ug3',w:55},{id:'ug4',w:94},{id:'ug5',w:38}].forEach((b,i)=>{
+      setTimeout(()=>{const el=document.getElementById(b.id);if(el)el.style.width=b.w+'%'},600+i*120)})
+  },800)});
+
+/* ── RING + ALLOC ON SCROLL ── */
+let ringDone=false;
+const so=new IntersectionObserver(e=>{
+  if(!e[0].isIntersecting||ringDone)return;
+  ringDone=true;
+  let cur=0;const step=()=>{cur=Math.min(cur+1.1,83);const r=document.getElementById('us-ring'),n=document.getElementById('us-ring-num');if(r)r.style.strokeDashoffset=440-(440*cur/100);if(n)n.textContent=Math.round(cur)+'%';if(cur<83)requestAnimationFrame(step)};
+  setTimeout(step,300);
+  setTimeout(()=>{[{id:'usab1',w:42},{id:'usab2',w:18},{id:'usab3',w:26},{id:'usab4',w:14}].forEach((b,i)=>{setTimeout(()=>{const el=document.getElementById(b.id);if(el)el.style.width=b.w+'%'},i*150)})},500);
+},{threshold:.25});
+const intelSec=document.getElementById('intel');if(intelSec)so.observe(intelSec);
+
+/* ── WGP PULSE ── */
+(function(){const vals=['68%','70%','67%','69%','71%','68%'];let i=0;setInterval(()=>{i=(i+1)%vals.length;const el=document.getElementById('us-wgp');if(el){el.style.opacity='.3';setTimeout(()=>{el.textContent=vals[i];el.style.opacity='1';el.style.transition='opacity .4s'},300)}},4500)})();
+
+/* ── PERSONA CYCLING ── */
+(function(){
+  const states=['dark','light','highlight'],labels={dark:'Dark',light:'Light',highlight:'Loss'};
+  const seq=[[0,0,0],[1,0,0],[1,1,0],[1,1,1],[2,1,1],[2,2,1],[2,2,2],[0,2,2],[0,0,2],[0,0,0]];
+  let step=0;
+  function apply(idx,state){
+    const p=document.getElementById('up-'+(idx+1)),b=document.getElementById('ubadge-'+(idx+1));
+    if(!p)return;p.classList.remove('pstate-dark','pstate-light','pstate-highlight');void p.offsetWidth;p.classList.add('pstate-'+state);
+    if(b){b.textContent=labels[state];b.style.background=state==='dark'?'rgba(201,160,80,.1)':state==='light'?'rgba(27,58,107,.08)':'rgba(255,107,91,.15)';b.style.color=state==='dark'?'#C9A050':state==='light'?'#1B3A6B':'#FF6B5B'}}
+  function tick(){const s=seq[step%seq.length];s.forEach((st,i)=>apply(i,states[st]));step++;setTimeout(tick,1800)}
+  const sec=document.getElementById('problem');if(!sec)return;
+  new IntersectionObserver(e=>{if(e[0].isIntersecting){setTimeout(tick,600)}},{threshold:.2}).observe(sec);
+})();
+
+/* ── FAN CHART ── */
+(function(){
+  new IntersectionObserver(e=>{if(!e[0].isIntersecting)return;e[0].target.__done=true;drawFan();},{threshold:.3}).observe(document.getElementById('us-proj-card')||document.body);
+  function drawFan(){
+    const canvas=document.getElementById('us-fan-canvas');if(!canvas)return;
+    const dpr=window.devicePixelRatio||1,W=canvas.offsetWidth,H=canvas.offsetHeight;
+    canvas.width=W*dpr;canvas.height=H*dpr;
+    const ctx=canvas.getContext('2d');ctx.scale(dpr,dpr);
+    const pad={l:52,r:28,t:20,b:32},cw=W-pad.l-pad.r,ch=H-pad.t-pad.b,years=7,target=3200000;
+    function path(seed,g,v){let val=1200000;const pts=[val];for(let i=0;i<years;i++){val*=(1+g+(Math.sin(seed*i+seed)*v));pts.push(Math.max(0,val))}return pts}
+    const b={p95:path(1.7,.14,.025),p75:path(2.1,.11,.018),p50:path(3.3,.085,.013),p25:path(4.2,.055,.018),p5:path(5.1,.025,.022)};
+    const maxV=Math.max(...b.p95)*1.08;
+    const X=i=>pad.l+(i/years)*cw,Y=v=>pad.t+ch-(v/maxV)*ch;
+    function grid(){
+      ctx.strokeStyle='rgba(255,255,255,.05)';ctx.lineWidth=.5;
+      [0,.25,.5,.75,1].forEach(f=>{const y=pad.t+ch*(1-f);ctx.beginPath();ctx.moveTo(pad.l,y);ctx.lineTo(pad.l+cw,y);ctx.stroke();ctx.fillStyle='rgba(245,240,232,.2)';ctx.font='9px "Instrument Sans",sans-serif';ctx.textAlign='right';ctx.fillText((maxV*f/1000000).toFixed(1)+'M',pad.l-5,y+3)});
+      ctx.textAlign='center';ctx.fillStyle='rgba(245,240,232,.2)';
+      [0,1,2,3,4,5,6,7].forEach(i=>ctx.fillText('Y'+i,X(i),H-pad.b+12));
+      const ty=Y(target);ctx.setLineDash([5,4]);ctx.strokeStyle='rgba(245,240,232,.25)';ctx.lineWidth=1;ctx.beginPath();ctx.moveTo(pad.l,ty);ctx.lineTo(pad.l+cw,ty);ctx.stroke();ctx.setLineDash([]);ctx.fillStyle='rgba(245,240,232,.32)';ctx.textAlign='right';ctx.fillText('Target $3.2M',pad.l+cw-4,ty-4)}
+    let prog=0;
+    function render(){
+      ctx.clearRect(0,0,W,H);grid();
+      const pts=Math.ceil(prog*(years))+1;
+      function band(u,l,color,alpha){ctx.beginPath();ctx.moveTo(X(0),Y(u[0]));for(let i=1;i<pts;i++)ctx.lineTo(X(i),Y(u[i]));for(let i=Math.min(pts-1,l.length-1);i>=0;i--)ctx.lineTo(X(i),Y(l[i]));ctx.closePath();ctx.fillStyle=color.replace('A',alpha);ctx.fill()}
+      function line(pts,color,width){const p=Math.ceil(prog*(years))+1;ctx.beginPath();ctx.strokeStyle=color;ctx.lineWidth=width;ctx.moveTo(X(0),Y(pts[0]));for(let i=1;i<p;i++)ctx.lineTo(X(i),Y(pts[i]));ctx.stroke()}
+      band(b.p95,b.p75,'rgba(78,205,196,A)','.18');band(b.p75,b.p50,'rgba(201,160,80,A)','.22');band(b.p50,b.p25,'rgba(201,160,80,A)','.12');band(b.p25,b.p5,'rgba(255,107,91,A)','.15');
+      line(b.p95,'rgba(78,205,196,.6)',1);line(b.p50,'rgba(201,160,80,.9)',2);line(b.p5,'rgba(255,107,91,.6)',1);
+      if(prog<1){const i=Math.min(Math.ceil(prog*years),years);ctx.beginPath();ctx.arc(X(i),Y(b.p50[i]),4,0,Math.PI*2);ctx.fillStyle='rgba(201,160,80,.9)';ctx.fill()}
+      prog+=.02;if(prog<1)requestAnimationFrame(render);
+    }
+    render();}
+})();
+
+/* ── GOAL NETWORK ── */
+(function(){
+  const nodes=[
+    {id:0,label:'Retirement\n2031',prob:82,color:'#22c55e',r:36,x:0,y:0,vx:0,vy:0},
+    {id:1,label:'Social\nSecurity',prob:94,color:'#C9A050',r:28,x:0,y:0,vx:0,vy:0},
+    {id:2,label:'College\nFund',prob:71,color:'#4ECDC4',r:26,x:0,y:0,vx:0,vy:0},
+    {id:3,label:'Estate\nTransfer',prob:55,color:'#F5C842',r:28,x:0,y:0,vx:0,vy:0},
+    {id:4,label:'Roth\nConversion',prob:38,color:'#FF6B5B',r:26,x:0,y:0,vx:0,vy:0},
+    {id:5,label:'Emergency\nFund',prob:88,color:'#5B9BD5',r:24,x:0,y:0,vx:0,vy:0},
+    {id:6,label:'401(k)\nMax',prob:96,color:'#C9A050',r:22,x:0,y:0,vx:0,vy:0},
+    {id:7,label:'Life\nInsurance',prob:75,color:'#4ECDC4',r:22,x:0,y:0,vx:0,vy:0},
+  ];
+  const edges=[[1,0,0],[6,0,0],[2,0,1],[4,0,1],[3,0,2],[5,0,2],[1,3,1],[4,3,2],[2,4,1],[5,4,3],[7,0,2],[6,4,2]];
+  const eColors=['#C9A050','#FF6B5B','#4ECDC4','rgba(255,255,255,.3)'];
+  const eDash=[[],[],[],[5,4]];
+  let W,H,hov=-1,active=0,t=0;
+  const canvas=document.getElementById('us-net-canvas');
+  if(!canvas)return;
+  const ctx=canvas.getContext('2d');
+  const insights=[
+    'Delaying Social Security to 70 <strong>funds</strong> retirement by $84K lifetime but <strong>competes with</strong> estate transfer — both must be solved simultaneously.',
+    'Social Security at 70 <strong>funds</strong> retirement and <strong>competes with</strong> estate — optimal claim age requires goal network analysis, not isolated SS planning.',
+    'College fund <strong>competes with</strong> Roth conversion in years 2025–2028 — sequencing matters. WealthWise solves both simultaneously.',
+    'Estate above $13.6M exemption is at risk of 2025 sunset. Estate planning <strong>supports</strong> Social Security timing by reducing estate goal urgency.',
+    'Roth conversion <strong>competes with</strong> college funding and <strong>blocks</strong> short-term liquidity — but <strong>supports</strong> retirement probability by +12pp.',
+    'Emergency fund <strong>supports</strong> retirement by providing 401(k) contribution continuity during income shocks.',
+    '401(k) maximisation directly <strong>funds</strong> retirement and <strong>supports</strong> Roth conversion by building the tax-deferred base to convert from.',
+    'Life insurance <strong>supports</strong> retirement by funding survivor income if primary earner dies before optimal SS claim age.',
+  ];
+  function resize(){
+    const dpr=window.devicePixelRatio||1;W=canvas.offsetWidth;H=canvas.offsetHeight;canvas.width=W*dpr;canvas.height=H*dpr;ctx.scale(dpr,dpr);
+    const cx=W/2,cy=H/2,R=Math.min(W,H)*.33;
+    nodes.forEach((n,i)=>{if(i===0){n.x=cx;n.y=cy}else{const a=((i-1)/(nodes.length-1))*Math.PI*2-Math.PI/2;n.x=cx+R*Math.cos(a);n.y=cy+R*Math.sin(a)}});
+  }
+  function draw(){
+    ctx.clearRect(0,0,W,H);t+=.012;
+    edges.forEach(([a,b,type])=>{
+      const na=nodes[a],nb=nodes[b],act=hov===a||hov===b||active===a||active===b;
+      ctx.save();ctx.setLineDash(eDash[type]);
+      const col=eColors[type];ctx.globalAlpha=act?.8:.2;ctx.strokeStyle=col;ctx.lineWidth=act?1.8:1;
+      ctx.beginPath();ctx.moveTo(na.x,na.y);ctx.lineTo(nb.x,nb.y);ctx.stroke();
+      if(act&&type!==3){const prog=((t*.4)%1),px=na.x+(nb.x-na.x)*prog,py=na.y+(nb.y-na.y)*prog;ctx.setLineDash([]);ctx.beginPath();ctx.arc(px,py,3,0,Math.PI*2);ctx.fillStyle=col;ctx.globalAlpha=1;ctx.fill()}
+      ctx.globalAlpha=1;ctx.setLineDash([]);ctx.restore();
+    });
+    nodes.forEach((n,i)=>{
+      const act=i===hov||i===active,pulse=act?1+.06*Math.sin(t*3):1+.025*Math.sin(t*1.5+(i*.8)),r=n.r*pulse;
+      ctx.beginPath();ctx.arc(n.x,n.y,r+5,-Math.PI/2,-Math.PI/2+(n.prob/100)*Math.PI*2);
+      ctx.strokeStyle=n.color;ctx.lineWidth=act?2.5:1.5;ctx.globalAlpha=act?.9:.4;ctx.stroke();ctx.globalAlpha=1;
+      ctx.beginPath();ctx.arc(n.x,n.y,r,0,Math.PI*2);ctx.fillStyle=act?n.color+'22':'rgba(20,20,20,.95)';ctx.fill();
+      ctx.strokeStyle=act?n.color:'rgba(255,255,255,.1)';ctx.lineWidth=act?1.5:.8;ctx.stroke();
+      ctx.fillStyle=act?'#F5F0E8':'rgba(245,240,232,.55)';ctx.font=`${act?'600 ':'400 '}${Math.max(8,r*.27)}px "Instrument Sans",sans-serif`;ctx.textAlign='center';
+      n.label.split('\n').forEach((l,li,arr)=>ctx.fillText(l,n.x,n.y+(li-(arr.length-1)/2)*11+2));
+      ctx.fillStyle=act?n.color:'rgba(245,240,232,.28)';ctx.font=`600 ${Math.max(7,r*.21)}px "Instrument Sans",sans-serif`;ctx.fillText(n.prob+'%',n.x,n.y+r+14);
+    });
+    requestAnimationFrame(draw);
+  }
+  canvas.addEventListener('mousemove',e=>{const rect=canvas.getBoundingClientRect(),mx=e.clientX-rect.left,my=e.clientY-rect.top;let f=-1;nodes.forEach((n,i)=>{if(Math.hypot(mx-n.x,my-n.y)<n.r+8)f=i});hov=f;canvas.style.cursor=f>=0?'pointer':'default';if(f>=0)setActive(f)});
+  canvas.addEventListener('click',()=>{if(hov>=0)setActive(hov)});
+  function setActive(i){active=i;const el=document.getElementById('us-gn-insight');if(el)el.innerHTML=insights[i]||insights[0];document.querySelectorAll('#us-gn-list .gn-node-item').forEach((el,j)=>el.classList.toggle('active',j===i))}
+  document.querySelectorAll('#us-gn-list .gn-node-item').forEach(el=>el.addEventListener('click',()=>setActive(parseInt(el.dataset.n))));
+  new IntersectionObserver(e=>{if(!e[0].isIntersecting)return;resize();draw();},{threshold:.2}).observe(canvas);
+  window.addEventListener('resize',resize);
+})();
+
+/* ── DEMO MODAL ── */
+function openDemo(){document.getElementById('demo-modal').style.display='flex'}
+function closeDemo(){document.getElementById('demo-modal').style.display='none'}
+document.getElementById('demo-modal').addEventListener('click',e=>{if(e.target===document.getElementById('demo-modal'))closeDemo()});
+document.addEventListener('keydown',e=>{if(e.key==='Escape')closeDemo()});
+function submitDemo(){
+  const name=document.getElementById('dm-name').value,email=document.getElementById('dm-email').value;
+  if(!name||!email)return;
+  const btn=document.getElementById('dm-btn');btn.textContent='Sending...';btn.disabled=true;
+  const body=encodeURIComponent(`Name: ${name}\nEmail: ${email}\nFirm: ${document.getElementById('dm-firm').value}\nType: ${document.getElementById('dm-type').value}\n\nUS Edition demo request.`);
+  try{window.location.href=`mailto:usa@wealthwise.ae?subject=US Demo Request — ${name}&body=${body}`}catch(e){}
+  setTimeout(()=>{document.querySelector('#demo-modal form, #demo-modal .demo-form')?.classList.add('hide');document.getElementById('dm-success').style.display='block';btn.disabled=false;btn.textContent='Request Demo →'},900);
+}
+</script>
+</body>
+</html>

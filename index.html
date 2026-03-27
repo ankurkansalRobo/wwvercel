@@ -570,6 +570,38 @@ footer{background:#080808;border-top:1px solid rgba(201,160,80,.1);padding:0}
 </head>
 <body>
 
+<!-- ══ LOCATION SELECTOR POPUP ══ -->
+<div id="location-modal" style="position:fixed;inset:0;background:rgba(0,0,0,.85);backdrop-filter:blur(12px);z-index:99999;display:flex;align-items:center;justify-content:center;padding:20px">
+  <div style="background:#111;border:1px solid rgba(201,160,80,.2);border-radius:16px;padding:48px 40px;width:90%;max-width:560px;text-align:center;position:relative">
+    <div style="font-size:9px;font-weight:600;letter-spacing:.16em;text-transform:uppercase;color:#8A6E35;margin-bottom:20px">WealthWise — Goal Intelligence OS</div>
+    <div style="font-family:'Cormorant Garamond',serif;font-size:clamp(24px,4vw,36px);font-weight:300;color:#F5F0E8;line-height:1.15;margin-bottom:12px">Where are you advising<br>your clients from?</div>
+    <p style="font-size:13px;color:rgba(245,240,232,.45);margin-bottom:36px;line-height:1.6">We'll show you the version built for your market — UAE-native intelligence or US-native intelligence. Same Monte Carlo engine. Different compliance universe.</p>
+    <div style="display:grid;grid-template-columns:1fr 1fr;gap:14px">
+      <button onclick="goUAE()" style="background:rgba(201,160,80,.08);border:1px solid rgba(201,160,80,.25);border-radius:10px;padding:24px 20px;cursor:pointer;transition:all .2s;text-align:left" onmouseover="this.style.background='rgba(201,160,80,.15)'" onmouseout="this.style.background='rgba(201,160,80,.08)'">
+        <div style="font-size:28px;margin-bottom:12px">🇦🇪</div>
+        <div style="font-family:'Cormorant Garamond',serif;font-size:20px;font-weight:300;color:#F5F0E8;margin-bottom:5px">UAE Advisor</div>
+        <div style="font-size:11px;color:rgba(245,240,232,.4);line-height:1.5">DIFC · Golden Visa · Zakat<br>EOSB · Islamic Finance · LRS</div>
+      </button>
+      <button onclick="goUSA()" style="background:rgba(91,155,213,.06);border:1px solid rgba(91,155,213,.2);border-radius:10px;padding:24px 20px;cursor:pointer;transition:all .2s;text-align:left" onmouseover="this.style.background='rgba(91,155,213,.12)'" onmouseout="this.style.background='rgba(91,155,213,.06)'">
+        <div style="font-size:28px;margin-bottom:12px">🇺🇸</div>
+        <div style="font-family:'Cormorant Garamond',serif;font-size:20px;font-weight:300;color:#F5F0E8;margin-bottom:5px">US Advisor</div>
+        <div style="font-size:11px;color:rgba(245,240,232,.4);line-height:1.5">401(k) · IRA · RMDs · SS Timing<br>Estate Tax · FBAR · DOL Fiduciary</div>
+      </button>
+    </div>
+    <button onclick="dismissModal()" style="margin-top:20px;background:none;border:none;color:rgba(245,240,232,.28);font-size:11px;cursor:pointer;font-family:'Instrument Sans',sans-serif;letter-spacing:.06em;text-transform:uppercase">Skip — show me both</button>
+  </div>
+</div>
+<script>
+  function goUAE(){localStorage.setItem('ww-region','uae');document.getElementById('location-modal').style.display='none'}
+  function goUSA(){localStorage.setItem('ww-region','usa');window.location.href='/usa'}
+  function dismissModal(){localStorage.setItem('ww-region','both');document.getElementById('location-modal').style.display='none'}
+  // Auto-dismiss if already chose
+  if(localStorage.getItem('ww-region')){
+    if(localStorage.getItem('ww-region')==='usa') window.location.href='/usa';
+    else document.getElementById('location-modal').style.display='none';
+  }
+</script>
+
 <canvas id="grid-canvas"></canvas>
 
 <!-- NAV -->
@@ -585,7 +617,10 @@ footer{background:#080808;border-top:1px solid rgba(201,160,80,.1);padding:0}
     <a href="#uae" class="nav-link">UAE-Native</a>
     <a href="#alternatives" class="nav-link">Alternatives</a>
   </div>
-  <a href="#" class="nav-cta">Request Demo</a>
+  <div style="display:flex;align-items:center;gap:8px">
+    <a href="/usa" style="font-size:10px;font-weight:600;letter-spacing:.08em;text-transform:uppercase;color:var(--txd);border:1px solid var(--border);border-radius:4px;padding:6px 10px;text-decoration:none;transition:all .2s" onmouseover="this.style.color='var(--tx)'" onmouseout="this.style.color='var(--txd)'">🇺🇸 US Version</a>
+    <a href="#" class="nav-cta">Request Demo</a>
+  </div>
 </nav>
 
 <!-- ══ HERO ══ -->
