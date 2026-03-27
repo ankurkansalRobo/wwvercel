@@ -1,11 +1,6 @@
 {
   "version": 2,
   "routes": [
-    { "src": "/favicon.ico", "dest": "/favicon.ico" },
-    { "src": "/favicon-32.png", "dest": "/favicon-32.png" },
-    { "src": "/apple-touch-icon.png", "dest": "/apple-touch-icon.png" },
-    { "src": "/og-image.png", "dest": "/og-image.png" },
-    { "src": "/usa", "dest": "/usa.html" },
     { "src": "/(.*)", "dest": "/index.html" }
   ]
 }
