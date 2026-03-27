@@ -238,6 +238,7 @@ nav{position:fixed;top:0;left:0;right:0;z-index:999;height:60px;display:flex;ali
 .goalnet-layout{display:grid;grid-template-columns:1fr 340px;gap:28px;align-items:start}
 .goalnet-canvas-wrap{background:#111;border:1px solid var(--border);border-radius:12px;position:relative;overflow:hidden}
 #net-canvas{width:100%;height:480px;display:block;cursor:pointer}
+#us-net-canvas{width:100%;height:480px;display:block;cursor:pointer}
 .goalnet-hint{position:absolute;bottom:12px;left:50%;transform:translateX(-50%);font-size:10px;font-weight:600;letter-spacing:.1em;text-transform:uppercase;color:var(--txd);pointer-events:none}
 .goalnet-panel{display:flex;flex-direction:column;gap:14px}
 .goalnet-title{font-family:var(--serif);font-size:19px;font-weight:300;color:var(--tx)}
@@ -287,6 +288,7 @@ footer{background:#080808;border-top:1px solid rgba(201,160,80,.1);padding:0}
   .advisors-grid{grid-template-columns:1fr 1fr}
   .goalnet-layout{grid-template-columns:1fr;gap:20px}
   #net-canvas{height:340px}
+  #us-net-canvas{height:340px}
   .intel-layout{gap:16px}
   .ft-inner{grid-template-columns:1fr 1fr;gap:28px;padding:36px 32px}
   .ft-bottom{padding:16px 32px}
@@ -311,6 +313,7 @@ footer{background:#080808;border-top:1px solid rgba(201,160,80,.1);padding:0}
   .ring-wrap{flex-direction:column;align-items:center;gap:16px}
   .goalnet-layout{grid-template-columns:1fr}
   #net-canvas{height:280px}
+  #us-net-canvas{height:280px}
   .gn-node-item{display:grid;grid-template-columns:auto 1fr auto;gap:6px}
   .ft-inner{grid-template-columns:1fr;gap:24px;padding:32px 20px}
   .ft-bottom{padding:14px 20px;flex-direction:column;align-items:flex-start}
@@ -977,8 +980,18 @@ const intelSec=document.getElementById('intel');if(intelSec)so.observe(intelSec)
   canvas.addEventListener('click',()=>{if(hov>=0)setActive(hov)});
   function setActive(i){active=i;const el=document.getElementById('us-gn-insight');if(el)el.innerHTML=insights[i]||insights[0];document.querySelectorAll('#us-gn-list .gn-node-item').forEach((el,j)=>el.classList.toggle('active',j===i))}
   document.querySelectorAll('#us-gn-list .gn-node-item').forEach(el=>el.addEventListener('click',()=>setActive(parseInt(el.dataset.n))));
-  new IntersectionObserver(e=>{if(!e[0].isIntersecting)return;resize();draw();},{threshold:.2}).observe(canvas);
-  window.addEventListener('resize',resize);
+  new IntersectionObserver(e=>{
+    if(!e[0].isIntersecting)return;
+    // Force layout before reading dimensions
+    canvas.style.display='block';
+    requestAnimationFrame(()=>{
+      requestAnimationFrame(()=>{
+        resize();
+        if(W>0&&H>0) draw();
+      });
+    });
+  },{threshold:.1}).observe(canvas);
+  window.addEventListener('resize',()=>{resize()});
 })();
 
 /* ── DEMO MODAL ── */
