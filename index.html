@@ -176,30 +176,7 @@ nav{position:fixed;top:0;left:0;right:0;z-index:999;height:60px;display:flex;ali
 .why-summary-quote{font-family:var(--serif);font-size:clamp(16px,2.2vw,22px);font-weight:300;color:var(--tx);line-height:1.5;font-style:italic;margin-bottom:14px}
 .why-summary-sub{font-size:11px;color:var(--gold-dim);letter-spacing:.04em}
 
-/* ── COMPETITIVE COMPARISON ── */
-.compare-section{background:transparent;border-top:1px solid rgba(201,160,80,.08)}
-.compare-wrap{overflow-x:auto}
-.compare-table{min-width:780px;border-radius:12px;overflow:hidden;border:1px solid rgba(201,160,80,.14)}
-.compare-row{display:grid;grid-template-columns:2fr 1.6fr 1fr 1fr 1fr;border-bottom:1px solid rgba(255,255,255,.05);transition:background .2s}
-.compare-row:last-of-type{border-bottom:none}
-.compare-row:not(.compare-header):not(.compare-footer):hover{background:rgba(255,255,255,.02)}
-.compare-header{background:#0E0E0E;border-bottom:1px solid rgba(201,160,80,.15) !important}
-.compare-feature{padding:13px 18px;font-size:12px;font-weight:500;color:var(--txm);display:flex;align-items:center}
-.compare-col{padding:12px 14px;font-size:11px;display:flex;align-items:center;justify-content:center;text-align:center;border-left:1px solid rgba(255,255,255,.05)}
-.ww-col{background:rgba(201,160,80,.04);border-left:1px solid rgba(201,160,80,.15) !important}
-.compare-logo-ww{width:28px;height:28px;border-radius:6px;background:rgba(201,160,80,.12);border:1px solid rgba(201,160,80,.2);display:flex;align-items:center;justify-content:center;font-family:var(--serif);color:var(--gold);font-size:13px;margin:0 auto 6px}
-.compare-platform-name{font-size:12px;font-weight:600;color:var(--tx);margin-bottom:2px}
-.ww-col .compare-platform-name{color:var(--gold)}
-.compare-platform-tag{font-size:9px;color:var(--txd);letter-spacing:.04em}
-.c-yes{color:var(--good);font-size:11px;font-weight:500;display:flex;flex-direction:column;align-items:center;gap:2px;text-align:center}
-.c-no{color:rgba(255,107,91,.6);font-size:11px;display:flex;flex-direction:column;align-items:center;gap:2px;text-align:center}
-.c-part{color:var(--warn);font-size:11px;display:flex;flex-direction:column;align-items:center;gap:2px;text-align:center}
-.compare-footer{display:flex;align-items:center;padding:10px 18px;font-size:10px;color:var(--txd);background:#0E0E0E;border-top:1px solid rgba(255,255,255,.06);flex-wrap:wrap;gap:8px}
-.cr-reveal{opacity:0;transform:translateX(-8px);transition:opacity .5s ease,transform .5s ease}
-.cr-reveal.vis{opacity:1;transform:none}
 
-/* RESPONSIVE */
-@media(max-width:1024px){.why-grid{grid-template-columns:1fr}}
 @media(max-width:768px){.why-summary-inner{padding:22px 20px}.why-stats{grid-template-columns:repeat(3,1fr)}}
 
 /* ── GOAL INTELLIGENCE DIVIDER ── */
@@ -1058,110 +1035,6 @@ footer{background:#080808;border-top:1px solid rgba(201,160,80,.1);padding:0}
   </div>
 </section>
 
-<!-- ══ COMPETITIVE COMPARISON ══ -->
-<section class="section compare-section" id="compare">
-  <div class="si">
-    <div class="reveal" style="text-align:center;margin-bottom:48px">
-      <span class="stag">Competitive landscape</span>
-      <h2 class="sh2" style="max-width:600px;margin:0 auto">What incumbents can't do.<br><em>What we built from scratch.</em></h2>
-      <p class="ssub" style="margin:14px auto 0;text-align:center;max-width:500px">Every major platform stops at Rung 3 — scenario comparison. WealthWise operates at Rung 4 — simultaneous goal probability optimisation.</p>
-    </div>
-    <div class="compare-wrap reveal">
-      <div class="compare-table">
-        <!-- Header -->
-        <div class="compare-row compare-header">
-          <div class="compare-feature"></div>
-          <div class="compare-col ww-col">
-            <div class="compare-logo-ww">W</div>
-            <div class="compare-platform-name">WealthWise</div>
-            <div class="compare-platform-tag">Goal Intelligence OS</div>
-          </div>
-          <div class="compare-col">
-            <div class="compare-platform-name">Addepar</div>
-            <div class="compare-platform-tag">Portfolio Reporting</div>
-          </div>
-          <div class="compare-col">
-            <div class="compare-platform-name">eMoney</div>
-            <div class="compare-platform-tag">Financial Planning</div>
-          </div>
-          <div class="compare-col">
-            <div class="compare-platform-name">MoneyGuidePro</div>
-            <div class="compare-platform-tag">Goal Planning</div>
-          </div>
-        </div>
-        <!-- Rows -->
-        <div class="compare-row cr-reveal">
-          <div class="compare-feature">Goal probability optimisation</div>
-          <div class="compare-col ww-col"><span class="c-yes">✓ Simultaneous, 10K paths</span></div>
-          <div class="compare-col"><span class="c-no">✗ Not available</span></div>
-          <div class="compare-col"><span class="c-part">◐ Scenario only</span></div>
-          <div class="compare-col"><span class="c-part">◐ Single goal</span></div>
-        </div>
-        <div class="compare-row cr-reveal">
-          <div class="compare-feature">UAE-native (Zakat, EOSB, Golden Visa)</div>
-          <div class="compare-col ww-col"><span class="c-yes">✓ First-class citizen</span></div>
-          <div class="compare-col"><span class="c-no">✗ Manual workaround</span></div>
-          <div class="compare-col"><span class="c-no">✗ Not supported</span></div>
-          <div class="compare-col"><span class="c-no">✗ Not supported</span></div>
-        </div>
-        <div class="compare-row cr-reveal">
-          <div class="compare-feature">Private markets in goal probability</div>
-          <div class="compare-col ww-col"><span class="c-yes">✓ Capital calls + IRR → goal pp</span></div>
-          <div class="compare-col"><span class="c-part">◐ Reporting only</span></div>
-          <div class="compare-col"><span class="c-no">✗ Not available</span></div>
-          <div class="compare-col"><span class="c-no">✗ Not available</span></div>
-        </div>
-        <div class="compare-row cr-reveal">
-          <div class="compare-feature">AI advisory brief generation</div>
-          <div class="compare-col ww-col"><span class="c-yes">✓ One-click, 5 minutes</span></div>
-          <div class="compare-col"><span class="c-no">✗ Manual reporting</span></div>
-          <div class="compare-col"><span class="c-part">◐ Template-based</span></div>
-          <div class="compare-col"><span class="c-no">✗ Manual</span></div>
-        </div>
-        <div class="compare-row cr-reveal">
-          <div class="compare-feature">Document intelligence (PE docs)</div>
-          <div class="compare-col ww-col"><span class="c-yes">✓ GPT-4 Vision parsing</span></div>
-          <div class="compare-col"><span class="c-no">✗ Manual entry</span></div>
-          <div class="compare-col"><span class="c-no">✗ Manual entry</span></div>
-          <div class="compare-col"><span class="c-no">✗ Manual entry</span></div>
-        </div>
-        <div class="compare-row cr-reveal">
-          <div class="compare-feature">Multi-currency goal risk</div>
-          <div class="compare-col ww-col"><span class="c-yes">✓ AED, USD, GBP, INR per goal</span></div>
-          <div class="compare-col"><span class="c-part">◐ Reporting only</span></div>
-          <div class="compare-col"><span class="c-part">◐ Basic FX</span></div>
-          <div class="compare-col"><span class="c-no">✗ USD only</span></div>
-        </div>
-        <div class="compare-row cr-reveal">
-          <div class="compare-feature">Goal network (dependency mapping)</div>
-          <div class="compare-col ww-col"><span class="c-yes">✓ Full relationship graph</span></div>
-          <div class="compare-col"><span class="c-no">✗ Not available</span></div>
-          <div class="compare-col"><span class="c-no">✗ Not available</span></div>
-          <div class="compare-col"><span class="c-no">✗ Not available</span></div>
-        </div>
-        <div class="compare-row cr-reveal">
-          <div class="compare-feature">Implementation time</div>
-          <div class="compare-col ww-col"><span class="c-yes">✓ Same day</span></div>
-          <div class="compare-col"><span class="c-no">✗ 3–6 months</span></div>
-          <div class="compare-col"><span class="c-part">◐ 4–8 weeks</span></div>
-          <div class="compare-col"><span class="c-part">◐ 2–4 weeks</span></div>
-        </div>
-        <div class="compare-row cr-reveal">
-          <div class="compare-feature">Built for UAE HNW advisors</div>
-          <div class="compare-col ww-col"><span class="c-yes">✓ Purpose-built</span></div>
-          <div class="compare-col"><span class="c-no">✗ US-first, adapted</span></div>
-          <div class="compare-col"><span class="c-no">✗ US-first, adapted</span></div>
-          <div class="compare-col"><span class="c-no">✗ US-first, adapted</span></div>
-        </div>
-        <!-- Footer note -->
-        <div class="compare-footer">
-          <span>◐ Partial capability &nbsp;·&nbsp; ✗ Not available &nbsp;·&nbsp; ✓ Full capability</span>
-          <span style="margin-left:auto;opacity:.5">Based on publicly available feature documentation · 2026</span>
-        </div>
-      </div>
-    </div>
-  </div>
-</section>
 
 <div class="gi-divider"><div class="gi-divider-line"></div><div class="gi-divider-label">Goal Intelligence OS</div><div class="gi-divider-line"></div></div>
 
@@ -2279,20 +2152,7 @@ if(altsSection) altsObs.observe(altsSection);
 
   document.querySelectorAll('.why-card').forEach(c=>counterObs.observe(c));
 
-  // Comparison row stagger reveal
-  const rowObs = new IntersectionObserver(entries=>{
-    entries.forEach(e=>{
-      if(!e.isIntersecting) return;
-      // stagger all rows
-      document.querySelectorAll('.cr-reveal').forEach((row,i)=>{
-        setTimeout(()=>row.classList.add('vis'), i*80);
-      });
-      rowObs.disconnect();
-    });
-  },{threshold:0.2});
-  const compareWrap = document.querySelector('.compare-table');
-  if(compareWrap) rowObs.observe(compareWrap);
-})();
+
 
 </script>
 </body>
