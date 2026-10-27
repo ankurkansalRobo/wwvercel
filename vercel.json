@@ -5,7 +5,8 @@
     { "src": "/favicon-32.png", "dest": "/favicon-32.png" },
     { "src": "/apple-touch-icon.png", "dest": "/apple-touch-icon.png" },
     { "src": "/og-image.png", "dest": "/og-image.png" },
-    { "src": "/usa", "dest": "/usa.html" },
+    { "src": "/robots.txt", "dest": "/robots.txt" },
+    { "src": "/sitemap.xml", "dest": "/sitemap.xml" },
     { "src": "/(.*)", "dest": "/index.html" }
   ]
 }
