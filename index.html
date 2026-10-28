@@ -38,7 +38,7 @@
 .option-grid{display:flex;flex-direction:column;gap:7px}.option{border:1px solid #47553b;background:none;display:flex;align-items:center;gap:12px;text-align:left;padding:12px;width:100%}.option[aria-pressed=true]{border-color:var(--gold);background:#2c3421}.option .option-id{font:italic 19px var(--serif);color:var(--gold);width:24px}.option .option-copy{flex:1;font-size:11px}.option .option-copy small{display:block;color:#acb79b;font-size:9px;margin-top:3px}.option .radio{width:14px;height:14px;border:1px solid #697859;border-radius:50%}.option[aria-pressed=true] .radio{background:var(--gold);border:4px solid #28341f}.contribution{margin-top:15px;padding:13px 15px;background:#202d1e;border:1px solid #4b5a3c}.contribution-head{display:flex;justify-content:space-between;align-items:center;font-size:10px;color:#acbb9c}.contribution-head output{color:var(--gold);font-size:14px}input[type=range]{accent-color:var(--gold);width:100%;margin:14px 0 9px}.contribution-total{display:flex;justify-content:space-between;align-items:center;font-size:10px;color:#b3c09f}.contribution-total strong{font:24px var(--serif);color:#ebe4c9}.contribution-note{font-size:8px;color:#98a889;line-height:1.6;margin-top:5px}.option-detail{margin-top:14px;border:1px solid #4d5b3e;padding:14px}.option-detail h3{font:18px var(--serif)}.option-detail p{font-size:10px;color:#aebc9e;margin-top:8px}.option-actions{display:flex;justify-content:space-between;align-items:center;gap:12px;margin-top:14px}.network{height:242px;width:100%;margin:10px 0}.network text{font-family:var(--sans);font-size:10px}.network-legend{display:flex;gap:18px;font-size:9px;color:#abb69d}.network-legend span{display:flex;gap:6px;align-items:center}.network-legend i{width:13px;height:1px;background:var(--gold)}.network-legend span:last-child i{background:var(--mint)}
 .review-summary{padding:17px;background:#202e20;border:1px solid #566347;margin-bottom:13px}.review-summary h3{font:22px var(--serif);color:#e6dfc4;margin-top:8px}.review-summary p{font-size:11px;color:#b5c0a2;margin-top:8px}.task-row{display:flex;align-items:center;gap:10px;padding:12px 0;border-bottom:1px solid #3c4a31;font-size:10px}.task-row .task-icon{width:18px;height:18px;border:1px solid #798866;display:grid;place-items:center;font-size:9px;color:#c2d0ac}.task-row .task-title{flex:1;color:#becaad}.task-row small{font-size:8px;color:#a4b092}.empty-review{margin:20px 0;border:1px dashed #59674c;padding:25px;text-align:center}.empty-review h3{font:23px var(--serif)}.empty-review p{font-size:11px;color:#adb99e;margin:10px 0 17px}.review-actions{display:flex;gap:8px;margin-top:16px;flex-wrap:wrap}
 .turn-nav{display:flex;align-items:center;justify-content:space-between;gap:18px;margin:23px 0 18px}.turn-button{display:flex;align-items:center;gap:15px;background:none;border:1px solid #595b43;color:var(--gold);padding:12px 17px;font-size:10px;min-width:152px;justify-content:space-between}.turn-button.next{background:var(--gold);color:#172016;border-color:var(--gold)}.turn-button .arrow{font-size:19px;line-height:1}.turn-hint{font-size:9px;color:#9ca491;text-align:center;line-height:1.7}.turn-hint b{font-weight:500;color:#d5cfad}.chapters{display:flex;gap:0;border-top:1px solid #32392c;border-bottom:1px solid #32392c;padding:10px 0;overflow-x:auto;scrollbar-width:thin;scrollbar-color:#6b7655 transparent}.chapter-link{flex:1;min-width:140px;background:none;border:0;padding:7px 12px;display:flex;align-items:center;gap:10px;color:#909d84;text-align:left;position:relative;font-size:10px}.chapter-link b{font:italic 18px var(--serif);color:#6d795d}.chapter-link[aria-current=step]{color:var(--gold)}.chapter-link[aria-current=step] b{color:var(--gold)}.chapter-link:after{content:'';position:absolute;top:0;bottom:0;right:0;width:1px;background:#32392c}.chapter-link:last-child:after{display:none}.site-foot{display:flex;justify-content:space-between;align-items:center;gap:15px;padding:21px 0 27px;color:#929f84;font-size:9px}.site-foot button{background:none;border:0;color:#b5c09f;font-size:9px;padding:4px;text-decoration:underline}.site-foot .footmark{display:flex;gap:7px;align-items:center;font-size:10px;color:#bcc5ad}.site-foot .footmark .mini{height:12px;width:8px;background:var(--gold);transform:skewY(-22deg)}
-.leaf{position:absolute;top:0;height:100%;width:50%;transform-style:preserve-3d;z-index:10;pointer-events:none;will-change:transform}.leaf.forward{left:50%;transform-origin:left center}.leaf.backward{left:0;transform-origin:right center}.leaf-face{position:absolute;inset:0;backface-visibility:hidden;-webkit-backface-visibility:hidden;overflow:hidden;transform:translateZ(.3px)}.leaf-face.back{transform:rotateY(180deg) translateZ(.3px)}.leaf-face .page{border-radius:0!important;width:100%;height:100%}.leaf-face:after{content:'';position:absolute;inset:0;pointer-events:none;opacity:0;background:linear-gradient(90deg,#0008,transparent 35%,#e2d2a733 82%,#0005)}.book.turning .leaf-face:after{animation:shade 1.08s ease-in-out}.leaf.forward{animation:turnForward 1.08s cubic-bezier(.32,.07,.22,.99) both}.leaf.backward{animation:turnBackward 1.08s cubic-bezier(.32,.07,.22,.99) both}.sweep-shadow{position:absolute;inset:0;pointer-events:none;background:linear-gradient(90deg,transparent 25%,#0007 48%,transparent 72%);z-index:4;opacity:0}.turning .sweep-shadow{animation:sweep 1.08s ease-in-out}.page-corner{position:absolute;right:0;bottom:0;width:24px;height:24px;pointer-events:none;background:linear-gradient(135deg,transparent 49%,#8a976047 50%,#d7dcc199);opacity:.65}.turning .page-corner{opacity:0}@keyframes turnForward{0%{transform:rotateY(0deg)}48%{transform:rotateY(-91deg) rotateZ(-.6deg)}100%{transform:rotateY(-180deg)}}@keyframes turnBackward{0%{transform:rotateY(0deg)}48%{transform:rotateY(91deg) rotateZ(.6deg)}100%{transform:rotateY(180deg)}}@keyframes shade{0%,100%{opacity:0}35%,65%{opacity:.85}}@keyframes sweep{0%,100%{opacity:0;transform:scaleX(.4)}50%{opacity:1;transform:scaleX(1)}}
+.page-corner{position:absolute;right:0;bottom:0;pointer-events:none}.turning .page-corner{opacity:0}
 .overlay{position:fixed;inset:0;background:#050a07c9;z-index:100;display:flex;align-items:center;justify-content:center;padding:25px}.overlay[hidden]{display:none}.dialog{width:min(1050px,100%);max-height:90dvh;background:#141b15;border:1px solid #687451;box-shadow:0 30px 90px #000a;display:flex;flex-direction:column;outline:none}.dialog-head{display:flex;justify-content:space-between;align-items:flex-start;gap:20px;padding:25px 29px 21px;border-bottom:1px solid #46523a}.dialog-head h2{font:32px/1.2 var(--serif);letter-spacing:-.8px;margin-top:5px}.close{background:none;border:1px solid #4e5d3e;min-width:35px;min-height:35px;color:#cfceaf;font-size:18px}.dialog-body{padding:25px 29px;overflow:auto;overscroll-behavior:contain}.dialog-body p{font-size:13px;color:#b5c2a5;line-height:1.8;max-width:750px}.dialog-body h3{font:23px var(--serif);margin:22px 0 12px}.dialog-body h3:first-child{margin-top:0}.dialog-body .card-grid{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:13px;margin-top:21px}.feature-card{border:1px solid #485b39;padding:19px;background:#1b291c;display:flex;flex-direction:column}.feature-card .card-number{font:italic 19px var(--serif);color:var(--gold);margin-bottom:10px}.feature-card h3{font:20px var(--serif);margin:0 0 10px}.feature-card p{font-size:11px;line-height:1.7}.feature-card .benefit{border-top:1px solid #405236;margin-top:13px;padding-top:11px;font-size:10px;color:#bccba9}.feature-card .benefit span{color:var(--gold);font-size:8px;text-transform:uppercase;display:block;margin-bottom:4px;letter-spacing:.1em}.feature-card button{margin-top:auto;align-self:flex-start;background:none;border:0;border-bottom:1px solid #6a7950;color:var(--gold);font-size:10px;padding:16px 0 4px}.dialog-foot{padding:15px 29px;border-top:1px solid #46523a;display:flex;align-items:center;justify-content:space-between;gap:15px;font-size:10px;color:#a4b294}.dialog-foot button{background:none;color:var(--gold);border:1px solid #617347;padding:9px 15px;font-size:10px}.index-row{width:100%;display:grid;grid-template-columns:40px 1fr auto;gap:15px;align-items:center;background:none;border:0;border-bottom:1px solid #405035;padding:16px 0;text-align:left}.index-row b{font:italic 25px var(--serif);color:var(--gold)}.index-row strong{font:22px var(--serif);font-weight:400}.index-row small{display:block;font-size:10px;color:#b3c0a0;margin-top:5px}.index-row .arrow{color:var(--gold);font-size:20px}.region-note{padding:17px;border:1px solid #627048;margin-top:17px;color:#bac7a9;font-size:11px;line-height:1.8}.pillrow{display:flex;gap:7px;flex-wrap:wrap;margin:14px 0}.pillrow span{font-size:10px;border:1px solid #50613f;padding:6px 10px;color:#c6d0b2}.source-list a{display:block;color:var(--gold);font-size:11px;text-decoration:underline;margin:11px 0}.field{display:flex;flex-direction:column;gap:7px;margin:17px 0}.field label{font-size:11px;color:#c0cdb0}.field select,.field textarea{background:#1d2c1d;color:#e6e7d2;border:1px solid #576d43;padding:11px;width:100%;border-radius:0}.field textarea{height:95px;resize:vertical}.field small{font-size:9px;color:#a2b390}.toast{position:fixed;bottom:24px;left:50%;transform:translateX(-50%);z-index:150;padding:13px 21px;max-width:calc(100vw - 28px);background:#283921;border:1px solid #99a278;color:#e8e6cc;font-size:12px;box-shadow:0 12px 40px #0008}.toast[hidden]{display:none}.dialog table{width:100%;border-collapse:collapse;margin:17px 0;font-size:11px}.dialog th,.dialog td{text-align:left;border-bottom:1px solid #45583a;padding:12px 10px;vertical-align:top;line-height:1.65}.dialog th{color:var(--gold);font-weight:500}.dialog td{color:#bac8a9}.dialog .table-wrap{overflow-x:auto}
 .reading .book{height:auto;box-shadow:none;border:0;background:none;perspective:none}.reading .spine,.reading .sweep-shadow{display:none}.reading .spread{display:block;height:auto}.reading .read-spread{display:grid;grid-template-columns:1fr 1fr;height:730px;min-height:640px;margin-bottom:30px;border:1px solid #626b4e}.reading .read-spread .page{min-height:640px}.reading .book-shell:before,.reading .book-shell:after{display:none}.reading .turn-nav{display:none}.reading .chapter-position .line{display:none}.reading .chapters{display:none}.page-fade{animation:fadeIn .18s ease-out}@keyframes fadeIn{from{opacity:.5}to{opacity:1}}
 @media(min-width:1550px){.stage{max-width:1510px}.page{padding:40px 47px 33px}.page.right{padding:31px 36px 27px}.page.left h1{margin-top:37px}.story-quote{margin-top:30px}.goal-contract{padding:20px}.rule-line{padding:12px 0}}
@@ -119,6 +119,41 @@ html[data-region="UAE"] .page.top-cover{background:#29271e}
 @media(max-width:680px){.topbar{padding:12px 15px;gap:10px;flex-wrap:nowrap}.topbar .nav{display:none!important}.topbar .ww-brand-logo{width:145px}.topbar .ww-edition{width:190px;max-width:none;flex-shrink:0;margin:0 0 0 auto}}
 @media(max-width:370px){.topbar{padding-left:12px;padding-right:12px;gap:8px}.topbar .ww-brand-logo{width:126px}.topbar .ww-edition{width:174px}}
 
+
+/* WealthWise curved folio v4. Pure visual/navigation enhancement. */
+.book{perspective:none}
+.book:not(.turning) #spread > .page{cursor:pointer}
+.reading .book #spread .page{cursor:auto}
+.book.turning{cursor:progress}
+.book.turning #spread{pointer-events:none}
+.book.turning > .sweep-shadow{display:none;animation:none}
+.ww-turn-frame{position:absolute;inset:0;z-index:12;pointer-events:none;isolation:isolate}
+.ww-turn-space{position:absolute;inset:0;perspective:2800px;transform-style:preserve-3d;pointer-events:none}
+.ww-paper-strip{position:absolute;top:0;transform-origin:0 50%;transform-style:preserve-3d;will-change:transform;pointer-events:none}
+.ww-paper-face{position:absolute;inset:0;overflow:hidden;backface-visibility:hidden;-webkit-backface-visibility:hidden;transform:translateZ(.15px);background:var(--paper);pointer-events:none}
+.ww-paper-face.ww-paper-back{transform:rotateY(180deg) translateZ(.15px)}
+.ww-paper-viewport{position:absolute;top:0;height:100%;overflow:hidden;pointer-events:none}
+.ww-paper-viewport > .page{width:100%;height:100%;min-height:0!important;border-radius:0!important;pointer-events:none!important}
+.ww-paper-viewport > .spread{height:100%;pointer-events:none!important}
+.ww-paper-viewport *{pointer-events:none!important;animation:none!important;transition:none!important;scroll-behavior:auto!important;caret-color:transparent!important}
+.ww-paper-face:after{content:'';position:absolute;inset:0;box-shadow:inset 0 1px #ffffff21,inset 0 -1px #00000024;pointer-events:none}
+.ww-paper-shade,.ww-paper-glint{position:absolute;inset:0;pointer-events:none;opacity:0;will-change:opacity}
+.ww-paper-shade{background:#080b0b}
+.ww-paper-glint{background:#fff6dd}
+.ww-paper-back-blank{position:absolute;inset:0;background:linear-gradient(90deg,#d8cfbc,#efe7d7 23%,#f5efe3 80%,#c6baa5);overflow:hidden}
+.ww-paper-back-blank:after{content:'WEALTHWISE';position:absolute;top:46%;left:12%;right:12%;text-align:center;font:12px Georgia,serif;letter-spacing:.35em;color:#a99b7b;opacity:.28}
+.ww-paper-shadow{position:absolute;top:0;height:100%;width:48%;pointer-events:none;will-change:transform,opacity;opacity:0;transform-origin:0 50%;background:linear-gradient(90deg,#02070675,#02070638 25%,#02070610 62%,transparent)}
+.ww-paper-contact{position:absolute;top:0;height:100%;width:6%;pointer-events:none;will-change:transform,opacity;opacity:0;transform-origin:0 50%;background:linear-gradient(90deg,transparent,#0507065c 45%,transparent)}
+.page-corner{width:33px;height:33px;background:linear-gradient(135deg,transparent 47%,#6f725246 49%,#d4c7a6 58%,#f9f0da 89%,#9d947b);clip-path:polygon(0 100%,100% 0,100% 100%);opacity:.66;transition:width .25s ease,height .25s ease,opacity .25s ease;filter:drop-shadow(-2px -2px 3px #0003)}
+@media(hover:hover){.book:not(.turning) .page:hover .page-corner{width:42px;height:42px;opacity:.9}.book:not(.turning):has(button:hover,input:hover,select:hover,a:hover) .page-corner{width:33px;height:33px;opacity:.66}}
+.turn-hint .desktop-hint{display:block;margin-top:2px}
+.ww-turn-instructions{font-size:9px;line-height:1.6;letter-spacing:.02em;color:#bfc6b4;display:flex;align-items:center;gap:9px;margin:0 0 10px}
+.ww-turn-instructions .ww-turn-glyph{font-size:18px;line-height:1;color:var(--gold)}
+.ww-turn-instructions .ww-turn-extra{color:#8e9b8a}
+.reading .ww-turn-instructions{display:none}
+@media(max-width:680px){.ww-turn-frame{overflow:hidden}.ww-turn-space{perspective:2000px}.ww-turn-instructions{font-size:9px}.ww-turn-instructions .ww-turn-extra{display:none}.turn-hint .desktop-hint{display:none}}
+@media(prefers-reduced-motion:reduce){.ww-turn-frame{display:none!important}.page-corner{transition:none!important}}
+
 </style>
 </head>
 <body>
@@ -136,15 +171,179 @@ html[data-region="UAE"] .page.top-cover{background:#29271e}
 <main class="stage" id="main" tabindex="-1">
 <div class="stage-header"><div><div class="eyebrow" id="edition">THE US ADVISOR EDITION</div><div class="stage-title" id="stage-title">A life in chapters. A plan that connects them.</div></div><div class="chapter-position"><span class="position-label" id="position-label">The opening chapter</span><span class="line"><span id="progress" style="width:0%"></span></span><button type="button" data-dialog="contents" aria-label="Open chapter contents">☷ &nbsp; Contents</button></div></div>
 <div id="regional-strip" aria-label="Regional context and household selection"></div>
-<div class="book-shell"><div class="book" id="book" aria-label="WealthWise interactive playbook"><div class="spread" id="spread"></div><div class="spine" aria-hidden="true"></div><div class="sweep-shadow" aria-hidden="true"></div></div></div>
-<div class="turn-nav"><button type="button" id="previous" class="turn-button" data-action="previous"><span class="arrow">←</span><span>Previous chapter</span></button><div class="turn-hint"><b id="turn-hint">Every chapter is a different decision.</b><span class="desktop-hint"> Click to turn the page · Use ← → keys</span></div><button type="button" id="next" class="turn-button next" data-action="next"><span id="next-label">Open the playbook</span><span class="arrow">→</span></button></div>
+<p class="ww-turn-instructions" id="page-turn-instructions"><span class="ww-turn-glyph" aria-hidden="true">↷</span><span>Click anywhere on a page to turn.</span><span class="ww-turn-extra">Controls stay interactive · ← → to navigate</span></p>
+<div class="book-shell"><div class="book" id="book" aria-label="WealthWise interactive playbook" aria-describedby="page-turn-instructions"><div class="spread" id="spread"></div><div class="spine" aria-hidden="true"></div><div class="sweep-shadow" aria-hidden="true"></div></div></div>
+<div class="turn-nav"><button type="button" id="previous" class="turn-button" data-action="previous"><span class="arrow">←</span><span>Previous chapter</span></button><div class="turn-hint"><b id="turn-hint">Every chapter is a different decision.</b><span class="desktop-hint"> Click text or background to continue · Shift-click or ← to go back</span></div><button type="button" id="next" class="turn-button next" data-action="next"><span id="next-label">Open the playbook</span><span class="arrow">→</span></button></div>
 <nav class="chapters" id="chapters" aria-label="Playbook chapters"></nav>
 <footer class="site-foot"><div class="footmark"><span class="mini"></span> One platform. Genuinely different regional stories.</div><div class="foot-center">Interactive examples · Fictional households · No live financial calculations or account connections.</div><div><button type="button" data-action="reading" id="reading-button">Read without page turns</button> &nbsp; <button type="button" data-dialog="evidence">Capability notes</button></div></footer>
 </main>
 </div>
 <div class="overlay" id="overlay" hidden><section class="dialog" id="dialog" role="dialog" aria-modal="true" aria-labelledby="dialog-title" tabindex="-1"><header class="dialog-head"><div><div class="eyebrow" id="dialog-eyebrow">WEALTHWISE · THE OPERATING SYSTEM</div><h2 id="dialog-title"></h2></div><button type="button" class="close" data-action="close" aria-label="Close dialog">×</button></header><div class="dialog-body" id="dialog-body"></div><footer class="dialog-foot"><span id="dialog-footnote">Illustrative website experience. Not the live WealthWise app.</span><button type="button" data-action="close">Back to the playbook</button></footer></section></div>
 <div class="toast" id="toast" role="status" aria-live="polite" hidden></div><div id="announcer" class="sr" role="status" aria-live="polite"></div>
-<script>
+<script>/*
+ * WealthWise CurvedFolio v4 — dependency-free, real HTML on a curved sheet.
+ * Transform/opacity keyframes are calculated before playback. No per-frame
+ * layout reads, no rasterizing customer content, no network, no libraries.
+ * Copyright 2026. Prepared for WealthWise; source is editable.
+ */
+(() => {
+  'use strict';
+  const clamp=(x,a,b)=>Math.max(a,Math.min(b,x));
+  const motion=matchMedia('(prefers-reduced-motion:reduce)');
+  const active=new Set();
+  let lastRun=null;
+
+  function make(tag,cls){const e=document.createElement(tag);e.className=cls;return e;}
+  function cleanClone(node){
+    const copy=node.cloneNode(true);
+    for(const el of [copy,...copy.querySelectorAll('*')]){
+      el.removeAttribute('id');el.removeAttribute('autofocus');
+      el.removeAttribute('aria-labelledby');el.removeAttribute('aria-describedby');
+      if(el.matches('input,select,textarea,button,a,[tabindex]'))el.tabIndex=-1;
+      if(el.matches('input,select,textarea'))el.removeAttribute('name');
+    }
+    return copy;
+  }
+  function retainScroll(source,copy){
+    // CloneNode does not preserve scrolling or all live input properties.
+    const aa=[source,...source.querySelectorAll('*')],bb=[copy,...copy.querySelectorAll('*')];
+    for(let i=0;i<aa.length;i++){
+      if(!bb[i])continue;
+      if(aa[i].scrollTop)bb[i].scrollTop=aa[i].scrollTop;
+      if(aa[i].scrollLeft)bb[i].scrollLeft=aa[i].scrollLeft;
+      if(aa[i] instanceof HTMLInputElement){bb[i].value=aa[i].value;bb[i].checked=aa[i].checked;}
+      if(aa[i] instanceof HTMLTextAreaElement)bb[i].value=aa[i].value;
+      if(aa[i] instanceof HTMLSelectElement)bb[i].selectedIndex=aa[i].selectedIndex;
+    }
+  }
+  function geometry(p,width,count,forward,single){
+    // An inextensible strip curve. Root and tip rotate at different angles,
+    // unlike a single stiff rectangle. Ends return exactly to a flat sheet.
+    const sign=forward?1:-1,step=width/count;
+    const bend=1.18*Math.sin(Math.PI*p);
+    const root=Math.PI*p-bend*.46;
+    let x=0,z=0;
+    const result=[];
+    for(let i=0;i<count;i++){
+      const u=(i+.5)/count;
+      const angle=root+bend*Math.pow(u,1.12);
+      // The soft axial bow adds a little lift toward the outer edge.
+      const lift=-7*Math.sin(Math.PI*p)*Math.pow(i/count,1.7);
+      result.push({x:sign*x,z,angle:sign*(-angle),y:lift});
+      x+=Math.cos(angle)*step;z+=Math.sin(angle)*step;
+    }
+    return result;
+  }
+  function animate({book,front,back,forward=true,single=false,duration=960,onFinish=()=>{}}){
+    if(!book||!front)throw new Error('CurvedFolio requires a book and front page.');
+    if(motion.matches||typeof Element.prototype.animate!=='function'){
+      onFinish('reduced-or-unavailable');return{finish:()=>{},pause:()=>{},seek:()=>{}};
+    }
+    const rect=book.getBoundingClientRect();
+    const width=book.clientWidth/(single?1:2),height=book.clientHeight;
+    const count=single?12:18,step=width/count;
+    const origin=single?(forward?0:width):width;
+    const frame=make('div','ww-turn-frame');frame.setAttribute('aria-hidden','true');frame.inert=true;
+    const shadow=make('div','ww-paper-shadow'),contact=make('div','ww-paper-contact');
+    shadow.style.width=width+'px';contact.style.width=(width*.12)+'px';
+    frame.append(shadow,contact);
+    const space=make('div','ww-turn-space');
+    space.style.perspective=Math.max(single?1900:2500,width*5)+'px';
+    // On a tall mobile spread, aim the perspective at the visible portion.
+    const perspectiveY=single?clamp(innerHeight*.5-rect.top,0,height):height/2;
+    space.style.perspectiveOrigin=`50% ${perspectiveY}px`;
+    frame.append(space);
+    const frontTemplate=cleanClone(front),backTemplate=back?cleanClone(back):null;
+    const clones=[],strips=[],animations=[];
+    for(let i=0;i<count;i++){
+      const strip=make('div','ww-paper-strip');strip.style.width=(step+.6)+'px';strip.style.height=height+'px';
+      strip.style.left=origin+'px';
+      const frontFace=make('div','ww-paper-face');
+      const backFace=make('div','ww-paper-face ww-paper-back');
+      // Forward strips run spine→right; backward strips run spine→left.
+      const sourceX=forward?i*step:width-(i+1)*step;
+      const backX=forward?width-(i+1)*step:i*step;
+      const addPage=(face,template,source,offset)=>{
+        const view=make('div','ww-paper-viewport');view.style.width=width+'px';view.style.left=-offset+'px';
+        const copy=template.cloneNode(true);view.append(copy);face.append(view);clones.push([source,copy]);
+      };
+      addPage(frontFace,frontTemplate,front,sourceX);
+      if(backTemplate)addPage(backFace,backTemplate,back,backX);
+      else {const blank=make('div','ww-paper-back-blank');blank.style.width=width+'px';blank.style.left=-backX+'px';backFace.append(blank);}
+      const fs=make('div','ww-paper-shade'),bs=make('div','ww-paper-shade');
+      const fg=make('div','ww-paper-glint'),bg=make('div','ww-paper-glint');
+      frontFace.append(fs,fg);backFace.append(bs,bg);strip.append(frontFace,backFace);space.append(strip);
+      strips.push({strip,fs,bs,fg,bg});
+    }
+    // Prepare a continuous set of frames; one easing curve applies to the
+    // entire turn. In particular, there is NO new ease at the 90° crossing.
+    const frames=Array.from({length:count},()=>({transform:[],front:[],back:[],glint:[]}));
+    const shadowFrames=[],contactFrames=[];
+    const samples=49;
+    for(let k=0;k<samples;k++){
+      const t=k/(samples-1),p=t*t*(3-2*t),g=geometry(p,width,count,forward,single);
+      for(let i=0;i<count;i++){
+        const a=g[i],angle=a.angle*180/Math.PI;
+        // A backward strip extends left from the hinge, so translate its
+        // local left edge by one strip-width along its own tangent.
+        const x=forward?a.x:a.x-Math.cos(a.angle)*step;
+        const z=forward?a.z:a.z+Math.sin(a.angle)*step;
+        frames[i].transform.push({offset:t,transform:`translate3d(${x.toFixed(3)}px,${a.y.toFixed(3)}px,${z.toFixed(3)}px) rotateY(${angle.toFixed(4)}deg)`});
+        const fold=Math.sin(Math.PI*p),normal=Math.abs(Math.sin(a.angle));
+        frames[i].front.push({offset:t,opacity:clamp(normal*.24+fold*.06,0,.33)});
+        frames[i].back.push({offset:t,opacity:clamp(normal*.2+fold*.035,0,.28)});
+        frames[i].glint.push({offset:t,opacity:fold*.09*(i/count)});
+      }
+      const lift=Math.sin(Math.PI*p),edge=g[count-1].x;
+      const sx=forward?origin+Math.min(0,edge):origin+Math.max(0,edge);
+      shadowFrames.push({offset:t,transform:`translate3d(${sx.toFixed(2)}px,0,0) scaleX(${(forward?1:-1)*(.18+.68*lift)})`,opacity:lift*.66});
+      contactFrames.push({offset:t,transform:`translate3d(${(origin+edge).toFixed(2)}px,0,0) scaleX(${.2+.9*lift})`,opacity:lift*.5});
+    }
+    let finished=false,rafA=0,rafB=0,timer=0,start=0;
+    const handle={
+      finish,
+      pause(){animations.forEach(a=>a.pause());clearTimeout(timer);},
+      seek(ms){animations.forEach(a=>{a.pause();a.currentTime=clamp(ms,0,duration);});clearTimeout(timer);},
+      get animations(){return animations;},get duration(){return duration;},
+      get frame(){return frame;},get started(){return start;},
+    };
+    function finish(reason='finished'){
+      if(finished)return;finished=true;
+      cancelAnimationFrame(rafA);cancelAnimationFrame(rafB);clearTimeout(timer);
+      animations.forEach(a=>a.cancel());frame.remove();active.delete(handle);
+      if(lastRun)lastRun.finishedReason=reason;
+      onFinish(reason);
+    }
+    const options={duration,easing:'linear',fill:'both'};
+    book.append(frame);clones.forEach(([a,b])=>retainScroll(a,b));
+    // Static first frame is ready before the live underlying pages change.
+    strips.forEach((s,i)=>{s.strip.style.transform=frames[i].transform[0].transform;});
+    active.add(handle);lastRun={width,height,count,duration,forward,single,samples,finishedReason:null};
+    const ready=performance.now();
+    rafA=requestAnimationFrame(()=>{rafB=requestAnimationFrame(()=>{
+      if(finished)return;
+      start=document.timeline.currentTime;
+      try{
+        function play(el,keyframes){const a=el.animate(keyframes,options);a.pause();animations.push(a);return a;}
+        strips.forEach((s,i)=>{play(s.strip,frames[i].transform);play(s.fs,frames[i].front);play(s.bs,frames[i].back);play(s.fg,frames[i].glint);play(s.bg,frames[i].glint);});
+        play(shadow,shadowFrames);play(contact,contactFrames);
+        // All layers share precisely one timeline origin, not N start times.
+        animations.forEach(a=>{a.startTime=start;});
+        Promise.all(animations.map(a=>a.finished)).then(()=>finish(),()=>{});
+        timer=setTimeout(()=>finish('timeout-recovery'),duration+500);
+        lastRun.prepareMs=performance.now()-ready;
+      }catch(err){lastRun.error=String(err);finish('animation-error');}
+    });});
+    return handle;
+  }
+  // A background tab or viewport change must never leave controls locked.
+  addEventListener('visibilitychange',()=>{if(document.hidden)for(const h of [...active])h.finish('visibility-change');});
+  addEventListener('resize',()=>{for(const h of [...active])h.finish('viewport-change');},{passive:true});
+  motion.addEventListener?.('change',e=>{if(e.matches)for(const h of [...active])h.finish('reduced-motion-change');});
+  window.WW_CurvedFolio={animate,cancelAll(){for(const h of [...active])h.finish('explicit-finish');},get active(){return [...active];},get lastRun(){return lastRun;},geometry};
+})();
+
+
 window.WW_REGIONAL_CONTENT = {
   "version": "3.0",
   "reviewedDate": "2026-10-27",
@@ -2262,7 +2461,7 @@ let HASH_LOCK=false;
 function syncHash(){if(HASH_LOCK)return;try{const hh='#'+S.profiles[S.region]+'/'+SLUGS[S.chapter];if(location.hash!==hh)history.pushState(null,'',hh);}catch(e){}}
 function fromHash(){const raw=location.hash.replace(/^#/,'');if(!raw)return false;let parts=raw.split('/');if(parts.length===3&&CONTENT.regions[parts[0]]&&CONTENT.profiles[parts[1]]){parts=[parts[1],SLUGS[Number(parts[2])]||'cover'];}let slug=parts.pop(),key=parts[0]||'';if(CONTENT.profiles[key]){S.region=CONTENT.profiles[key].region;S.profiles[S.region]=key;}else if(key.toUpperCase()==='UAE'){S.region='UAE';}else if(key.toUpperCase()==='US'){S.region='US';}const i=SLUGS.indexOf(slug);if(i>=0)S.chapter=i;return true;}
 const S={region:'US',profiles:{US:'us-retirement',UAE:'uae-expat'},chapter:0,turning:false,reading:false,turnCount:0,data:Object.fromEntries(Object.keys(CONTENT.profiles).map(k=>[k,emptyState()]))};
-let lastFocus=null,toastTimer=null,turnFallback=null;
+let lastFocus=null,toastTimer=null;
 const profile=()=>CONTENT.profiles[S.profiles[S.region]];
 const regional=()=>CONTENT.regions[S.region];
 const data=()=>S.data[S.profiles[S.region]];
@@ -2299,11 +2498,53 @@ function switchRegion(code){if(S.turning||!CONTENT.regions[code])return;S.region
 function selectProfile(id,cover=false){if(S.turning||!CONTENT.profiles[id])return;S.region=CONTENT.profiles[id].region;S.profiles[S.region]=id;if(cover)S.chapter=0;syncHash();render();$('announcer').textContent='Household changed to '+profile().family+'. All six chapters now follow this fictional household.';}
 /* The physical page-turn engine is inherited from the supplied approved website prototype. */
 function stripIds(node){node.querySelectorAll('[id]').forEach(x=>x.removeAttribute('id'));node.querySelectorAll('input,button,select,textarea,a').forEach(x=>{x.tabIndex=-1;x.setAttribute('aria-hidden','true');});return node;}
-function jump(n){n=Math.max(0,Math.min(7,n));if(S.turning||n===S.chapter&&!S.reading)return;const _c=S.chapter;S.chapter=n;syncHash();S.chapter=_c;if(S.reading){S.chapter=n;renderNav();$('read-chapter-'+n)?.scrollIntoView({behavior:'smooth',block:'start'});return;}const forward=n>S.chapter;const nextLeft=leftPage(n),nextRight=rightPage(n);const small=matchMedia('(max-width:680px)').matches;const reduced=matchMedia('(prefers-reduced-motion:reduce)').matches;if(reduced){S.chapter=n;render();$('announcer').textContent=n===0?'Playbook cover':n===7?'The next chapter':`Chapter ${n}: ${CHAPTERS[n-1][0]}`;return;}
- S.turning=true;renderNav();const book=$('book'),spread=$('spread');const oldLeft=spread.children[0].cloneNode(true),oldRight=spread.children[1].cloneNode(true);const leaf=document.createElement('div');leaf.className='leaf '+(forward?'forward':'backward');leaf.setAttribute('aria-hidden','true');leaf.inert=true;const front=document.createElement('div'),back=document.createElement('div');front.className='leaf-face front';back.className='leaf-face back';
- if(small){const oldSpread=spread.cloneNode(true);stripIds(oldSpread);front.appendChild(oldSpread);const nextSpread=document.createElement('div');nextSpread.className='spread';nextSpread.innerHTML=nextLeft+nextRight;stripIds(nextSpread);back.appendChild(nextSpread);spread.innerHTML=nextLeft+nextRight;leaf.style.height=book.clientHeight+'px';}else{front.appendChild(stripIds(forward?oldRight:oldLeft));back.innerHTML=forward?nextLeft:nextRight;stripIds(back);spread.innerHTML=forward?oldLeft.outerHTML+nextRight:nextLeft+oldRight.outerHTML;}
- leaf.append(front,back);book.classList.add('turning');book.appendChild(leaf);S.turnCount++;let finished=false;function done(){if(finished)return;finished=true;clearTimeout(turnFallback);leaf.remove();book.classList.remove('turning');S.chapter=n;S.turning=false;render();$('announcer').textContent=n===0?'Playbook cover':n===7?'The next chapter':`Chapter ${n}: ${CHAPTERS[n-1][0]}`;if(small)$('book').scrollIntoView({behavior:'smooth',block:'start'});}leaf.addEventListener('animationend',e=>{if(e.target===leaf)done();});turnFallback=setTimeout(done,1350);
+/* Adapter for the supplied v3 regional playbook. Existing CONTENT is unchanged. */
+let currentTurn=null;
+function announceChapter(n){$('announcer').textContent=n===0?'Playbook cover':n===7?'The next chapter':`Chapter ${n}: ${CHAPTERS[n-1][0]}`;}
+function jump(n){
+  n=Math.max(0,Math.min(7,n));
+  if(S.turning||(n===S.chapter&&!S.reading))return;
+  {const _c=S.chapter;S.chapter=n;syncHash();S.chapter=_c;}
+  const reduced=matchMedia('(prefers-reduced-motion:reduce)').matches;
+  if(S.reading){S.chapter=n;renderNav();$('read-chapter-'+n)?.scrollIntoView({behavior:reduced?'instant':'smooth',block:'start'});return;}
+  const book=$('book'),spread=$('spread'),small=matchMedia('(max-width:680px)').matches;
+  if(reduced||typeof Element.prototype.animate!=='function'){
+    S.chapter=n;render();announceChapter(n);return;
+  }
+  const forward=n>S.chapter;
+  const oldRect=book.getBoundingClientRect();
+  const newLeft=leftPage(n),newRight=rightPage(n);
+  const oldLeft=spread.children[0],oldRight=spread.children[1];
+  let front,back;
+  function fromHTML(html){const tpl=document.createElement('template');tpl.innerHTML=html;return tpl.content.firstElementChild;}
+  if(small){front=spread;back=null;}
+  else {front=forward?oldRight:oldLeft;back=fromHTML(forward?newLeft:newRight);}
+  S.turning=true;S.turnCount++;book.classList.add('turning');book.setAttribute('aria-busy','true');
+  spread.inert=true;renderNav();
+  let done=false;
+  function complete(reason){
+    if(done)return;done=true;currentTurn=null;
+    S.chapter=n;S.turning=false;spread.inert=false;
+    book.classList.remove('turning');book.removeAttribute('aria-busy');
+    book.style.height='';render();announceChapter(n);
+    // No animated scroll competes with the page turn. On small screens,
+    // start the next chapter at its top only when the reader was in the book.
+    if(small&&oldRect.top<0&&oldRect.bottom>0&&reason!=='viewport-change'){
+      const top=book.getBoundingClientRect().top+window.scrollY-12;
+      window.scrollTo({top,behavior:'instant'});
+    }
+  }
+  try{
+    // Freeze mobile height during the visual turn, avoiding document reflow.
+    if(small)book.style.height=oldRect.height+'px';
+    currentTurn=window.WW_CurvedFolio.animate({book,front,back,forward,single:small,duration:small?820:940,onFinish:complete});
+    // Mount the destination underneath AFTER the first visual overlay exists.
+    if(small)spread.innerHTML=newLeft+newRight;
+    else if(forward)oldRight.replaceWith(fromHTML(newRight));
+    else oldLeft.replaceWith(fromHTML(newLeft));
+  }catch(error){console.error('Page-turn recovered:',error);window.WW_CurvedFolio.cancelAll();complete('error-recovery');}
 }
+
 
 function featureCards(n){return CONTENT.features[S.region].filter(f=>!n||f[1]===n).map(([name,ch,fn,cv,av,authority])=>`<article class="feature-card"><div class="feature-no">${String(ch).padStart(2,'0')} / ${esc(CHAPTERS[ch-1]?.[0]||'Life changes')}</div><h3>${esc(name)}</h3><p>${esc(fn)}</p><div class="benefit"><span>For the client</span>${esc(cv)}</div><div class="benefit"><span>For the advisor</span>${esc(av)}</div><div class="feature-evidence">${esc(authority)} · illustrative website scene</div><button type="button" class="textbtn" data-dialog-chapter="${ch}">Open this example ↗</button></article>`).join('');}
 function sourceLinks(){return CONTENT.sources.filter(s=>regional().sourceIds.includes(s.id)).map(s=>`<div class="source-entry"><a href="${s.url}" target="_blank" rel="noopener noreferrer">${esc(s.title)} ↗</a><p>${esc(s.note)}</p></div>`).join('');}
@@ -2320,7 +2561,7 @@ function showDialog(key){let heading='',content='',label=regional().edition;cons
 }
 function closeDialog(){if($('overlay').hidden)return;$('overlay').hidden=true;$('site').inert=false;document.body.style.overflow='';if(lastFocus?.isConnected)lastFocus.focus();lastFocus=null;}
 function downloadText(name,text){const url=URL.createObjectURL(new Blob([text],{type:'text/plain;charset=utf-8'}));const a=document.createElement('a');a.href=url;a.download=name;document.body.append(a);a.click();a.remove();setTimeout(()=>URL.revokeObjectURL(url),1000);}
-function exportBrief(){const p=profile(),d=data(),s=d.selection;if(!s)return;const o=p.options[s.option];downloadText('WealthWise_'+S.profiles[S.region]+'_discussion.txt',`WEALTHWISE — ILLUSTRATIVE DISCUSSION BRIEF\nWebsite v3.0; synthetic data; not advice, consent, a committed plan or completed execution.\n\nEdition: ${regional().name}\nHousehold: ${p.family}\nContext: ${p.place}\nStory: ${p.segment}\n\nSelected discussion: ${o.title}\nWhat could change: ${o.change}\nWhat stays protected: ${o.keep}\nNext evidence: ${o.next}\nNext discussion owner: ${o.owner}\n\nExpected resource at selection: ${p.time.resourceLabel}, ${s.arrival}\nFirst commitment: ${p.time.needLabel}, ${p.time.need}\nTiming check: ${s.arrival>p.time.need?'Arrives after first need':'Date is earlier; other gates remain'}\nOnly dates compared; no funding feasibility, tax, FX or investment result calculated.\n\nContext changed after selection: ${d.changed?'YES — re-review required':'No subsequent local change recorded'}\nPreference at selection: ${s.preference}\nEvidence route at selection: ${s.benefit}\n\nOPEN HANDOFFS\n${p.actions.map(a=>a[0]+' | '+a[1]+' | '+a[2]).join('\n')}\n\n${regional().publicationBoundary}\nGenerated locally: ${new Date().toISOString()}\n`);toast('Example brief exported locally. No plan was adopted.');}
+function exportBrief(){const p=profile(),d=data(),s=d.selection;if(!s)return;const o=p.options[s.option];downloadText('WealthWise_'+S.profiles[S.region]+'_discussion.txt',`WEALTHWISE — ILLUSTRATIVE DISCUSSION BRIEF\nWebsite v4.0; synthetic data; not advice, consent, a committed plan or completed execution.\n\nEdition: ${regional().name}\nHousehold: ${p.family}\nContext: ${p.place}\nStory: ${p.segment}\n\nSelected discussion: ${o.title}\nWhat could change: ${o.change}\nWhat stays protected: ${o.keep}\nNext evidence: ${o.next}\nNext discussion owner: ${o.owner}\n\nExpected resource at selection: ${p.time.resourceLabel}, ${s.arrival}\nFirst commitment: ${p.time.needLabel}, ${p.time.need}\nTiming check: ${s.arrival>p.time.need?'Arrives after first need':'Date is earlier; other gates remain'}\nOnly dates compared; no funding feasibility, tax, FX or investment result calculated.\n\nContext changed after selection: ${d.changed?'YES — re-review required':'No subsequent local change recorded'}\nPreference at selection: ${s.preference}\nEvidence route at selection: ${s.benefit}\n\nOPEN HANDOFFS\n${p.actions.map(a=>a[0]+' | '+a[1]+' | '+a[2]).join('\n')}\n\n${regional().publicationBoundary}\nGenerated locally: ${new Date().toISOString()}\n`);toast('Example brief exported locally. No plan was adopted.');}
 function act(action){if(S.turning&&!['close','export'].includes(action))return;const p=profile(),d=data();switch(action){case 'next':jump(S.chapter===7?0:S.chapter+1);break;case 'previous':jump(S.chapter-1);break;case 'home':jump(0);break;case 'close':closeDialog();break;case 'walkthrough':showDialog('walkthrough');break;case 'show-choices':d.section='choices';updateCanvas('[data-explore-section="choices"]');break;case 'go-explore':d.section='choices';jump(5);break;case 'add-option':d.selection={option:d.option,arrival:p.time[d.timing],preference:d.preference,benefit:d.benefit,event:d.event,revision:d.revision};d.changed=false;toast('Discussion added for '+p.family+'. No plan or portfolio changed.');jump(6);break;case 'export':exportBrief();break;case 'reading':S.reading=!S.reading;render();$('book').scrollIntoView({behavior:matchMedia('(prefers-reduced-motion:reduce)').matches?'instant':'smooth',block:'start'});break;case 'send-walk':{const name=$('walk-name').value.trim(),email=$('walk-email').value.trim(),firm=$('walk-firm').value.trim();if(!name||!email){toast('Please add your name and work email.');($('walk-name').value?$('walk-email'):$('walk-name')).focus();break;}const subj=encodeURIComponent(`WealthWise walkthrough — ${firm||name} (${regional().name})`);const body=encodeURIComponent(`Name: ${name}\nEmail: ${email}\nFirm: ${firm||'—'}\nTeam: ${$('firm-type').value}\nEdition: ${regional().name}\nHousehold example: ${p.family}\nStart with: ${$('walk-focus').value}\n\nWhat would make the discussion useful:\n${$('walk-note').value.trim()||'—'}\n\n(Please use a fictional household for the demonstration.)`);location.href=`mailto:demo@wealthwise.ae?subject=${subj}&body=${body}`;toast('Your mail app should open with the request. Press send there to submit.');break;}
 case 'export-walk':downloadText('WealthWise_'+S.profiles[S.region]+'_walkthrough.txt',`WEALTHWISE — LOCAL WALKTHROUGH BRIEF\nNo enquiry submitted. Fictional demonstration only.\n\nEdition: ${regional().name}\nHousehold: ${p.family}\nTeam: ${$('firm-type').value}\nFocus: ${$('walk-focus').value}\nDiscussion: ${$('walk-note').value||'Not supplied'}\n\nDo not use client data in this prototype. Verify any production capability separately.\n`);toast('Walkthrough brief exported. No enquiry submitted.');break;}}
 document.addEventListener('click',e=>{const el=e.target.closest('button,a');if(!el||el.disabled)return;if(el.dataset.action){act(el.dataset.action);return;}if(S.turning)return;if(el.dataset.dialog){showDialog(el.dataset.dialog);return;}if(el.dataset.chapter!==undefined){jump(Number(el.dataset.chapter));return;}if(el.dataset.dialogChapter!==undefined){const n=Number(el.dataset.dialogChapter);closeDialog();jump(n);return;}if(el.dataset.dialogCase){const id=el.dataset.dialogCase;closeDialog();selectProfile(id,true);return;}if(el.dataset.case){selectProfile(el.dataset.case,true);return;}const d=data();if(el.dataset.person!==undefined){d.person=Number(el.dataset.person);updateCanvas(`[data-person="${d.person}"]`);return;}if(el.dataset.event!==undefined){const v=Number(el.dataset.event);if(d.event!==v){dirty();d.event=v;if(v===1)d.timing='late';}updateCanvas(`[data-event="${v}"]`);return;}if(el.dataset.goal!==undefined){d.goal=Number(el.dataset.goal);updateCanvas(`[data-goal="${d.goal}"]`);return;}if(el.dataset.resourceTab){d.resourceTab=el.dataset.resourceTab;d.resourceId=null;updateCanvas(`[data-resource-tab="${d.resourceTab}"]`);return;}if(el.dataset.resource){d.resourceId=el.dataset.resource;updateCanvas(`[data-resource="${d.resourceId}"]`);return;}if(el.dataset.scope){if(d.scope!==el.dataset.scope){dirty();d.scope=el.dataset.scope;}updateCanvas(`[data-scope="${d.scope}"]`);return;}if(el.dataset.preference){if(d.preference!==el.dataset.preference){dirty();d.preference=el.dataset.preference;}updateCanvas(`[data-preference="${d.preference}"]`);return;}if(el.dataset.exploreSection){d.section=el.dataset.exploreSection;updateCanvas(`[data-explore-section="${d.section}"]`);return;}if(el.dataset.timing){if(d.timing!==el.dataset.timing){dirty();d.timing=el.dataset.timing;}updateCanvas(`[data-timing="${d.timing}"]`);return;}if(el.dataset.option!==undefined){d.option=Number(el.dataset.option);updateCanvas(`[data-option="${d.option}"]`);return;}if(el.dataset.life!==undefined){dirty();d.event=Number(el.dataset.life);if(d.event===1)d.timing='late';jump(d.event===1?3:1);return;}});
@@ -2328,7 +2569,37 @@ document.addEventListener('change',e=>{const el=e.target;if(S.turning)return;if(
 document.addEventListener('submit',e=>e.preventDefault());
 document.addEventListener('keydown',e=>{if(!$('overlay').hidden){if(e.key==='Escape'){e.preventDefault();closeDialog();return;}if(e.key==='Tab'){const all=[...$('dialog').querySelectorAll('button:not(:disabled),a[href],input,select,textarea,[tabindex="0"]')].filter(x=>x.getClientRects().length);const first=all[0],last=all.at(-1);if(e.shiftKey&&(document.activeElement===first||document.activeElement===$('dialog'))){e.preventDefault();last?.focus();}else if(!e.shiftKey&&document.activeElement===last){e.preventDefault();first?.focus();}}return;}if(['INPUT','TEXTAREA','SELECT'].includes(document.activeElement?.tagName)||S.reading)return;if(e.key==='ArrowRight'){e.preventDefault();act('next');}else if(e.key==='ArrowLeft'){e.preventDefault();act('previous');}});
 $('overlay').addEventListener('click',e=>{if(e.target===$('overlay'))closeDialog();});
-let touch=null;$('book').addEventListener('touchstart',e=>{if(e.target.closest('button,input,select,textarea,a')||S.reading)return;touch={x:e.changedTouches[0].clientX,y:e.changedTouches[0].clientY};},{passive:true});$('book').addEventListener('touchend',e=>{if(!touch)return;const dx=e.changedTouches[0].clientX-touch.x,dy=e.changedTouches[0].clientY-touch.y;touch=null;if(Math.abs(dx)>90&&Math.abs(dx)>Math.abs(dy)*1.7)act(dx<0?'next':'previous');},{passive:true});
+// Only the actual book surface is a turn target. Headers, footer, dialogs,
+// and real controls retain their own actions. Any ordinary spot advances.
+const TURN_CONTROL='button,a,input,select,textarea,label,summary,details,video,audio,iframe,[role="button"],[role="link"],[role="slider"],[role="tab"],[role="radio"],[role="checkbox"],[role="switch"],[contenteditable]:not([contenteditable="false"]),[data-no-turn]';
+let pointerStart=null,blockClickUntil=0;
+function canTurnFrom(target){return target instanceof Element&&!target.closest(TURN_CONTROL)&&!!target.closest('#spread > .page')&&!S.reading&&!S.turning&&$('overlay').hidden;}
+$('book').addEventListener('pointerdown',e=>{
+  pointerStart=null;
+  if(e.button!==0||!canTurnFrom(e.target)||e.ctrlKey||e.metaKey||e.altKey)return;
+  if(e.shiftKey)e.preventDefault(); // Explicit reverse gesture must not extend text selection.
+  const scrollable=e.target.closest('.canvas-content,.page');
+  pointerStart={id:e.pointerId,x:e.clientX,y:e.clientY,sy:window.scrollY,scrollable,scrollTop:scrollable?.scrollTop||0,type:e.pointerType,target:e.target,time:performance.now()};
+},{passive:false});
+$('book').addEventListener('pointerup',e=>{
+  const p=pointerStart;if(!p||p.id!==e.pointerId)return;
+  const dx=e.clientX-p.x,dy=e.clientY-p.y;
+  if(p.type!=='mouse'&&Math.abs(dx)>65&&Math.abs(dx)>Math.abs(dy)*1.6&&canTurnFrom(p.target)){
+    blockClickUntil=performance.now()+650;pointerStart=null;
+    act(dx<0?'next':'previous');
+  }
+},{passive:true});
+$('book').addEventListener('pointercancel',()=>{pointerStart=null;blockClickUntil=performance.now()+450;},{passive:true});
+$('book').addEventListener('click',e=>{
+  if(performance.now()<blockClickUntil||e.defaultPrevented||e.button!==0||e.detail>1||!canTurnFrom(e.target)||e.ctrlKey||e.metaKey||e.altKey)return;
+  if(e.shiftKey){e.preventDefault();window.getSelection()?.removeAllRanges();pointerStart=null;act('previous');return;}
+  const selection=window.getSelection();
+  if(selection&&!selection.isCollapsed&&selection.toString().trim())return;
+  const p=pointerStart;pointerStart=null;
+  if(p&&(Math.abs(e.clientX-p.x)>9||Math.abs(e.clientY-p.y)>9||Math.abs(window.scrollY-p.sy)>5||Math.abs((p.scrollable?.scrollTop||0)-p.scrollTop)>5))return;
+  e.preventDefault();act(e.shiftKey?'previous':'next');
+});
+
 window.WW_DEMO={state:()=>JSON.parse(JSON.stringify(S)),jump,render,switchRegion,selectProfile,profile,region:regional,timingResult,content:CONTENT};
 fromHash();
 render();
