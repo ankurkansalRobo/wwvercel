@@ -2968,7 +2968,7 @@ window.WW_SOCIAL_ICONS={"linkedin": "<svg aria-hidden=\"true\" focusable=\"false
   }
   function safePhoto(value){if(!value||typeof value!=='string')return null;if(/^data:image\/(png|jpeg|webp);base64,/.test(value)||/^\/(?!\/)[^<>]+$/.test(value)||/^\.\.?\/[^<>]+$/.test(value))return value;return null;}
   const mark=k=>`<span class="ab-social-icon" aria-hidden="true">${window.WW_SOCIAL_ICONS?.[k]||''}</span>`;
-  const external=(href,label,cls='',inner='')=>`<a class="${cls}" href="${esc(href)}" target="_blank" rel="noopener noreferrer" aria-label="${esc(label)} (opens in a new tab)">${inner||esc(label)}<span aria-hidden="true">↗</span></a>`;
+  const external=(href,label,cls='',inner='')=>`<a class="${cls}" href="${esc(href)}" target="_blank" rel="noopener noreferrer" aria-label="${esc(label)} (opens in a new tab)">${inner?inner:esc(label)+'<span aria-hidden="true">↗</span>'}</a>`;
   const fullLogo=()=>document.querySelector('.brand img')?.getAttribute('src')||'';
   function deactivate(){
     if(!A.active)return;A.active=false;$('dialog').classList.remove('ww-about');
